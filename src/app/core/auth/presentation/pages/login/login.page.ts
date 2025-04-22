@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-    IonContent,
-    IonButton,
-    IonIcon,
-    IonSpinner,
-} from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, IonSpinner } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -19,6 +15,7 @@ import { logoGoogle } from 'ionicons/icons';
 })
 export class LoginPage implements OnInit {
     isLoading = false;
+    #authService = inject(AuthService);
 
     constructor(private router: Router) {
         addIcons({
@@ -39,13 +36,18 @@ export class LoginPage implements OnInit {
         }, 1500);
     }
 
-    loginWithGoogle() {
-        this.isLoading = true;
-        // Aquí iría la lógica de autenticación con Google
-        setTimeout(() => {
+    async loginWithGoogle() {
+        try {
+            this.isLoading = true;
+            const result = await this.#authService.signInWithGoogle();
+            console.log({ result });
+
             this.isLoading = false;
             this.router.navigate(['/home']);
-        }, 1500);
+        } catch (error) {
+            this.isLoading = false;
+            console.error('Google sign-in error:', error);
+        }
     }
 
     goToSignUp() {

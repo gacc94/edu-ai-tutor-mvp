@@ -2,17 +2,17 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: 'login',
-        loadComponent: () =>
-            import('./login/login.page').then((m) => m.LoginPage),
+        path: 'auth',
+        loadChildren: () => import('./core/auth/auth.routes'),
     },
     {
         path: 'home',
-        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+        loadComponent: () =>
+            import('./features/home/home.page').then((m) => m.HomePage),
     },
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'auth',
         pathMatch: 'full',
     },
 ];

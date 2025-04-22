@@ -30,6 +30,15 @@ export class LoginPage implements OnInit {
         // Inicialización si es necesaria
     }
 
+    signIn() {
+        this.isLoading = true;
+        // Aquí iría la lógica de autenticación estándar
+        setTimeout(() => {
+            this.isLoading = false;
+            this.router.navigate(['/home']);
+        }, 1500);
+    }
+
     loginWithGoogle() {
         this.isLoading = true;
         // Aquí iría la lógica de autenticación con Google
@@ -37,5 +46,11 @@ export class LoginPage implements OnInit {
             this.isLoading = false;
             this.router.navigate(['/home']);
         }, 1500);
+    }
+
+    goToSignUp() {
+        // Navegar a la página de registro
+        console.log('Navegando a registro');
+        // this.router.navigate(['/register']);
     }
 }

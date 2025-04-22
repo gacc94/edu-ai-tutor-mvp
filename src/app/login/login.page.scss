@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 :host {
@@ -7,12 +7,11 @@
 }
 
 ion-content {
-    --background: linear-gradient(
-        125deg,
-        var(--ion-color-dark) 0%,
-        var(--ion-color-tertiary-shade) 40%,
-        var(--ion-color-primary-shade) 100%
-    );
+    --background: #110e25;
+    --background-image: url("/assets/world-map-dark.png");
+    --background-position: center;
+    --background-size: cover;
+    --background-repeat: no-repeat;
 }
 
 .login-container {
@@ -30,78 +29,111 @@ ion-content {
 
 .logo-container {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .app-logo {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 0 12px rgba(var(--ion-color-primary-rgb), 0.7));
-    animation: pulse 2s infinite ease-in-out alternate;
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 8px rgba(189, 94, 255, 0.5));
 }
 
 .app-title {
-    color: var(--ion-color-light);
-    font-size: 2.2rem;
+    color: #ffffff;
+    font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
     background: linear-gradient(
         to right,
-        var(--ion-color-primary) 0%,
-        var(--ion-color-secondary) 50%,
-        var(--ion-color-tertiary) 100%
+        #a864ff 0%,
+        #d175ff 50%,
+        #7e94ff 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
-.app-subtitle {
-    color: rgba(var(--ion-color-light-rgb), 0.9);
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-}
-
-.login-card {
-    background: rgba(var(--ion-color-dark-tint-rgb), 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 28px 24px;
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    animation: slideUp 1s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.card-header {
-    text-align: center;
-    margin-bottom: 2.2rem;
-}
-
-.login-title {
-    color: var(--ion-color-light);
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin: 0 0 10px 0;
-    letter-spacing: 0.5px;
-}
-
-.login-subtitle {
-    color: rgba(var(--ion-color-light-rgb), 0.7);
-    font-size: 1rem;
-    margin: 0;
-    font-weight: 300;
-}
-
-.card-content {
+.main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 4rem;
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.main-title {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.accent-text {
+    color: #d175ff;
+    background: linear-gradient(
+        to right,
+        #a864ff 0%,
+        #e456ff 50%,
+        #e05cff 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.signin-button {
+    background: linear-gradient(to right, #9c2caf 0%, #d619a5 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 16px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(210, 36, 194, 0.3);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.social-login-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
 }
 
 .google-button {
@@ -110,23 +142,21 @@ ion-content {
     justify-content: center;
     background-color: #ffffff;
     border: none;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    width: 48px;
     height: 48px;
-    width: 100%;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
-    padding: 1px;
-    font-family: "Roboto", sans-serif;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.15);
 
     &:hover {
-        box-shadow: 0 0 3px 3px rgba(66, 133, 244, 0.15);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.25);
     }
 
     &:active {
-        background-color: #eee;
+        transform: scale(0.95);
     }
 
     &:disabled {
@@ -138,44 +168,49 @@ ion-content {
 .google-icon-wrapper {
     width: 24px;
     height: 24px;
-    margin-right: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .google-icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
 
-.google-button-text {
-    color: #757575;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-}
-
-.helper-text {
+.signup-section {
     text-align: center;
-    color: rgba(var(--ion-color-light-rgb), 0.6);
-    font-size: 0.85rem;
-    margin: 20px 0 0 0;
-    line-height: 1.5;
-    max-width: 80%;
+    margin-bottom: 2rem;
+}
+
+.signup-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.signup-link {
+    color: #d175ff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #e456ff;
+    }
 }
 
 .login-footer {
     text-align: center;
     margin-top: auto;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     opacity: 0.7;
-    animation: fadeIn 1.5s ease-in-out forwards;
 }
 
 .version-text {
-    color: rgba(var(--ion-color-light-rgb), 0.5);
-    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
     margin: 0;
 }
 
@@ -184,38 +219,12 @@ ion-content {
     animation: fadeIn 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-.animate-slide-up {
-    animation: slideUp 1s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-        filter: drop-shadow(0 0 12px rgba(var(--ion-color-primary-rgb), 0.7));
-    }
-    to {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 16px rgba(var(--ion-color-primary-rgb), 0.9));
     }
 }
 
@@ -230,29 +239,12 @@ ion-content {
         margin-bottom: 2rem;
     }
 
-    .app-logo {
-        width: 75px;
-        height: 75px;
+    .main-title {
+        font-size: 2.2rem;
     }
 
-    .app-title {
-        font-size: 2rem;
-    }
-
-    .app-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .login-card {
-        padding: 24px 20px;
-    }
-
-    .login-title {
-        font-size: 1.6rem;
-    }
-
-    .login-subtitle {
-        font-size: 0.9rem;
+    .signin-button {
+        padding: 14px 0;
     }
 }
 
@@ -261,20 +253,7 @@ ion-content {
         padding: 16px;
     }
 
-    .app-logo {
-        width: 65px;
-        height: 65px;
-    }
-
-    .app-title {
-        font-size: 1.8rem;
-    }
-
-    .login-card {
-        padding: 20px 16px;
-    }
-
-    .helper-text {
-        max-width: 95%;
+    .main-title {
+        font-size: 2rem;
     }
 }

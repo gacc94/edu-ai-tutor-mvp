@@ -13,6 +13,9 @@ import {
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 bootstrapApplication(AppComponent, {
     providers: [
@@ -20,5 +23,8 @@ bootstrapApplication(AppComponent, {
         provideIonicAngular(),
         provideRouter(routes, withPreloading(PreloadAllModules)),
         provideHttpClient(withFetch()),
+        provideFirebaseApp(() => initializeApp()),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
     ],
 });

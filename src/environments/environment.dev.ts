@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    name: 'local',
+    name: 'development',
     production: false,
     firebase: {
         projectId: 'edu-ai-tutor',

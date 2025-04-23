@@ -1,35 +1,27 @@
-<ion-content class="login-content dark" [fullscreen]="true" mode="android">
-    <div class="login-container">
-        <div class="logo-container animate-fade-in">
-            <img src="assets/eduaitor-logo.svg" alt="Logo" class="app-logo" />
-            <h1 class="app-title">EduAiTutor</h1>
-        </div>
-        <div class="main-content animate-fade-in buttons-section">
-            <div class="title-container">
-                <h1 class="main-title">Let's Get <span class="accent-text">Started!</span></h1>
-            </div>
-
-            <button class="signin-button" (click)="signIn()" [disabled]="isLoading">
+<ion-content class="login login--dark" [fullscreen]="true" mode="android">
+    <div class="login__container">
+        <header class="login__header">
+            <img src="assets/eduaitor-logo.svg" alt="Logo" class="login__logo" />
+            <h1 class="login__brand">EduAiTutor</h1>
+        </header>
+        <main class="login__main">
+            <h1 class="login__title">Let’s Get <span class="login__title--accent">Started!</span></h1>
+            <button class="login__button" (click)="signIn()" [disabled]="isLoading">
                 <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
                 <span *ngIf="!isLoading">SIGN IN</span>
             </button>
-
-            <div class="or-divider">
-                <span>OR SIGN IN WITH</span>
-            </div>
-
-            <div class="social-login-buttons">
-                <!-- Botón de Google -->
+            <div class="login__divider">OR SIGN IN WITH</div>
+            <div class="login__social-login">
                 <button
-                    class="google-button"
+                    class="login__social-btn login__social-btn--google"
                     (click)="loginWithGoogle()"
                     [disabled]="isLoading"
                     aria-label="Iniciar sesión con Google"
                 >
                     <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
                     <ng-container *ngIf="!isLoading">
-                        <div class="google-icon-wrapper">
-                            <svg class="google-icon" viewBox="0 0 48 48">
+                        <div class="login__social-icon-wrapper">
+                            <svg class="login__social-icon" viewBox="0 0 48 48">
                                 <path
                                     fill="#EA4335"
                                     d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
@@ -52,18 +44,14 @@
                     </ng-container>
                 </button>
             </div>
-        </div>
-
-        <div class="signup-section">
-            <p class="signup-text">
-                DIDN'T HAVE ACCOUNT?
-                <span class="signup-link" (click)="goToSignUp()">SIGN UP NOW</span>
-            </p>
-        </div>
-
-        <footer class="login-footer animate-fade-in">
-            <hr class="version-divider" />
-            <p class="version-text">Versión 1.0.0</p>
+        </main>
+        <footer class="login__footer">
+            <hr class="login__version-divider" />
+            <div class="login__signup">
+                <span class="login__signup-text">DIDN’T HAVE ACCOUNT?</span>
+                <button class="login__signup-link" (click)="goToSignUp()">SIGN UP NOW</button>
+            </div>
+            <p class="login__version-text">Versión 1.0.0</p>
         </footer>
     </div>
 </ion-content>

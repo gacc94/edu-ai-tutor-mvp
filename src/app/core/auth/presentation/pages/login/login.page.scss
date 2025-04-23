@@ -2,6 +2,8 @@
 
 .login {
     &__container {
+        // background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-light) 50%, var(--color-bg) 100%);
+
         display: grid;
         grid-template-rows: auto 1fr auto;
         justify-content: center;
@@ -21,10 +23,10 @@
         gap: var(--spacing-md);
     }
     &__logo {
-        width: 65px;
-        height: 65px;
+        width: 75px;
+        height: 75px;
         filter: drop-shadow(0 0 8px var(--color-shadow));
-        // box-shadow: var(--box-shadow-light);
+        box-shadow: var(--box-shadow-light);
         border-radius: 50%;
         background: transparent;
     }

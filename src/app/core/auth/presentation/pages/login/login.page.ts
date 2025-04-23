@@ -30,10 +30,10 @@ export class LoginPage implements OnInit {
     signIn() {
         this.isLoading = true;
         //TODO: Aquí iría la lógica de autenticación estándar
-        // setTimeout(() => {
-        //     this.isLoading = false;
-        //     this.router.navigate(['/home']);
-        // }, 1500);
+        setTimeout(() => {
+            this.isLoading = false;
+            this.router.navigate(['/home']);
+        }, 1500);
     }
 
     async loginWithGoogle() {

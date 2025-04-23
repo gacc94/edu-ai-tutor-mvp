@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
     templateUrl: 'login.page.html',
     styleUrls: ['login.page.scss'],
     standalone: true,
-    imports: [CommonModule, IonContent, IonButton, IonIcon, IonSpinner],
+    imports: [CommonModule, IonContent, IonSpinner],
 })
 export class LoginPage implements OnInit {
     isLoading = false;

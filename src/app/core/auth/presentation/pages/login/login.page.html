@@ -5,12 +5,12 @@
             <h1 class="login__brand">EduAiTutor</h1>
         </header>
         <main class="login__main">
-            <h1 class="login__title">Let’s Get <span class="login__title--accent">Started!</span></h1>
+            <h1 class="login__title">¡Vamos a <span class="login__title--accent">Comenzar!</span></h1>
             <button class="login__button" (click)="signIn()" [disabled]="isLoading">
                 <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
-                <span *ngIf="!isLoading">SIGN IN</span>
+                <span *ngIf="!isLoading">INICIAR SESIÓN</span>
             </button>
-            <div class="login__divider">OR SIGN IN WITH</div>
+            <div class="login__divider">O INICIAR SESIÓN CON</div>
             <div class="login__social-login">
                 <button
                     class="login__social-btn login__social-btn--google"
@@ -48,8 +48,8 @@
         <footer class="login__footer">
             <hr class="login__version-divider" />
             <div class="login__signup">
-                <span class="login__signup-text">DIDN’T HAVE ACCOUNT?</span>
-                <button class="login__signup-link" (click)="goToSignUp()">SIGN UP NOW</button>
+                <span class="login__signup-text">¿NO TIENES CUENTA?</span>
+                <button class="login__signup-link" (click)="goToSignUp()">REGÍSTRATE AHORA</button>
             </div>
             <p class="login__version-text">Versión 1.0.0</p>
         </footer>

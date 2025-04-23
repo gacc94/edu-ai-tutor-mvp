@@ -1,0 +1,80 @@
+/*=============== BASE PARA IONIC ===============*/
+@use "../config/variables";
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+input,
+textarea,
+button,
+body {
+    font-family: var(--font-family-main);
+    font-size: var(--font-size-base);
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+ion-content {
+    --background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-family-main);
+    button {
+        outline: none;
+        border: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: var(--title-color);
+        font-weight: var(--font-medium);
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    img,
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+    ::-webkit-scrollbar {
+        width: 0.6rem;
+        border-radius: 0.5rem;
+        background-color: hsl(228, 12%, 25%);
+    }
+    ::-moz-viewport-scroll {
+        width: 0.6rem;
+        border-radius: 0.5rem;
+        background-color: hsl(228, 12%, 25%);
+    }
+    ::-webkit-slider-thumb {
+        background-color: hsl(228, 8%, 35%);
+        border-radius: 0.5rem;
+    }
+    ::-webkit-slider-thumb:hover {
+        background-color: hsl(228, 8%, 45%);
+    }
+    ::selection {
+        background-color: var(--first-color-light);
+    }
+}

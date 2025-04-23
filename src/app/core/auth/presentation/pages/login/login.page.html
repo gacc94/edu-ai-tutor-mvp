@@ -1,22 +1,15 @@
-<ion-content class="login-content" [fullscreen]="true">
+<ion-content class="login-content dark" [fullscreen]="true" mode="android">
     <div class="login-container">
         <div class="logo-container animate-fade-in">
             <img src="assets/eduaitor-logo.svg" alt="Logo" class="app-logo" />
             <h1 class="app-title">EduAiTutor</h1>
         </div>
-
-        <div class="main-content animate-fade-in">
+        <div class="main-content animate-fade-in buttons-section">
             <div class="title-container">
-                <h1 class="main-title">
-                    Let's Get <span class="accent-text">Started!</span>
-                </h1>
+                <h1 class="main-title">Let's Get <span class="accent-text">Started!</span></h1>
             </div>
 
-            <button
-                class="signin-button"
-                (click)="signIn()"
-                [disabled]="isLoading"
-            >
+            <button class="signin-button" (click)="signIn()" [disabled]="isLoading">
                 <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
                 <span *ngIf="!isLoading">SIGN IN</span>
             </button>
@@ -64,13 +57,12 @@
         <div class="signup-section">
             <p class="signup-text">
                 DIDN'T HAVE ACCOUNT?
-                <span class="signup-link" (click)="goToSignUp()"
-                    >SIGN UP NOW</span
-                >
+                <span class="signup-link" (click)="goToSignUp()">SIGN UP NOW</span>
             </p>
         </div>
 
         <footer class="login-footer animate-fade-in">
+            <hr class="version-divider" />
             <p class="version-text">Versión 1.0.0</p>
         </footer>
     </div>

@@ -1,13 +1,6 @@
 import { HttpParams, httpResource } from '@angular/common/http';
 import { Component, inject, linkedSignal, signal } from '@angular/core';
-import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonIcon,
-} from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, IonFooter } from '@ionic/angular/standalone';
 import { Character, DBResponse } from './dragon-ball.interface';
 import { JsonPipe } from '@angular/common';
 import { DragonBallService } from './dragon-ball.service';
@@ -16,15 +9,7 @@ import { DragonBallService } from './dragon-ball.service';
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [
-        IonIcon,
-        IonButton,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
-        JsonPipe,
-    ],
+    imports: [IonIcon, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, JsonPipe, IonFooter],
 })
 export class HomePage {
     #dbService = inject(DragonBallService);

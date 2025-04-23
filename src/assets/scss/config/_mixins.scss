@@ -1,0 +1,39 @@
+// Mixins globales para el proyecto
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin gradient-text($gradient) {
+    background: $gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin button-base {
+    border: none;
+    border-radius: $border-radius;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: $transition-main;
+}
+
+@mixin box-shadow-main {
+    box-shadow: $box-shadow-main;
+}
+
+@mixin responsive-font($size-lg, $size-md, $size-sm, $size-xs) {
+    font-size: $size-lg;
+    @media (max-width: 480px) {
+        font-size: $size-md;
+    }
+    @media (max-width: 360px) {
+        font-size: $size-sm;
+    }
+    @media (max-width: 320px) {
+        font-size: $size-xs;
+    }
+}

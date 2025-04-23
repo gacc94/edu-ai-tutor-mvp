@@ -1,0 +1,88 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+:root {
+    /*========== Colors ==========*/
+    --color-primary: #a864ff;
+    --color-primary-dark: #7e94ff;
+    --color-accent: #d175ff;
+    --color-accent-2: #e456ff;
+    --color-accent-3: #e05cff;
+    --color-secondary: #9c2caf;
+    --color-secondary-dark: #d619a5;
+    --color-bg: #110e25;
+    --color-bg-light: #1a1535;
+    --color-white: #fff;
+    --color-gray: #ccc;
+    --color-gray-dark: #444;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.7);
+    --color-text-light: rgba(255, 255, 255, 0.4);
+
+    /*========== Gradients ==========*/
+    --gradient-primary: linear-gradient(
+        to right,
+        var(--color-primary) 0%,
+        var(--color-accent) 50%,
+        var(--color-primary-dark) 100%
+    );
+    --gradient-accent: linear-gradient(
+        to right,
+        var(--color-primary) 0%,
+        var(--color-accent-2) 50%,
+        var(--color-accent-3) 100%
+    );
+    --gradient-button: linear-gradient(to right, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+
+    /*========== Typography ==========*/
+    --font-family-main: "Poppins", sans-serif;
+    --font-family-alt: "Roboto", sans-serif;
+    --font-size-base: 1rem;
+    --font-size-lg: 2.5rem;
+    --font-size-md: 1.8rem;
+    --font-size-sm: 0.8rem;
+    --font-size-xs: 0.7rem;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+
+    /*========== Spacing ==========*/
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 48px;
+    --header-height: 3.5rem;
+
+    /*========== Borders and shadows ==========*/
+    --border-radius: 30px;
+    --border-radius-sm: 8px;
+    --box-shadow-main: 0 4px 15px rgba(210, 36, 194, 0.3);
+    --box-shadow-light: 0 0 8px rgba(189, 94, 255, 0.5);
+
+    /*========== Transitions ==========*/
+    --transition-main: all 0.3s ease;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+
+    /*========== Additional theme colors ==========*/
+    --hue: 200;
+    --first-color: hsl(var(--hue), 80%, 60%);
+    --first-color-light: hsl(var(--hue), 100%, 75%);
+    --first-color-alt: hsl(var(--hue), 56%, 35%);
+    --title-color: hsl(228, 8%, 95%);
+    --text-color: hsl(228, 8%, 65%);
+    --body-color: hsl(216, 59%, 13%);
+    --container-color: hsl(217, 59%, 8%);
+
+    /*========== Additional typography ==========*/
+    --biggest-font-size: 2rem;
+    --bigger-font-size: 1.25rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+}

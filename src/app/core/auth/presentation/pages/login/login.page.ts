@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
     constructor(private router: Router) {
         addIcons({
-            logoGoogle,
+            // logoGoogle,
         });
     }
 
@@ -29,11 +29,11 @@ export class LoginPage implements OnInit {
 
     signIn() {
         this.isLoading = true;
-        // Aquí iría la lógica de autenticación estándar
-        setTimeout(() => {
-            this.isLoading = false;
-            this.router.navigate(['/home']);
-        }, 1500);
+        //TODO: Aquí iría la lógica de autenticación estándar
+        // setTimeout(() => {
+        //     this.isLoading = false;
+        //     this.router.navigate(['/home']);
+        // }, 1500);
     }
 
     async loginWithGoogle() {

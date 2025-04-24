@@ -5,13 +5,10 @@ import {
     initializeAuth,
     provideAuth,
 } from '@angular/fire/auth';
-import {
-    initializeFirestore,
-    persistentLocalCache,
-    provideFirestore,
-} from '@angular/fire/firestore';
+import { initializeFirestore, persistentLocalCache, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '@envs/environment';
 
+//TODO: firebase init
 const fbApp = () => initializeApp(environment.firebase);
 const authApp = () =>
     initializeAuth(fbApp(), {
@@ -24,8 +21,4 @@ const firestoreApp = () =>
         localCache: persistentLocalCache(),
     });
 
-export const firebaseProviders = [
-    provideFirebaseApp(fbApp),
-    provideAuth(authApp),
-    provideFirestore(firestoreApp),
-];
+export const firebaseProviders = [provideFirebaseApp(fbApp), provideAuth(authApp), provideFirestore(firestoreApp)];

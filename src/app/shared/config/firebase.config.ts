@@ -1,11 +1,19 @@
+import { isDevMode } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import {
     browserPopupRedirectResolver,
     browserSessionPersistence,
+    connectAuthEmulator,
     initializeAuth,
     provideAuth,
 } from '@angular/fire/auth';
-import { initializeFirestore, persistentLocalCache, provideFirestore } from '@angular/fire/firestore';
+import {
+    connectFirestoreEmulator,
+    initializeFirestore,
+    persistentLocalCache,
+    provideFirestore,
+} from '@angular/fire/firestore';
+import { connectFunctionsEmulator, getFunctions, provideFunctions } from '@angular/fire/functions';
 import { environment } from '@envs/environment';
 
 //TODO: firebase init
@@ -18,11 +26,9 @@ const authApp = () => {
         popupRedirectResolver: browserPopupRedirectResolver,
     });
 
-    if (!environment.production) {
+    if (isDevMode()) {
         // TODO: Configure the emulator for authentication
-        import('@angular/fire/auth').then(({ connectAuthEmulator }) => {
-            connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
-        });
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
     }
 
     return auth;
@@ -34,14 +40,26 @@ const firestoreApp = () => {
         localCache: persistentLocalCache(),
     });
 
-    if (!environment.production) {
+    if (isDevMode()) {
         // TODO: Configure the emulator for Firestore
-        import('@angular/fire/firestore').then(({ connectFirestoreEmulator }) => {
-            connectFirestoreEmulator(firestore, 'localhost', 9092);
-        });
+        connectFirestoreEmulator(firestore, 'localhost', 9092);
     }
 
     return firestore;
 };
 
-export const firebaseProviders = [provideFirebaseApp(fbApp), provideAuth(authApp), provideFirestore(firestoreApp)];
+const functionsApp = () => {
+    const functions = getFunctions(fbApp());
+    if (isDevMode()) {
+        // TODO: Configure the emulator for Functions
+        connectFunctionsEmulator(functions, 'localhost', 9098);
+    }
+    return functions;
+};
+
+export const firebaseProviders = [
+    provideFirebaseApp(fbApp),
+    provideAuth(authApp),
+    provideFirestore(firestoreApp),
+    provideFunctions(functionsApp),
+];

@@ -1,13 +1,143 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title> Blank </ion-title>
+<ion-header [translucent]="true" class="header">
+    <ion-toolbar class="header__toolbar">
+        <ion-title class="header__title">
+            <ion-icon name="school-outline" class="header__icon"></ion-icon>
+            EduAI
+        </ion-title>
+        <ion-buttons slot="end" class="header__actions">
+            <ion-button class="header__button">
+                <ion-icon name="notifications-outline"></ion-icon>
+            </ion-button>
+            <ion-button class="header__button">
+                <ion-icon name="person-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true" class="home">
+    <div class="home__container">
+        <!-- Sección de bienvenida -->
+        <section class="welcome">
+            <div class="welcome__content">
+                <h2 class="welcome__title">Bienvenido de nuevo</h2>
+                <h3 class="welcome__name">Estudiante</h3>
+                <div class="welcome__stats">
+                    <div class="welcome__balance">
+                        <span class="welcome__label">Puntos acumulados</span>
+                        <span class="welcome__value">1,245</span>
+                    </div>
+                    <div class="welcome__icon">
+                        <ion-icon name="school"></ion-icon>
+                    </div>
+                </div>
+                <p class="welcome__description">Continúa aprendiendo y resolviendo tus dudas con nuestra IA</p>
+            </div>
+        </section>
 
-<ion-footer>
-    <ion-toolbar>
-        <ion-title>Footer Toolbar</ion-title>
-    </ion-toolbar>
-</ion-footer>
+        <!-- Menú de acciones rápidas -->
+        <section class="actions">
+            <div class="actions__grid">
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="chatbubbles-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Preguntar</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="document-text-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Tareas</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="book-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Notas</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="analytics-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Progreso</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="people-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Grupos</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="calendar-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Horario</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="medal-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Logros</span>
+                </div>
+                <div class="actions__item">
+                    <div class="actions__icon-container">
+                        <ion-icon name="settings-outline" class="actions__icon"></ion-icon>
+                    </div>
+                    <span class="actions__label">Ajustes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividades recientes -->
+        <section class="activities">
+            <h2 class="activities__title">Actividades recientes</h2>
+
+            <div class="activities__list">
+                <div class="activity">
+                    <div class="activity__icon-container">
+                        <ion-icon name="chatbubble-ellipses-outline" class="activity__icon"></ion-icon>
+                    </div>
+                    <div class="activity__content">
+                        <h3 class="activity__title">Pregunta resuelta</h3>
+                        <p class="activity__date">11:30 Hoy</p>
+                    </div>
+                    <div class="activity__value">+15 pts</div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity__icon-container">
+                        <ion-icon name="document-text-outline" class="activity__icon"></ion-icon>
+                    </div>
+                    <div class="activity__content">
+                        <h3 class="activity__title">Tarea completada</h3>
+                        <p class="activity__date">17:45 Ayer</p>
+                    </div>
+                    <div class="activity__value">+50 pts</div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity__icon-container">
+                        <ion-icon name="book-outline" class="activity__icon"></ion-icon>
+                    </div>
+                    <div class="activity__content">
+                        <h3 class="activity__title">Nota guardada</h3>
+                        <p class="activity__date">09:20 Ayer</p>
+                    </div>
+                    <div class="activity__value">+5 pts</div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity__icon-container">
+                        <ion-icon name="medal-outline" class="activity__icon"></ion-icon>
+                    </div>
+                    <div class="activity__content">
+                        <h3 class="activity__title">Logro desbloqueado</h3>
+                        <p class="activity__date">14:15 Ayer</p>
+                    </div>
+                    <div class="activity__value">+25 pts</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</ion-content>

@@ -27,7 +27,8 @@
       "command": "pkill -f \"pnpm run start\" || true",
       "presentation": {
         "reveal": "never",
-        "panel": "dedicated"
+        "panel": "new",
+        "close": true
       },
       "problemMatcher": []
     }

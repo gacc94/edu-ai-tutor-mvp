@@ -1,6 +1,6 @@
 import { httpResource } from '@angular/common/http';
-import { Injectable, linkedSignal, Signal, signal } from '@angular/core';
-import { Character, DBResponse } from './dragon-ball.interface';
+import { Injectable, Signal } from '@angular/core';
+import { Character, DBResponse } from '../interfaces/dragon-ball.interface';
 
 @Injectable({
     providedIn: 'root',

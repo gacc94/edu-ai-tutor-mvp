@@ -7,8 +7,11 @@
         <main class="login__main">
             <h1 class="login__title">¡Vamos a <span class="login__title--accent">Comenzar!</span></h1>
             <button class="login__button" (click)="signIn()" [disabled]="isLoading">
-                <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
-                <span *ngIf="!isLoading">INICIAR SESIÓN</span>
+                @if (isLoading) {
+                <ion-spinner name="dots"></ion-spinner>
+                } @if (!isLoading) {
+                <span>INICIAR SESIÓN</span>
+                }
             </button>
             <div class="login__divider">O INICIAR SESIÓN CON</div>
             <div class="login__social-login">
@@ -18,8 +21,10 @@
                     [disabled]="isLoading"
                     aria-label="Iniciar sesión con Google"
                 >
-                    <ion-spinner name="dots" *ngIf="isLoading"></ion-spinner>
-                    <ng-container *ngIf="!isLoading">
+                    @if (isLoading) {
+                    <ion-spinner name="dots"></ion-spinner>
+                    } @if (!isLoading) {
+                    <ng-container>
                         <div class="login__social-icon-wrapper">
                             <svg class="login__social-icon" viewBox="0 0 48 48">
                                 <path
@@ -42,6 +47,7 @@
                             </svg>
                         </div>
                     </ng-container>
+                    }
                 </button>
             </div>
         </main>

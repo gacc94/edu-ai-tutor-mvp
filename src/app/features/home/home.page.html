@@ -1,13 +1,136 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title> Blank </ion-title>
+<ion-header [translucent]="true" class="header">
+    <ion-toolbar class="header__toolbar">
+        <ion-title class="header__title">
+            <div class="header__profile">
+                <img src="assets/avatar-placeholder.png" alt="Profile" class="header__avatar" />
+                <div class="header__user-info">
+                    <h2 class="header__name">Estudiante</h2>
+                    <p class="header__role">Aprendiz</p>
+                </div>
+            </div>
+        </ion-title>
+        <ion-buttons slot="end" class="header__actions">
+            <ion-button class="header__button">
+                <ion-icon name="notifications-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> </ion-content>
+<ion-content [fullscreen]="true" class="home">
+    <div class="home__container">
+        <!-- Carrusel de sugerencias -->
+        <section class="features-carousel">
+            <h2 class="features-carousel__title">Nuevas herramientas</h2>
 
-<ion-footer>
-    <ion-toolbar>
-        <ion-title>Footer Toolbar</ion-title>
-    </ion-toolbar>
+            <div class="features-carousel__wrapper">
+                <div class="feature-card feature-card--blue">
+                    <div class="feature-card__icon-container">
+                        <ion-icon name="pulse-outline" class="feature-card__icon"></ion-icon>
+                    </div>
+                    <div class="feature-card__content">
+                        <h3 class="feature-card__title">Seguimiento emocional</h3>
+                        <p class="feature-card__description">Aprende a gestionar tus emociones durante el estudio.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card feature-card--orange">
+                    <div class="feature-card__icon-container">
+                        <ion-icon name="desktop-outline" class="feature-card__icon"></ion-icon>
+                    </div>
+                    <div class="feature-card__content">
+                        <h3 class="feature-card__title">Reestructuración cognitiva</h3>
+                        <p class="feature-card__description">Cambia pensamientos limitantes sobre tu aprendizaje.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card feature-card--purple">
+                    <div class="feature-card__icon-container">
+                        <ion-icon name="analytics-outline" class="feature-card__icon"></ion-icon>
+                    </div>
+                    <div class="feature-card__content">
+                        <h3 class="feature-card__title">Seguimiento de bloqueos</h3>
+                        <p class="feature-card__description">Identifica qué te impide avanzar en tu estudio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progreso actual -->
+        <section class="progress">
+            <div class="progress__header">
+                <h2 class="progress__title">En progreso:</h2>
+                <span class="progress__course">Matemáticas avanzadas</span>
+            </div>
+
+            <div class="progress__container">
+                <div class="progress__info">
+                    <p class="progress__label">Completa hoy tu lección de cálculo</p>
+                </div>
+                <div class="progress__chart">
+                    <div class="progress__percentage">60%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Herramientas disponibles -->
+        <section class="tools">
+            <div class="tools__header">
+                <h2 class="tools__title">Herramientas para ti</h2>
+                <a href="#" class="tools__more">Más</a>
+            </div>
+
+            <div class="tools__grid">
+                <div class="tool-card tool-card--blue">
+                    <div class="tool-card__icon-wrapper">
+                        <ion-icon name="star-outline" class="tool-card__icon"></ion-icon>
+                    </div>
+                    <h3 class="tool-card__title">Evaluaciones</h3>
+                    <p class="tool-card__description">Practica con ejercicios interactivos</p>
+                </div>
+
+                <div class="tool-card tool-card--teal">
+                    <div class="tool-card__icon-wrapper">
+                        <ion-icon name="warning-outline" class="tool-card__icon"></ion-icon>
+                    </div>
+                    <h3 class="tool-card__title">Seguimiento de errores</h3>
+                    <p class="tool-card__description">Aprende de tus equivocaciones</p>
+                </div>
+
+                <div class="tool-card tool-card--purple">
+                    <div class="tool-card__icon-wrapper">
+                        <ion-icon name="bulb-outline" class="tool-card__icon"></ion-icon>
+                    </div>
+                    <h3 class="tool-card__title">Lluvia de ideas</h3>
+                    <p class="tool-card__description">Generar ideas para tus proyectos</p>
+                </div>
+
+                <div class="tool-card tool-card--orange">
+                    <div class="tool-card__icon-wrapper">
+                        <ion-icon name="help-circle-outline" class="tool-card__icon"></ion-icon>
+                    </div>
+                    <h3 class="tool-card__title">IA Tutor</h3>
+                    <p class="tool-card__description">Resuelve dudas al instante</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</ion-content>
+
+<ion-footer class="footer">
+    <div class="footer__tabs">
+        <div class="footer__tab footer__tab--active">
+            <ion-icon name="home"></ion-icon>
+            <span>Inicio</span>
+        </div>
+        <div class="footer__tab">
+            <ion-icon name="flash-outline"></ion-icon>
+        </div>
+        <div class="footer__tab">
+            <ion-icon name="search-outline"></ion-icon>
+        </div>
+        <div class="footer__tab">
+            <ion-icon name="person-outline"></ion-icon>
+        </div>
+    </div>
 </ion-footer>

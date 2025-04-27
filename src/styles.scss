@@ -1,0 +1,17 @@
+/* Global status bar spacing */
+ion-app {
+    margin-top: var(--ion-safe-area-top, 0);
+}
+
+html.ios {
+    --ion-safe-area-top: 20px; /* Adjust based on device status bar height */
+}
+
+html.md {
+    --ion-safe-area-top: 24px;
+}
+
+/* Asegura que el contenido tenga padding en la parte superior */
+ion-content {
+    padding-top: var(--ion-safe-area-top, 20px); // 20px es un fallback, el var() es lo importante
+}

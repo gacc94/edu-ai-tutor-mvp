@@ -1,30 +1,21 @@
-<ion-header [translucent]="true" class="header">
-    <ion-toolbar class="header__toolbar">
-        <ion-title class="header__title">
-            <div class="header__profile">
-                <img src="assets/avatar-placeholder.png" alt="Profile" class="header__avatar" />
-                <div class="header__user-info">
-                    <h2 class="header__name">Estudiante</h2>
-                    <p class="header__role">Aprendiz</p>
-                </div>
-            </div>
-        </ion-title>
-        <ion-buttons slot="end" class="header__actions">
-            <ion-button class="header__button">
-                <ion-icon name="notifications-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="home">
     <div class="home__container">
         <!-- Carrusel de sugerencias -->
         <section class="features-carousel">
             <h2 class="features-carousel__title">Nuevas herramientas</h2>
 
-            <div class="features-carousel__wrapper">
-                <div class="feature-card feature-card--blue">
+            <swiper-container
+                [slidesPerView]="'1.5'"
+                [spaceBetween]="20"
+                [loop]="true"
+                [pagination]="true"
+                [autoplay]="{ delay: 2000 }"
+                [speed]="500"
+                [freeMode]="true"
+                [effect]="'slide'"
+                class="features-carousel__wrapper"
+            >
+                <swiper-slide class="feature-card feature-card--blue">
                     <div class="feature-card__icon-container">
                         <ion-icon name="pulse-outline" class="feature-card__icon"></ion-icon>
                     </div>
@@ -32,9 +23,8 @@
                         <h3 class="feature-card__title">Seguimiento emocional</h3>
                         <p class="feature-card__description">Aprende a gestionar tus emociones durante el estudio.</p>
                     </div>
-                </div>
-
-                <div class="feature-card feature-card--orange">
+                </swiper-slide>
+                <swiper-slide class="feature-card feature-card--orange">
                     <div class="feature-card__icon-container">
                         <ion-icon name="desktop-outline" class="feature-card__icon"></ion-icon>
                     </div>
@@ -42,9 +32,8 @@
                         <h3 class="feature-card__title">Reestructuración cognitiva</h3>
                         <p class="feature-card__description">Cambia pensamientos limitantes sobre tu aprendizaje.</p>
                     </div>
-                </div>
-
-                <div class="feature-card feature-card--purple">
+                </swiper-slide>
+                <swiper-slide class="feature-card feature-card--purple">
                     <div class="feature-card__icon-container">
                         <ion-icon name="analytics-outline" class="feature-card__icon"></ion-icon>
                     </div>
@@ -52,12 +41,12 @@
                         <h3 class="feature-card__title">Seguimiento de bloqueos</h3>
                         <p class="feature-card__description">Identifica qué te impide avanzar en tu estudio.</p>
                     </div>
-                </div>
-            </div>
+                </swiper-slide>
+            </swiper-container>
         </section>
 
         <!-- Progreso actual -->
-        <section class="progress">
+        <!-- <section class="progress">
             <div class="progress__header">
                 <h2 class="progress__title">En progreso:</h2>
                 <span class="progress__course">Matemáticas avanzadas</span>
@@ -71,7 +60,7 @@
                     <div class="progress__percentage">60%</div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Herramientas disponibles -->
         <section class="tools">

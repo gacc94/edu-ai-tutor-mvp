@@ -1,4 +1,4 @@
-import { Component, inject, linkedSignal, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, linkedSignal, signal } from '@angular/core';
 import {
     IonHeader,
     IonToolbar,
@@ -9,14 +9,14 @@ import {
     IonFooter,
     IonButtons,
 } from '@ionic/angular/standalone';
-import { JsonPipe } from '@angular/common';
 import { DragonBallService } from '../../shared/services/dragon-ball.service';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [IonIcon, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButtons],
+    imports: [IonIcon, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButtons, IonIcon],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
     #dbService = inject(DragonBallService);

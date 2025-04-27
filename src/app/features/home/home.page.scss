@@ -61,7 +61,7 @@ ion-content {
 /* Home container */
 .home {
     &__container {
-        padding: var(--spacing-md);
+        //padding: var(--spacing-md);
         max-width: 600px;
         margin: 0 auto;
     }
@@ -70,6 +70,10 @@ ion-content {
 /* Features carousel */
 .features-carousel {
     margin-bottom: var(--spacing-lg);
+    background-color: violet;
+    padding: var(--spacing-md);
+    padding-bottom: 2rem;
+    border-bottom-left-radius: 2.5rem;
 
     &__title {
         font-size: var(--h3-font-size);
@@ -94,7 +98,7 @@ ion-content {
 
 /* Feature card */
 .feature-card {
-    min-width: 270px;
+    min-width: 16.875rem;
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-md);
     display: flex;
@@ -104,11 +108,12 @@ ion-content {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    height: 9rem;
 
-    &:hover {
+    /*&:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
+    }*/
 
     /* Card color variants */
     &--blue {
@@ -234,6 +239,7 @@ ion-content {
 /* Tools section */
 .tools {
     margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
 
     &__header {
         display: flex;
@@ -433,4 +439,15 @@ ion-content {
             font-size: var(--smallest-font-size);
         }
     }
+}
+
+ion-content {
+    // Asegura que el contenido tenga padding en la parte superior
+    // Esto debería ser manejado por Ionic automáticamente sin fullscreen,
+    // pero si algo interfiere, puedes forzarlo:
+    padding-top: var(--ion-safe-area-top, 20px); // 20px es un fallback, el var() es lo importante
+
+    // También asegura que el contenido respete el footer/tab bar
+    // Ionic también maneja esto por defecto
+    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }

@@ -78,3 +78,27 @@ ion-content {
         background-color: var(--first-color-light);
     }
 }
+
+/* Ajustes para botones y tarjetas en toda la app */
+ion-button {
+    text-transform: none;
+}
+
+ion-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Personalización de elementos de formulario */
+ion-item {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --inner-padding-end: 8px;
+}
+
+/* Estilos para inputs y placeholders */
+ion-input,
+ion-textarea,
+ion-select {
+    --placeholder-opacity: 0.7;
+}

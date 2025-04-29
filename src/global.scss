@@ -26,28 +26,6 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-// /* Estilos personalizados globales */
-// :root {
-//     /* Colores principales */
-//     --ion-color-primary: #6c5ce7;
-//     --ion-color-primary-rgb: 108, 92, 231;
-//     --ion-color-primary-contrast: #ffffff;
-//     --ion-color-primary-contrast-rgb: 255, 255, 255;
-//     --ion-color-primary-shade: #5f51cb;
-//     --ion-color-primary-tint: #7b6de9;
-
-//     /* Colores secundarios */
-//     --ion-color-secondary: #00cec9;
-//     --ion-color-secondary-rgb: 0, 206, 201;
-//     --ion-color-secondary-contrast: #ffffff;
-//     --ion-color-secondary-contrast-rgb: 255, 255, 255;
-//     --ion-color-secondary-shade: #00b5b1;
-//     --ion-color-secondary-tint: #1ad3ce;
-
-//     /* Fuente personalizada */
-//     --ion-font-family: "Poppins", sans-serif;
-// }
-
 /* Estilos para animaciones globales */
 .page-transition {
     animation: fadein 0.3s ease-in-out;
@@ -60,28 +38,4 @@
     to {
         opacity: 1;
     }
-}
-
-/* Ajustes para botones y tarjetas en toda la app */
-ion-button {
-    text-transform: none;
-}
-
-ion-card {
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-/* Personalización de elementos de formulario */
-ion-item {
-    --padding-start: 8px;
-    --padding-end: 8px;
-    --inner-padding-end: 8px;
-}
-
-/* Estilos para inputs y placeholders */
-ion-input,
-ion-textarea,
-ion-select {
-    --placeholder-opacity: 0.7;
 }

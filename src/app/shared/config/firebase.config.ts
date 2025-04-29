@@ -1,4 +1,4 @@
-import { isDevMode } from '@angular/core';
+import { EnvironmentProviders, isDevMode } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import {
     browserPopupRedirectResolver,
@@ -57,7 +57,7 @@ const functionsApp = () => {
     return functions;
 };
 
-export const firebaseProviders = [
+export const firebaseProviders: EnvironmentProviders[] = [
     provideFirebaseApp(fbApp),
     provideAuth(authApp),
     provideFirestore(firestoreApp),

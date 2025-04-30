@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="180" fill="#3366cc"/>
+  
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="155" fill="none" stroke="#ffffff" stroke-width="6"/>
+  
+  <!-- Book base -->
+  <path d="M130,220 L270,220 L270,180 C270,180 250,165 200,165 C150,165 130,180 130,180 Z" 
+        fill="#ffffff"/>
+  
+  <!-- Book pages -->
+  <path d="M135,215 L265,215 L265,185 C265,185 245,175 200,175 C155,175 135,185 135,185 Z" 
+        fill="#3366cc"/>
+  
+  <!-- AI circuit pattern -->
+  <circle cx="170" cy="195" r="8" fill="#ffffff"/>
+  <circle cx="230" cy="195" r="8" fill="#ffffff"/>
+  <circle cx="200" cy="185" r="10" fill="#ffffff"/>
+  
+  <!-- Connections -->
+  <line x1="170" y1="195" x2="200" y2="185" stroke="#ffffff" stroke-width="4"/>
+  <line x1="230" y1="195" x2="200" y2="185" stroke="#ffffff" stroke-width="4"/>
+  
+  <!-- Graduation cap -->
+  <path d="M200,140 L250,160 L200,180 L150,160 Z" fill="#ffffff"/>
+  <path d="M230,165 L230,190" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M220,195 L240,195" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Text -->
+  <text x="200" y="265" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#ffffff">EduAITutor</text>
+</svg>

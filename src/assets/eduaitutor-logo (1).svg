@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="180" fill="#3366cc"/>
+  
+  <!-- Modern circuit board pattern in background - subtle -->
+  <path d="M80,200 L120,200 M140,160 L140,240 M260,160 L260,240 M280,200 L320,200" 
+        stroke="#ffffff" stroke-width="1" stroke-opacity="0.2"/>
+  <path d="M200,80 L200,120 M160,140 L240,140 M160,260 L240,260 M200,280 L200,320" 
+        stroke="#ffffff" stroke-width="1" stroke-opacity="0.2"/>
+  
+  <!-- Outer ring - professional style -->
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#ffffff" stroke-width="5"/>
+  <circle cx="200" cy="200" r="143" fill="none" stroke="#ffffff" stroke-width="1"/>
+  
+  <!-- AI Brain/Chip icon -->
+  <rect x="150" y="150" width="100" height="100" rx="10" ry="10" fill="#ffffff"/>
+  
+  <!-- CPU/Brain circuit pattern -->
+  <path d="M160,170 H240 M160,190 H240 M160,210 H240 M160,230 H240" 
+        stroke="#3366cc" stroke-width="4"/>
+  <path d="M170,160 V240 M190,160 V240 M210,160 V240 M230,160 V240" 
+        stroke="#3366cc" stroke-width="4"/>
+  
+  <!-- AI Brain connections/synapses -->
+  <circle cx="170" cy="170" r="4" fill="#3366cc"/>
+  <circle cx="210" cy="170" r="4" fill="#3366cc"/>
+  <circle cx="190" cy="190" r="6" fill="#3366cc"/>
+  <circle cx="230" cy="210" r="4" fill="#3366cc"/>
+  <circle cx="170" cy="230" r="4" fill="#3366cc"/>
+  <circle cx="210" cy="230" r="4" fill="#3366cc"/>
+  
+  <!-- Neural network connections -->
+  <path d="M170,170 L190,190 L170,230 M210,170 L190,190 L210,230 M190,190 L230,210" 
+        stroke="#3366cc" stroke-width="2" stroke-opacity="0.8"/>
+  
+  <!-- Digital emanation from the AI chip - representing teaching/knowledge -->
+  <path d="M150,150 L130,130 M150,200 L110,200 M150,250 L130,270 
+           M250,150 L270,130 M250,200 L290,200 M250,250 L270,270
+           M200,150 L200,110 M200,250 L200,290" 
+        stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Graduation cap accent - subtle education reference -->
+  <path d="M200,125 L215,132 L200,139 L185,132 Z" fill="#ffffff" fill-opacity="0.9"/>
+  
+  <!-- Company Name -->
+  <text x="200" y="300" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#ffffff">EduAITutor</text>
+</svg>

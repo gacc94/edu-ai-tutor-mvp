@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonContent, IonButton, IonIcon, IonSpinner } from '@ionic/angular/standalone';
+import { IonContent, IonSpinner } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
     constructor(private router: Router) {
         addIcons({
-            // logoGoogle,
+            logoGoogle,
         });
     }
 
@@ -27,23 +27,15 @@ export class LoginPage implements OnInit {
         // Inicialización si es necesaria
     }
 
-    signIn() {
-        this.isLoading = true;
-        //TODO: Aquí iría la lógica de autenticación estándar
-        setTimeout(() => {
-            this.isLoading = false;
-            this.router.navigate(['/home']);
-        }, 1500);
-    }
-
     async loginWithGoogle() {
         try {
             this.isLoading = true;
-            const result = await this.#authService.signInWithGoogle();
-            console.log({ result });
-
-            this.isLoading = false;
-            this.router.navigate(['/home']);
+            // const result = await this.#authService.signInWithGoogle();
+            // console.log({ result });
+            setTimeout(() => {
+                this.isLoading = false;
+                this.router.navigate(['/home']);
+            }, 1500);
         } catch (error) {
             this.isLoading = false;
             console.error('Google sign-in error:', error);

@@ -1,9 +1,30 @@
 <ion-content [fullscreen]="true" class="home">
     <div class="home__container">
-        <!-- Carrusel de sugerencias -->
-        <section class="features-carousel">
-            <h2 class="features-carousel__title">Nuevas herramientas</h2>
+        <!-- Header con AI Assistant -->
+        <div class="home__header">
+            <div class="home__assistant">
+                <div class="home__assistant-icon">
+                    <ion-icon name="logo-ionic"></ion-icon>
+                </div>
+                <span class="home__assistant-text">EduAITutor</span>
+            </div>
+        </div>
 
+        <!-- Tabs de categorías -->
+        <div class="home__tabs">
+            <div class="home__tab home__tab--active">
+                <span>AI</span>
+            </div>
+            <div class="home__tab">
+                <span>Design</span>
+            </div>
+            <div class="home__tab">
+                <span>Creative</span>
+            </div>
+        </div>
+
+        <!-- Carrusel de sugerencias (mantenido como está) -->
+        <section class="features-carousel">
             <swiper-container
                 [slidesPerView]="'1.5'"
                 [spaceBetween]="20"
@@ -45,61 +66,47 @@
             </swiper-container>
         </section>
 
-        <!-- Progreso actual -->
-        <!-- <section class="progress">
-            <div class="progress__header">
-                <h2 class="progress__title">En progreso:</h2>
-                <span class="progress__course">Matemáticas avanzadas</span>
-            </div>
-
-            <div class="progress__container">
-                <div class="progress__info">
-                    <p class="progress__label">Completa hoy tu lección de cálculo</p>
-                </div>
-                <div class="progress__chart">
-                    <div class="progress__percentage">60%</div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- Herramientas disponibles -->
+        <!-- Herramientas disponibles (rediseñadas según la imagen) -->
         <section class="tools">
-            <div class="tools__header">
-                <h2 class="tools__title">Herramientas para ti</h2>
-                <a href="#" class="tools__more">Más</a>
-            </div>
-
             <div class="tools__grid">
-                <div class="tool-card tool-card--blue">
-                    <div class="tool-card__icon-wrapper">
-                        <ion-icon name="star-outline" class="tool-card__icon"></ion-icon>
+                <div class="tool-card">
+                    <div class="tool-card__icon-wrapper tool-card__icon-wrapper--blue">
+                        <ion-icon name="create-outline" class="tool-card__icon"></ion-icon>
                     </div>
-                    <h3 class="tool-card__title">Evaluaciones</h3>
-                    <p class="tool-card__description">Practica con ejercicios interactivos</p>
+                    <div class="tool-card__content">
+                        <h3 class="tool-card__title">Writing Article</h3>
+                        <p class="tool-card__description">Practica con ejercicios interactivos</p>
+                    </div>
                 </div>
 
-                <div class="tool-card tool-card--teal">
-                    <div class="tool-card__icon-wrapper">
-                        <ion-icon name="warning-outline" class="tool-card__icon"></ion-icon>
+                <div class="tool-card">
+                    <div class="tool-card__icon-wrapper tool-card__icon-wrapper--purple">
+                        <ion-icon name="chatbubbles-outline" class="tool-card__icon"></ion-icon>
                     </div>
-                    <h3 class="tool-card__title">Seguimiento de errores</h3>
-                    <p class="tool-card__description">Aprende de tus equivocaciones</p>
+                    <div class="tool-card__content">
+                        <h3 class="tool-card__title">Quote & poetry</h3>
+                        <p class="tool-card__description">Aprende de tus equivocaciones</p>
+                    </div>
                 </div>
 
-                <div class="tool-card tool-card--purple">
-                    <div class="tool-card__icon-wrapper">
-                        <ion-icon name="bulb-outline" class="tool-card__icon"></ion-icon>
+                <div class="tool-card">
+                    <div class="tool-card__icon-wrapper tool-card__icon-wrapper--blue">
+                        <ion-icon name="image-outline" class="tool-card__icon"></ion-icon>
                     </div>
-                    <h3 class="tool-card__title">Lluvia de ideas</h3>
-                    <p class="tool-card__description">Generar ideas para tus proyectos</p>
+                    <div class="tool-card__content">
+                        <h3 class="tool-card__title">Image & Art</h3>
+                        <p class="tool-card__description">Generar ideas para tus proyectos</p>
+                    </div>
                 </div>
 
-                <div class="tool-card tool-card--orange">
-                    <div class="tool-card__icon-wrapper">
-                        <ion-icon name="help-circle-outline" class="tool-card__icon"></ion-icon>
+                <div class="tool-card">
+                    <div class="tool-card__icon-wrapper tool-card__icon-wrapper--purple">
+                        <ion-icon name="search-outline" class="tool-card__icon"></ion-icon>
                     </div>
-                    <h3 class="tool-card__title">IA Tutor</h3>
-                    <p class="tool-card__description">Resuelve dudas al instante</p>
+                    <div class="tool-card__content">
+                        <h3 class="tool-card__title">Search JS</h3>
+                        <p class="tool-card__description">Resuelve dudas al instante</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -109,17 +116,28 @@
 <ion-footer class="footer">
     <div class="footer__tabs">
         <div class="footer__tab footer__tab--active">
-            <ion-icon name="home"></ion-icon>
-            <span>Inicio</span>
+            <div class="footer__icon-container">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+            </div>
+            <span class="footer__label">Chat</span>
         </div>
         <div class="footer__tab">
-            <ion-icon name="flash-outline"></ion-icon>
+            <div class="footer__icon-container">
+                <ion-icon name="grid-outline"></ion-icon>
+            </div>
+            <span class="footer__label">AI Assistants</span>
         </div>
         <div class="footer__tab">
-            <ion-icon name="search-outline"></ion-icon>
+            <div class="footer__icon-container">
+                <ion-icon name="time-outline"></ion-icon>
+            </div>
+            <span class="footer__label">Historial</span>
         </div>
         <div class="footer__tab">
-            <ion-icon name="person-outline"></ion-icon>
+            <div class="footer__icon-container">
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <span class="footer__label">Perfil</span>
         </div>
     </div>
 </ion-footer>

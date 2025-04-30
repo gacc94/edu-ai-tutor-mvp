@@ -14,6 +14,14 @@ import {
     analyticsOutline,
     starOutline,
     warningOutline,
+    chatbubbleEllipses,
+    gridOutline,
+    createOutline,
+    chatboxEllipsesOutline,
+    timeOutline,
+    chatbubbleOutline,
+    imageOutline,
+    chatbubblesOutline,
 } from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
 
@@ -37,6 +45,14 @@ export const appInitializerProviders: EnvironmentProviders[] = [
             analyticsOutline,
             starOutline,
             warningOutline,
+            chatbubbleEllipses,
+            gridOutline,
+            createOutline,
+            chatboxEllipsesOutline,
+            timeOutline,
+            chatbubbleOutline,
+            imageOutline,
+            chatbubblesOutline,
         });
     }),
 ];

@@ -1,6 +1,6 @@
 /* Estilos generales */
 ion-content {
-    --background: var(--color-bg);
+    --background: var(--color-bg-main);
     font-family: var(--font-family-main);
 }
 
@@ -232,7 +232,7 @@ ion-content {
         justify-content: space-around;
         align-items: center;
         padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-md) + var(--ion-safe-area-bottom, 0px));
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-dark);
         border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 

@@ -8,7 +8,7 @@ ion-content {
 .home {
     &__container {
         max-width: 600px;
-        margin: 0 auto;
+        margin: 1.5rem auto 0;
         padding: var(--spacing-md);
     }
 
@@ -73,11 +73,54 @@ ion-content {
             color: var(--color-text);
         }
     }
+    /* Search input styles */
+    &__search {
+        margin-bottom: var(--spacing-md);
+    }
+
+    &__search-wrapper {
+        display: flex;
+        align-items: center;
+        background-color: var(--color-bg-card);
+        border-radius: var(--border-radius);
+        padding: var(--spacing-sm) var(--spacing-md);
+        transition: var(--transition-main);
+
+        &:focus-within {
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+    }
+
+    &__search-icon {
+        color: var(--color-text-muted);
+        font-size: 1.25rem;
+        margin-right: var(--spacing-sm);
+    }
+
+    &__search-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--color-text);
+        font-family: var(--font-family-main);
+        font-size: var(--normal-font-size);
+        outline: none;
+
+        &::placeholder {
+            color: var(--color-text-muted);
+        }
+    }
 }
 
 /* Features carousel */
 .features-carousel {
     margin-bottom: var(--spacing-lg);
+
+    &__title {
+        font-size: var(--h3-font-size);
+        font-weight: var(--font-medium);
+        margin-bottom: var(--spacing-sm);
+    }
 
     &__wrapper {
         display: flex;
@@ -159,6 +202,12 @@ ion-content {
 /* Tools section */
 .tools {
     margin-bottom: var(--spacing-lg);
+
+    &__title {
+        font-size: var(--h3-font-size);
+        font-weight: var(--font-medium);
+        margin-bottom: var(--spacing-sm);
+    }
 
     &__grid {
         display: grid;

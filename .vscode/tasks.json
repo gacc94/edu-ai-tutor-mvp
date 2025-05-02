@@ -1,36 +1,22 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "pnpm run start",
-      "type": "shell",
-      "command": "pnpm run start",
-      "isBackground": true,
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true
-      },
-      "problemMatcher": {
-        "owner": "custom",
-        "pattern": {
-          "regexp": "."
-        },
-        "background": {
-          "activeOnStart": true
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Ionic Build and Sync",
+        "type": "shell",
+        "command": "ionic build && ionic cap copy && ionic cap sync",
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
         }
-      }
-    },
-    {
-      "label": "kill pnpm run start",
-      "type": "shell",
-      "command": "pkill -f \"pnpm run start\" || true",
-      "presentation": {
-        "reveal": "never",
-        "panel": "new",
-        "close": true
       },
-      "problemMatcher": []
-    }
-  ]
-}
+      {
+        "label": "Ionic Build, Sync and Open Android",
+        "type": "shell",
+        "command": "ionic build && ionic cap copy && ionic cap sync && ionic cap open android",
+        "problemMatcher": [],
+        "group": "build"
+      }
+    ]
+  }

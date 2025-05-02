@@ -28,7 +28,7 @@ body {
 }
 
 ion-content {
-    --background: var(--color-bg);
+    --background: var(--color-bg-main);
     color: var(--color-text);
     font-family: var(--font-family-main);
     button {
@@ -77,6 +77,15 @@ ion-content {
     ::selection {
         background-color: var(--first-color-light);
     }
+}
+
+ion-toolbar {
+    --background: var(--color-bg-dark);
+    --color: var(--color-white);
+}
+
+ion-footer {
+    --background: var(--color-bg-dark);
 }
 
 /* Ajustes para botones y tarjetas en toda la app */

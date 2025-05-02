@@ -1,14 +1,19 @@
-/* Estilos generales */
-ion-content {
-    --background: var(--color-bg-main);
-    font-family: var(--font-family-main);
+.header {
+    &__toolbar {
+        --min-height: 3.2rem;
+        text-align: center;
+        font-weight: var(--font-medium);
+    }
+
+    &__title {
+        color: var(--color-text);
+    }
 }
 
-/* Home container */
 .home {
     &__container {
         max-width: 600px;
-        margin: 1.5rem auto 0;
+        // margin: 1.5rem auto 0;
         padding: var(--spacing-md);
     }
 
@@ -370,11 +375,6 @@ ion-content {
             font-size: var(--smallest-font-size);
         }
     }
-}
-
-ion-content {
-    padding-top: var(--ion-safe-area-top, 20px);
-    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }
 
 /* Estilos para la sección de Plan Premium */

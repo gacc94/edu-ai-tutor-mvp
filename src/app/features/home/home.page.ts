@@ -1,21 +1,12 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, linkedSignal, signal } from '@angular/core';
-import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonIcon,
-    IonFooter,
-    IonButtons,
-} from '@ionic/angular/standalone';
+import { IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
 import { DragonBallService } from '../../shared/services/dragon-ball.service';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [IonIcon, IonButton, IonHeader, IonToolbar, IonTitle, IonContent, IonFooter, IonButtons, IonIcon],
+    imports: [IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {

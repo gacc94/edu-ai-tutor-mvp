@@ -1,30 +1,25 @@
+<ion-header [fullscreen]="true" class="header">
+    <ion-toolbar class="header__toolbar">
+        <ion-title class="header__title">
+            <ion-icon name="logo-ionic"></ion-icon>
+            EduAITutor
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true" class="home">
     <div class="home__container">
-        <!-- Header con AI Assistant -->
-        <div class="home__header">
-            <div class="home__assistant">
-                <div class="home__assistant-icon">
-                    <ion-icon name="logo-ionic"></ion-icon>
-                </div>
-                <span class="home__assistant-text">EduAITutor</span>
-            </div>
-        </div>
-
-        <!-- Tabs de categorías -->
-        <div class="home__tabs">
-            <div class="home__tab home__tab--active">
-                <span>AI</span>
-            </div>
-            <div class="home__tab">
-                <span>Design</span>
-            </div>
-            <div class="home__tab">
-                <span>Creative</span>
+        <!-- Search input -->
+        <div class="home__search">
+            <div class="home__search-wrapper">
+                <ion-icon name="search-outline" class="home__search-icon"></ion-icon>
+                <input type="text" placeholder="Buscar herramientas AI" class="home__search-input" />
             </div>
         </div>
 
         <!-- Carrusel de sugerencias (mantenido como está) -->
         <section class="features-carousel">
+            <h4 class="features-carousel__title">Nuevas Herramientas</h4>
             <swiper-container
                 [slidesPerView]="'1.5'"
                 [spaceBetween]="20"
@@ -66,8 +61,26 @@
             </swiper-container>
         </section>
 
+        <!-- Plan Premium (NUEVA SECCIÓN) -->
+        <section class="premium-plan">
+            <div class="premium-plan__content">
+                <div class="premium-plan__text">
+                    <h2 class="premium-plan__title">Plan Premium</h2>
+                    <p class="premium-plan__description">
+                        Desbloquea tu chatbot de IA y obtén todas las funciones premium.
+                    </p>
+                    <button class="premium-plan__button">Mejorar Plan</button>
+                </div>
+                <div class="premium-plan__image-container">
+                    <img src="assets/eduaitutor-bot.png" alt="Bot de IA" class="premium-plan__image" />
+                </div>
+            </div>
+        </section>
+
         <!-- Herramientas disponibles (rediseñadas según la imagen) -->
         <section class="tools">
+            <h4 class="tools__title">Herramientas para ti</h4>
+
             <div class="tools__grid">
                 <div class="tool-card">
                     <div class="tool-card__icon-wrapper tool-card__icon-wrapper--blue">
@@ -78,7 +91,6 @@
                         <p class="tool-card__description">Practica con ejercicios interactivos</p>
                     </div>
                 </div>
-
                 <div class="tool-card">
                     <div class="tool-card__icon-wrapper tool-card__icon-wrapper--purple">
                         <ion-icon name="chatbubbles-outline" class="tool-card__icon"></ion-icon>

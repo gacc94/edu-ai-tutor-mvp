@@ -1,20 +1,30 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Launch Chrome and Debug",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:4200",
-      "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "pnpm run start",
-      "postDebugTask": "kill pnpm run start",
-      "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222",
-        "--user-data-dir=${workspaceFolder}/.vscode/chrome-debug"
-      ],
-      "sourceMaps": true,
-    }
-  ]
-}
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Ionic: Serve",
+        "type": "node",
+        "request": "launch",
+        "preLaunchTask": "Ionic Build and Sync",
+        "runtimeExecutable": "ionic",
+        "runtimeArgs": [
+          "serve"
+        ],
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Ionic: Build & Open Android",
+        "type": "node",
+        "request": "launch",
+        "preLaunchTask": "Ionic Build, Sync and Open Android",
+        "console": "integratedTerminal"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Ionic: Full Development Workflow",
+        "configurations": ["Ionic: Serve"]
+      }
+    ]
+  }

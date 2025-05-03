@@ -128,4 +128,10 @@
     --tab-active-text: #ffffff;
     --header-bg: #0a0e1a;
     --logo-bg: #4361ee;
+
+    /*========== Android Safe Area ==========*/
+    --android-status-bar-height: env(safe-area-inset-top);
+    --android-navigation-bar-height: env(safe-area-inset-bottom);
+    --safe-area-top: max(var(--android-status-bar-height), 24px);
+    --safe-area-bottom: max(var(--android-navigation-bar-height), 48px);
 }

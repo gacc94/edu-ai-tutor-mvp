@@ -1,0 +1,61 @@
+@use "mixins";
+
+.footer {
+    background-color: var(--color-bg-dark);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+
+    &__tabs {
+        @include mixins.flex(row, space-around, center);
+        padding: var(--spacing-xs);
+    }
+
+    &__tab {
+        @include mixins.flex(column, center, center, nowrap, 0.25rem);
+        color: var(--color-text-muted);
+        transition: var(--transition-main);
+        cursor: pointer;
+        padding: var(--spacing-xs) 0;
+
+        &:hover {
+            color: var(--color-text);
+        }
+
+        &--active {
+            color: var(--color-primary);
+        }
+    }
+
+    &__icon-container {
+        @include mixins.flex(row, center, center);
+        transition: var(--transition-main);
+
+        ion-icon {
+            font-size: var(--normal-font-size);
+            color: currentColor;
+        }
+    }
+
+    &__label {
+        font-size: var(--smallest-font-size-2);
+        font-weight: var(--font-medium);
+    }
+}
+
+@media (min-width: 30rem) {
+    .footer {
+        &__container {
+            margin: 0 auto;
+            max-width: 30rem;
+        }
+
+        &__icon-container {
+            ion-icon {
+                font-size: var(--bigger-font-size);
+            }
+        }
+
+        &__label {
+            font-size: var(--smallest-font-size);
+        }
+    }
+}

@@ -35,6 +35,9 @@
                         ],
                         "styles": ["src/global.scss", "src/theme/variables.scss"],
                         "scripts": [],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src/assets/scss/config/"]
+                        },
                         "browser": "src/main.ts"
                     },
                     "configurations": {

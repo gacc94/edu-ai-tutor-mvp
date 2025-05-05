@@ -4,6 +4,7 @@
 *,
 ::before,
 ::after {
+    font-family: var(--font-family-main);
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -85,7 +86,7 @@ ion-toolbar {
 }
 
 ion-footer {
-    // background-color: var(--color-bg-dark);
+    background-color: var(--color-bg-dark);
 }
 
 /* Ajustes para botones y tarjetas en toda la app */
@@ -94,8 +95,25 @@ ion-button {
 }
 
 ion-card {
-    border-radius: 12px;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
     overflow: hidden;
+}
+
+ion-card-title {
+    font-size: var(--normal-font-size);
+    --color: var(--color-text);
+    font-weight: var(--font-medium);
+}
+
+ion-card-subtitle {
+    font-size: var(--smaller-font-size);
+}
+
+ion-card-content {
+    --color: var(--color-text-muted);
+    font-size: var(--smaller-font-size) !important;
+    padding: 0 !important;
 }
 
 /* Personalización de elementos de formulario */

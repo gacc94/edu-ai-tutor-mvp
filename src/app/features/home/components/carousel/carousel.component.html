@@ -1,3 +1,43 @@
-<p>
-  carousel works!
-</p>
+<section class="carousel">
+    <h4 class="carousel__title">Nuevas Herramientas</h4>
+    <swiper-container
+        [slidesPerView]="2"
+        [spaceBetween]="10"
+        [loop]="true"
+        [pagination]="true"
+        [autoplay]="true"
+        [speed]="500"
+        [freeMode]="true"
+        [effect]="'slide'"
+        class="carousel__wrapper"
+        [breakpoints]="breakpoints()"
+    >
+        <swiper-slide class="carousel__card carousel__card--blue">
+            <div class="carousel__card__icon-container">
+                <ion-icon name="pulse-outline" class="carousel__card__icon"></ion-icon>
+            </div>
+            <div class="carousel__card__content">
+                <h3 class="carousel__card__title">Seguimiento emocional</h3>
+                <p class="carousel__card__description">Aprende a gestionar tus emociones durante el estudio.</p>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="carousel__card carousel__card--orange">
+            <div class="carousel__card__icon-container">
+                <ion-icon name="desktop-outline" class="carousel__card__icon"></ion-icon>
+            </div>
+            <div class="carousel__card__content">
+                <h3 class="carousel__card__title">Reestructuración cognitiva</h3>
+                <p class="carousel__card__description">Cambia pensamientos limitantes.</p>
+            </div>
+        </swiper-slide>
+        <swiper-slide class="carousel__card carousel__card--purple">
+            <div class="carousel__card__icon-container">
+                <ion-icon name="analytics-outline" class="carousel__card__icon"></ion-icon>
+            </div>
+            <div class="carousel__card__content">
+                <h3 class="carousel__card__title">Seguimiento de bloqueos</h3>
+                <p class="carousel__card__description">Identifica qué te impide avanzar en tu estudio.</p>
+            </div>
+        </swiper-slide>
+    </swiper-container>
+</section>

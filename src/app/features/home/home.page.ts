@@ -4,12 +4,23 @@ import { DragonBallService } from '../../shared/services/dragon-ball.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { PlanPremiunComponent } from './components/plan-premiun/plan-premiun.component';
+import { ToolsComponent } from './components/tools/tools.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [IonIcon, IonContent, HeaderComponent, FooterComponent, SearchbarComponent],
+    imports: [
+        IonContent,
+        HeaderComponent,
+        FooterComponent,
+        SearchbarComponent,
+        CarouselComponent,
+        PlanPremiunComponent,
+        ToolsComponent,
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {

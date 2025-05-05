@@ -17,6 +17,46 @@ $color-main: var(--color-primary);
     gap: $gap;
 }
 
+@mixin grid($columns: 1fr, $rows: auto, $gap: var(--spacing-md), $template-areas: none) {
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+    gap: $gap;
+
+    @if $template-areas != none {
+        grid-template-areas: $template-areas;
+    }
+}
+
+@mixin grid-area($area) {
+    grid-area: $area;
+}
+
+@mixin grid-responsive($breakpoints...) {
+    display: grid;
+
+    @each $breakpoint in $breakpoints {
+        $min-width: nth($breakpoint, 1);
+        $columns: nth($breakpoint, 2);
+
+        @media (min-width: $min-width) {
+            grid-template-columns: repeat($columns, 1fr);
+        }
+    }
+}
+
+@mixin grid-auto-fit($min-size: 250px, $gap: var(--spacing-md)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($min-size, 1fr));
+    gap: $gap;
+}
+
+@mixin grid-auto-fill($min-size: 250px, $gap: var(--spacing-md)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($min-size, 1fr));
+    gap: $gap;
+}
+
 @mixin gradient-text($gradient) {
     background: $gradient;
     -webkit-background-clip: text;

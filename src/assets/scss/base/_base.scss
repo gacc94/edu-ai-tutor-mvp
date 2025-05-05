@@ -101,9 +101,7 @@ ion-card {
 }
 
 ion-card-title {
-    font-size: var(--normal-font-size);
     --color: var(--color-text);
-    font-weight: var(--font-medium);
 }
 
 ion-card-subtitle {
@@ -112,8 +110,6 @@ ion-card-subtitle {
 
 ion-card-content {
     --color: var(--color-text-muted);
-    font-size: var(--smaller-font-size) !important;
-    padding: 0 !important;
 }
 
 /* Personalización de elementos de formulario */

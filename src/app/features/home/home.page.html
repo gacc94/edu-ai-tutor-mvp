@@ -2,12 +2,7 @@
 <ion-content [fullscreen]="true" class="home">
     <div class="home__container">
         <!-- Search input -->
-        <div class="home__search">
-            <div class="home__search-wrapper">
-                <ion-icon name="search-outline" class="home__search-icon"></ion-icon>
-                <input type="text" placeholder="Buscar herramientas AI" class="home__search-input" />
-            </div>
-        </div>
+        <app-searchbar></app-searchbar>
 
         <!-- Carrusel de sugerencias (mantenido como está) -->
         <section class="features-carousel">

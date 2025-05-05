@@ -26,6 +26,7 @@ import {
     grid,
     time,
     person,
+    closeOutline,
 } from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
 
@@ -61,6 +62,7 @@ export const appInitializerProviders: EnvironmentProviders[] = [
             grid,
             time,
             person,
+            closeOutline,
         });
     }),
 ];

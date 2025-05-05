@@ -3,12 +3,13 @@ import { IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle } from 
 import { DragonBallService } from '../../shared/services/dragon-ball.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [IonIcon, IonContent, HeaderComponent, FooterComponent],
+    imports: [IonIcon, IonContent, HeaderComponent, FooterComponent, SearchbarComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {

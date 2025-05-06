@@ -1,12 +1,12 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, linkedSignal, signal } from '@angular/core';
 import { IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
-import { DragonBallService } from '../../shared/services/dragon-ball.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { PlanPremiunComponent } from './components/plan-premiun/plan-premiun.component';
 import { ToolsComponent } from './components/tools/tools.component';
+import { DragonBallService } from 'src/app/shared/services/dragon-ball.service';
 
 @Component({
     selector: 'app-home',
@@ -23,7 +23,7 @@ import { ToolsComponent } from './components/tools/tools.component';
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage {
+export default class HomePage {
     #dbService = inject(DragonBallService);
 
     $id = signal<number>(1);

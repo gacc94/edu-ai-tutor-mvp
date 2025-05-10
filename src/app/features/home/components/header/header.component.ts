@@ -8,8 +8,7 @@ import { IonHeader, IonToolbar, IonTitle, IonIcon } from '@ionic/angular/standal
         <ion-header class="header">
             <ion-toolbar class="header__toolbar">
                 <ion-title class="header__title">
-                    <ion-icon name="logo-ionic"></ion-icon>
-                    EduAITutor
+                    <span class="header__title-text">EduAITutor</span>
                 </ion-title>
             </ion-toolbar>
         </ion-header>

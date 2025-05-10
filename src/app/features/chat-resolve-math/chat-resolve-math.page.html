@@ -1,0 +1,49 @@
+<ion-header class="chat-resolve-math__header">
+    <ion-toolbar class="chat-resolve-math__header-toolbar">
+        <ion-buttons slot="start">
+            <ion-back-button class="chat-resolve-math__back-button" defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="chat-resolve-math__title">Ai Assistant</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-resolve-math__content">
+    <ion-list class="chat-resolve-math__message-list" [lines]="'none'">
+        <ion-item
+            *ngFor="let message of messages; trackBy: trackByMessageId"
+            class="chat-resolve-math__message-item"
+            [ngClass]="'chat-resolve-math__message-item--' + message.sender"
+        >
+            <ion-avatar *ngIf="message.sender === 'ai'" slot="start" class="chat-resolve-math__avatar">
+                <ion-icon class="chat-resolve-math__avatar-icon" [name]="message.avatarIcon!"></ion-icon>
+            </ion-avatar>
+            <div class="chat-resolve-math__bubble" [ngClass]="'chat-resolve-math__bubble--' + message.sender">
+                <p class="chat-resolve-math__bubble-text">{{ message.text }}</p>
+                Optional: Timestamp
+                <span class="chat-resolve-math__bubble-timestamp"> {{ message.timestamp | date:'shortTime' }} </span>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer class="chat-resolve-math__footer">
+    <ion-toolbar class="chat-resolve-math__footer-toolbar">
+        <div class="chat-wrapper">
+            <ion-button class="chat-resolve-math__attach-button" fill="clear" (click)="handleImageUpload()">
+                <ion-icon slot="icon-only" name="camera-outline" />
+            </ion-button>
+
+            <div class="chat-resolve-math__input-wrapper">
+                <ion-input
+                    class="chat-resolve-math__input"
+                    placeholder="Write To Send Message"
+                    (keyup.enter)="sendMessage()"
+                />
+            </div>
+
+            <ion-button class="chat-resolve-math__send-button" fill="clear" (click)="sendMessage()">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

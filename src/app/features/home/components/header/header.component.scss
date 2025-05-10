@@ -1,11 +1,19 @@
+@use "mixins";
+
 .header {
     &__toolbar {
-        --min-height: 3.2rem;
         text-align: center;
         font-weight: var(--font-medium);
+        @include mixins.flex-center;
+        padding: 0;
     }
 
     &__title {
         color: var(--color-text);
+    }
+
+    &__title-text {
+        font-weight: var(--font-bold);
+        font-size: var(--h3-font-size);
     }
 }

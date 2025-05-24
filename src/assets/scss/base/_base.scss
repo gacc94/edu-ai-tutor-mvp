@@ -82,10 +82,16 @@ ion-content {
 
 ion-toolbar {
     --background: var(--color-bg-dark);
-    --color: var(--color-white);
+    // --color: var(--color-white);
 }
 
 ion-footer {
+    background-color: var(--color-bg-dark);
+    padding-bottom: var(--safe-area-inset-bottom);
+}
+
+ion-header {
+    padding-top: var(--safe-area-inset-top);
     background-color: var(--color-bg-dark);
 }
 

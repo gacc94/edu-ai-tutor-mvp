@@ -4,7 +4,6 @@
     &__toolbar {
         text-align: center;
         font-weight: var(--font-medium);
-        @include mixins.flex-center;
         padding: 0;
     }
 

@@ -1,18 +1,6 @@
 import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-    IonContent,
-    IonInput,
-    IonButton,
-    IonIcon,
-    IonList,
-    IonItem,
-    IonAvatar,
-    IonToolbar,
-    IonTitle,
-    IonFooter,
-    IonBackButton,
-} from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, IonList, IonItem, IonAvatar, IonFooter } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
     arrowBackOutline,
@@ -21,6 +9,8 @@ import {
     paperPlaneOutline,
     cogOutline, // Placeholder for AI avatar
 } from 'ionicons/icons';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 // Define the message structure
 interface Message {
@@ -37,17 +27,15 @@ interface Message {
     standalone: true, // Ensure this component is standalone
     imports: [
         CommonModule,
-        IonInput,
         IonButton,
         IonIcon,
         IonList,
         IonItem,
         IonAvatar,
-        IonToolbar,
-        IonTitle,
         IonContent,
         IonFooter,
-        IonBackButton,
+        HeaderComponent,
+        FooterComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -100,15 +88,15 @@ export default class ChatResolveMathPage {
         });
     }
 
-    sendMessage(): void {
-        if (this.newMessage.trim() === '') {
+    sendMessage(message: string): void {
+        if (message.trim() === '') {
             return;
         }
 
         const userMessage: Message = {
             id: Date.now().toString(), // Simple unique ID
             sender: 'user',
-            text: this.newMessage,
+            text: message,
             timestamp: new Date(),
         };
         this.messages.push(userMessage);
@@ -124,22 +112,21 @@ export default class ChatResolveMathPage {
                 timestamp: new Date(),
                 avatarIcon: 'cog-outline',
             };
-            this.messages.push(aiResponse);
             this.scrollToBottom();
         }, 1000);
     }
 
-    handleImageUpload(): void {
-        const aiResponse: Message = {
-            id: (Date.now() + 1).toString(),
-            sender: 'ai',
-            text: 'Image upload feature is coming soon! For now, please describe your math problem.',
-            timestamp: new Date(),
-            avatarIcon: 'cog-outline',
-        };
-        this.messages.push(aiResponse);
-        this.scrollToBottom();
-    }
+    // handleImageUpload(): void {
+    //     const aiResponse: Message = {
+    //         id: (Date.now() + 1).toString(),
+    //         sender: 'ai',
+    //         text: 'Image upload feature is coming soon! For now, please describe your math problem.',
+    //         timestamp: new Date(),
+    //         avatarIcon: 'cog-outline',
+    //     };
+    //     this.messages.push(aiResponse);
+    //     this.scrollToBottom();
+    // }
 
     trackByMessageId(index: number, message: Message): string {
         return message.id;

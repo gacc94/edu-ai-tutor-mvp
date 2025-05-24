@@ -5,14 +5,11 @@
         text-align: center;
         font-weight: var(--font-medium);
         padding: 0;
-    }
-
-    &__title {
         color: var(--color-text);
     }
 
-    &__title-text {
-        font-weight: var(--font-bold);
+    &__title {
         font-size: var(--h3-font-size);
+        font-weight: var(--font-bold);
     }
 }

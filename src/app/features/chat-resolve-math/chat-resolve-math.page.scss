@@ -1,25 +1,7 @@
 @use "mixins";
 
 .chat-resolve-math {
-    &__header {
-        &-toolbar {
-            --color: var(--color-text);
-            --border-width: 0; // Remove bottom border if any
-        }
-
-        .chat-resolve-math__title {
-            font-size: var(--h2-font-size);
-            font-weight: var(--font-medium);
-            text-align: center; // As per image
-        }
-
-        .chat-resolve-math__back-button {
-            --color: var(--color-text);
-        }
-    }
-
     &__content {
-        --background: var(--color-bg-main);
         --padding-start: var(--spacing-md);
         --padding-end: var(--spacing-md);
         --padding-top: var(--spacing-md);
@@ -57,16 +39,16 @@
     }
 
     &__avatar {
-        width: 36px; // Slightly smaller avatar
+        width: 36px;
         height: 36px;
-        background-color: var(--color-bg-light); // Darker avatar bg
+        background-color: var(--color-bg-light);
         border-radius: var(--border-radius-circle);
         @include mixins.flex-center;
-        align-self: flex-end; // Align avatar to bottom of message bubble
-        margin-bottom: var(--spacing-xs); // Align with bubble bottom padding
+        align-self: flex-end;
+        margin-bottom: var(--spacing-xs);
 
         &-icon {
-            font-size: var(--size-md-xl); // Slightly smaller icon
+            font-size: var(--size-md-xl);
             color: var(--color-text-secondary);
         }
     }
@@ -102,76 +84,4 @@
             border-bottom-right-radius: var(--border-radius);
         }
     }
-
-    &__footer {
-        &-toolbar {
-            --min-height: auto;
-            --padding-start: var(--spacing-sm); // Reduced padding
-            --padding-end: var(--spacing-sm);
-            --padding-top: var(--spacing-xs);
-            --padding-bottom: var(--spacing-xs);
-        }
-    }
-
-    &__input {
-        padding: var(--spacing-sm);
-        --highlight-color-focused: var(--color-primary);
-        --highlight-height: 0;
-        &-wrapper {
-            border-radius: var(--button-radius);
-            background-color: var(--color-bg-card); // Using --color-bg-card for the darker purple/blue tint from image
-            padding-inline: var(--spacing-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-    }
-
-    // &__input {
-    //     --padding-start: var(--spacing-sm);
-    //     --padding-end: var(--spacing-sm);
-    //     --padding-top: var(--spacing-sm); // Ensure text is vertically centered
-    //     --padding-bottom: var(--spacing-sm);
-    //     --placeholder-color: var(--color-text-muted);
-    //     --placeholder-opacity: 1;
-    //     --color: var(--color-text);
-    //     font-size: var(--normal-font-size);
-    //     border: none;
-    // }
-
-    &__attach-button {
-        --color: var(--color-text-secondary);
-        font-size: var(--size-lg);
-        margin: 0 var(--spacing-xs);
-    }
-
-    &__send-button {
-        --background: var(--color-primary);
-        --color: var(--color-white);
-        --border-radius: var(--border-radius-circle);
-        --box-shadow: none; // Remove default shadow if any
-        --padding-start: 0; // Ensure icon is centered
-        --padding-end: 0;
-        width: 44px; // Fixed size for circular button
-        height: 44px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        ion-icon {
-            font-size: var(--size-lg); // Send icon size
-        }
-
-        &[disabled] {
-            --background: var(--color-bg-light); // Disabled state
-            --color: var(--color-text-muted);
-        }
-    }
-}
-
-.chat-wrapper {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: var(--spacing-sm);
-    align-items: center;
 }

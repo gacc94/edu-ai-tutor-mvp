@@ -1,0 +1,20 @@
+.footer {
+    &__wrapper {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+        --color: var(--color-text);
+        padding: var(--spacing-md);
+    }
+
+    &__input {
+        --highlight-color-focused: var(--color-primary);
+        --highlight-height: 0;
+        color: var(--color-text);
+
+        background-color: var(--color-bg-card);
+        border-radius: var(--border-radius-lg);
+        --padding-start: var(--spacing-md);
+        --padding-end: var(--spacing-md);
+    }
+}

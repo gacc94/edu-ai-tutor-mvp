@@ -8,8 +8,21 @@
         color: var(--color-text);
     }
 
+    &__wrapper {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
     &__title {
         font-size: var(--h3-font-size);
         font-weight: var(--font-bold);
+    }
+
+    & ion-img {
+        width: 2rem;
+        height: 2rem;
     }
 }

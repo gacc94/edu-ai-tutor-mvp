@@ -1,160 +1,89 @@
-import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-    IonContent,
-    IonInput,
-    IonButton,
-    IonIcon,
-    IonList,
-    IonItem,
-    IonAvatar,
-    IonToolbar,
-    IonFooter,
-    IonImg,
-} from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import {
-    arrowBackOutline,
-    happyOutline,
-    cameraOutline,
-    paperPlaneOutline,
-    cogOutline, // Placeholder for AI avatar
-} from 'ionicons/icons';
+import { IonContent, IonList, IonItem } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Photo } from '@capacitor/camera';
 
-// Define the message structure
 interface Message {
     id: string;
-    sender: 'user' | 'ai';
+    role: 'user' | 'ia';
     text: string;
     timestamp: Date;
-    avatarIcon?: string; // For AI avatar
+    avatarIcon?: string;
+    images?: Array<Photo>;
 }
 @Component({
     selector: 'app-chat-resolve-math',
     templateUrl: './chat-resolve-math.page.html',
     styleUrls: ['./chat-resolve-math.page.scss'],
-    standalone: true, // Ensure this component is standalone
-    imports: [
-        CommonModule,
-        IonInput,
-        IonButton,
-        IonIcon,
-        IonList,
-        IonItem,
-        IonAvatar,
-        IonToolbar,
-        IonContent,
-        IonFooter,
-        IonImg,
-        HeaderComponent,
-        FooterComponent,
-    ],
+    standalone: true,
+    imports: [CommonModule, IonList, IonItem, IonContent, HeaderComponent, FooterComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class ChatResolveMathPage {
-    @ViewChild(IonContent) contentArea!: IonContent;
+    // @ViewChild(IonContent) contentArea!: IonContent;
+
+    area = viewChild(IonContent);
 
     messages: Message[] = [
         {
-            id: '1',
-            sender: 'user',
-            text: 'Hello Ai Hello! How can I assist you today?Hello! How can I assist you today?Hello! How can I assist you today?Hello! How can I assist you today?',
-            timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
-        },
-        {
-            id: '2',
-            sender: 'ai',
-            text: 'Hello! How can I assist you today?',
-            timestamp: new Date(Date.now() - 4 * 60 * 1000),
-            avatarIcon: 'cog-outline',
-        },
-        {
-            id: '3',
-            sender: 'user',
-            text: 'how to learn fast ?',
-            timestamp: new Date(Date.now() - 3 * 60 * 1000),
-        },
-        {
-            id: '4',
-            sender: 'ai',
-            text: 'Learning fast can be achieved through a combination of effective strategies and a growth mindset',
-            timestamp: new Date(Date.now() - 2 * 60 * 1000),
-            avatarIcon: 'cog-outline',
-        },
-        {
-            id: '5',
-            sender: 'user',
-            text: 'write the best quote in the world',
-            timestamp: new Date(Date.now() - 1 * 60 * 1000),
+            id: '0',
+            role: 'ia',
+            text: `¡Hola! Soy tu asistente EduAiTutor. Estoy aquí para ayudarte a resolver tus ejercicios o dudas. 😊`,
+            timestamp: new Date(),
         },
     ];
     newMessage: string = '';
 
-    constructor() {
-        addIcons({
-            arrowBackOutline,
-            happyOutline,
-            cameraOutline,
-            paperPlaneOutline,
-            cogOutline,
-        });
-    }
+    constructor() {}
 
-    sendMessage(message: string) {
-        if (message.trim() === '') {
+    async sendMessage(message: any) {
+        console.log({ message });
+        if (message.message.trim() === '') {
             return;
         }
 
         const userMessage: Message = {
-            id: Date.now().toString(), // Simple unique ID
-            sender: 'user',
-            text: this.newMessage,
+            id: Date.now().toString(),
+            role: 'user',
+            text: message.message,
             timestamp: new Date(),
+            images: message.images,
         };
         this.messages.push(userMessage);
         this.newMessage = '';
-        this.scrollToBottom();
+        await this.scrollToBottom();
 
         // Simulate AI response
-        setTimeout(() => {
+        setTimeout(async () => {
             const aiResponse: Message = {
                 id: (Date.now() + 1).toString(),
-                sender: 'ai',
-                text: `I received your message: "${userMessage.text}". I'm still learning to process math problems from text. Try uploading an image!`,
+                role: 'ia',
+                text: `lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.`,
                 timestamp: new Date(),
                 avatarIcon: 'cog-outline',
             };
-            this.scrollToBottom();
             this.messages.push(aiResponse);
         }, 1000);
+
+        setTimeout(() => this.scrollToBottom(), 100);
     }
 
-    image: Photo | null = null;
-
     handleImageUpload(image: Photo) {
-        this.image = image;
-        console.log(this.image);
         const aiResponse: Message = {
             id: (Date.now() + 1).toString(),
-            sender: 'ai',
+            role: 'ia',
             text: 'Image upload feature is coming soon! For now, please describe your math problem.',
             timestamp: new Date(),
             avatarIcon: 'cog-outline',
+            images: [image],
         };
         this.messages.push(aiResponse);
         this.scrollToBottom();
     }
 
-    trackByMessageId(index: number, message: Message): string {
-        return message.id;
-    }
-
-    private scrollToBottom(): void {
-        setTimeout(() => {
-            this.contentArea?.scrollToBottom(300);
-        }, 100);
+    private scrollToBottom() {
+        return this.area()?.scrollToBottom(300);
     }
 }

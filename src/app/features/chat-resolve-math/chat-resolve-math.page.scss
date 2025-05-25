@@ -30,11 +30,8 @@
             }
         }
 
-        &--ai {
+        &--ia {
             justify-content: flex-start;
-            .chat-resolve-math__avatar {
-                margin-right: var(--spacing-sm);
-            }
         }
     }
 
@@ -55,7 +52,8 @@
 
     &__bubble {
         padding: var(--spacing-sm) var(--size-sm); // Adjusted padding
-        border-radius: var(--border-radius);
+        // border: 1px solid red;
+        border-radius: var(--border-radius-sm);
         max-width: 80%; // Allow slightly wider bubbles
         word-wrap: break-word; // Ensure long words break
 
@@ -67,44 +65,33 @@
         }
 
         &--user {
-            background-color: var(--color-primary);
+            background-color: var(--color-bg-card); // Darker AI bubble
             color: var(--color-white);
-            border-top-right-radius: var(--border-radius-sm); // As per image
-            border-bottom-right-radius: var(--border-radius);
-            border-top-left-radius: var(--border-radius);
-            border-bottom-left-radius: var(--border-radius);
+            // border-top-right-radius: var(--border-radius-sm); // As per image
+            // border-bottom-right-radius: var(--border-radius);
+            // border-top-left-radius: var(--border-radius);
+            // border-bottom-left-radius: var(--border-radius);
         }
 
-        &--ai {
-            background-color: var(--color-bg-card); // Darker AI bubble
+        &--ia {
+            background-color: var(--color-primary);
             color: var(--color-text);
-            border-top-left-radius: var(--border-radius-sm); // As per image
-            border-bottom-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
+            // border-top-left-radius: var(--border-radius-sm); // As per image
+            // border-bottom-left-radius: var(--border-radius);
+            // border-top-right-radius: var(--border-radius);
+            // border-bottom-right-radius: var(--border-radius);
         }
     }
-}
 
-.image-preview-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 350px;
-    border-radius: 12px;
-    overflow: hidden;
-    margin: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    &__images {
+        display: flex;
+        gap: var(--spacing-xs);
+    }
 
-.image-preview {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-}
-
-.close-button {
-    position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
+    &__image {
+        width: 3.75rem;
+        height: 3.75rem;
+        object-fit: cover;
+        opacity: 0.9;
+    }
 }

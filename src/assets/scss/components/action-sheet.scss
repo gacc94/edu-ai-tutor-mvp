@@ -1,42 +1,43 @@
-ion-action-sheet#action-sheet-picture {
-    & .action-sheet {
-        &-wrapper {
-            padding: var(--spacing-sm);
-            --background: var(--color-bg-card);
-            max-width: 100%;
-        }
+// ion-action-sheet#action-sheet-picture {
+//     margin-bottom: calc(var(--safe-area-inset-bottom) + 5rem);
+//     & .action-sheet {
+//         &-wrapper {
+//             padding: var(--spacing-sm);
+//             --background: var(--color-bg-card);
+//             max-width: 100%;
+//         }
 
-        &-container {
-            border-radius: var(--border-radius-sm);
-            overflow: hidden;
-        }
+//         &-container {
+//             border-radius: var(--border-radius-sm);
+//             overflow: hidden;
+//         }
 
-        &-group {
-            padding: var(--spacing-sm);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(5rem, 5rem));
-            gap: var(--spacing-sm);
-        }
+//         &-group {
+//             padding: var(--spacing-sm);
+//             display: grid;
+//             grid-template-columns: repeat(auto-fit, minmax(5rem, 5rem));
+//             gap: var(--spacing-sm);
+//         }
 
-        &-button {
-            background-color: var(--color-bg-light);
-            border-radius: var(--border-radius-sm);
-            padding: var(--spacing-sm);
+//         &-button {
+//             background-color: var(--color-bg-light);
+//             border-radius: var(--border-radius-sm);
+//             padding: var(--spacing-sm);
 
-            &-inner {
-                color: var(--color-text);
-                font-size: var(--smaller-font-size);
-                display: grid;
-                justify-content: center;
-            }
-        }
+//             &-inner {
+//                 color: var(--color-text);
+//                 font-size: var(--smaller-font-size);
+//                 display: grid;
+//                 justify-content: center;
+//             }
+//         }
 
-        &-icon {
-            --color: var(--color-text);
-            font-size: var(--size-md-xl);
-            margin-right: 0;
-            margin-bottom: var(--spacing-xs);
-            justify-self: center;
-        }
-    }
-}
+//         &-icon {
+//             --color: var(--color-text);
+//             font-size: var(--size-md-xl);
+//             margin-right: 0;
+//             margin-bottom: var(--spacing-xs);
+//             justify-self: center;
+//         }
+//     }
+// }

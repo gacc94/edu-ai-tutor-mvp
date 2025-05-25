@@ -8,7 +8,7 @@ export class CameraService {
     async takePicture(source: CameraSource) {
         const image = await Camera.getPhoto({
             quality: 90,
-            // allowEditing: true,
+            allowEditing: true,
             // correctOrientation: true,
             // width: 800,
             // height: 600,

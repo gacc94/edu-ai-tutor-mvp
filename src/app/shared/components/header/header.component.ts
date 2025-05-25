@@ -1,5 +1,5 @@
 import { Component, input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-header',
@@ -11,12 +11,15 @@ import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton } from '@ion
                     <ion-back-button class="header__back-button" defaultHref="/home"></ion-back-button>
                 </ion-buttons>
                 }
-                <ion-title class="header__title">{{ title() }}</ion-title>
+                <div class="header__wrapper">
+                    <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
+                    <ion-title class="header__title">{{ title() }}</ion-title>
+                </div>
             </ion-toolbar>
         </ion-header>
     `,
     styleUrls: ['./header.component.scss'],
-    imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar],
+    imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonImg],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HeaderComponent {

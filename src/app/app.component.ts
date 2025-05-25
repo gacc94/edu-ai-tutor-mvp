@@ -3,6 +3,8 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
 import { SafeArea } from '@capacitor-community/safe-area';
+import { Camera } from '@capacitor/camera';
+
 @Component({
     selector: 'app-root',
     template: `
@@ -21,16 +23,38 @@ export class AppComponent {
     }
 
     async ngOnInit(): Promise<void> {
+        //TODO: SafeArea config
         const { enable } = SafeArea;
         await enable({
             config: {
                 customColorsForSystemBars: true,
-                statusBarColor: '#ffffff',
-                statusBarContent: 'dark',
-                navigationBarColor: '#ffffff',
-                navigationBarContent: 'dark',
+                statusBarColor: '#000000',
+                statusBarContent: 'light',
+                navigationBarColor: '#000000',
+                navigationBarContent: 'light',
                 offset: 2,
             },
         });
+
+        //TODO: Camera config
+        this.requestPermissions();
+    }
+
+    async requestPermissions() {
+        const { camera, photos } = await Camera.checkPermissions();
+
+        if (camera !== 'granted' || photos !== 'granted') {
+            const status = await Camera.requestPermissions({
+                permissions: ['camera', 'photos'],
+            });
+
+            if (status.camera !== 'granted') {
+                console.log('Camera permission denied');
+            }
+
+            if (status.photos !== 'granted') {
+                console.log('Photos permission denied');
+            }
+        }
     }
 }

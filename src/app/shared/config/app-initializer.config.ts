@@ -32,6 +32,10 @@ import {
     paperPlaneOutline,
     cogOutline,
     happyOutline,
+    imagesOutline,
+    closeCircleOutline,
+    closeCircle,
+    attachOutline,
 } from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
 
@@ -73,6 +77,10 @@ export const appInitializerProviders: EnvironmentProviders[] = [
             paperPlaneOutline,
             cogOutline,
             happyOutline,
+            imagesOutline,
+            closeCircleOutline,
+            closeCircle,
+            attachOutline,
         });
     }),
 ];

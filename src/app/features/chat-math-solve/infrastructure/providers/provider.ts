@@ -6,7 +6,7 @@ import { ChatMathStateService } from '@features/chat-math-solve/application/stat
 
 export const CHAT_REPOSITORY = new InjectionToken<ChatRepository>('ChatRepository');
 
-export const providers: Provider[] = [
+export const CHAT_MATH_PROVIDERS: Provider[] = [
     {
         provide: CHAT_REPOSITORY,
         useFactory: (chatState: ChatMathStateService) => new HttpChatRepository(chatState),

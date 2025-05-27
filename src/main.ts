@@ -9,13 +9,12 @@ import { firebaseProviders } from './app/shared/config/firebase.config';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { environment } from '@envs/environment';
 import { appInitializerProviders } from './app/shared/config/app-initializer.config';
-import { providers } from '@features/chat-math-solve/infrastructure/providers/provider';
+import { CHAT_MATH_PROVIDERS } from '@features/chat-math-solve/infrastructure/providers/provider';
+import { STORAGE_PROVIDERS } from '@shared/storage/providers/storage.provider';
 
 if (environment.production) {
     enableProdMode();
 }
-
-const chatProviders = [...providers];
 
 bootstrapApplication(AppComponent, {
     providers: [
@@ -27,6 +26,7 @@ bootstrapApplication(AppComponent, {
         //TODO: Firebase config start
         ...firebaseProviders,
         importProvidersFrom(),
-        ...chatProviders,
+        ...CHAT_MATH_PROVIDERS,
+        ...STORAGE_PROVIDERS,
     ],
 });

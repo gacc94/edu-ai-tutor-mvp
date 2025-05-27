@@ -9,4 +9,10 @@ export const environment = {
         authDomain: 'edu-ai-tutor.firebaseapp.com',
         messagingSenderId: '207854376775',
     },
+    apis: {
+        openai: {
+            baseUrl: 'https://api.openai.com/v1/chat/completions',
+            apiKey: 'sk-proj-0100000000000000000000000000000000000000000000000000000000000000',
+        },
+    },
 };

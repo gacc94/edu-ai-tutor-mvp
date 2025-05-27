@@ -11,7 +11,8 @@ export const routes: Routes = [
     },
     {
         path: 'chat-resolve-math',
-        loadComponent: () => import('./features/chat-resolve-math/chat-resolve-math.page'),
+        loadComponent: () =>
+            import('./features/chat-math-solve/presentation/pages/chat-math-solve/chat-resolve-math.page'),
     },
     {
         path: '',

@@ -39,7 +39,6 @@ export class CameraService {
     }
 
     async imagesToFiles(images: Image[]): Promise<File[]> {
-        if (!images.length) return [];
         return await Promise.all(images.map((image) => this.imageToFile(image)));
     }
 }

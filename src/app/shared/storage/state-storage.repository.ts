@@ -1,19 +1,20 @@
-import { Inject, Injectable, Optional, signal } from '@angular/core';
-import { PreferencesStorage } from './preference-storage';
-import { StorageRepository } from './interfaces/storage.interface';
+import { Inject, Injectable, Optional, signal, Signal } from '@angular/core';
+import { StateStorage } from './interfaces/state-storage.interface';
+import { Storage } from './interfaces/storage.interface';
+import { STORAGE_TOKEN } from './providers/storage.provider';
 
 @Injectable()
-export class StateStorageRepository<T> implements StorageRepository<T> {
+export class StateStorageRepository<T> implements StateStorage<T> {
     private readonly _state = signal<T | undefined>(undefined);
 
     constructor(
-        private readonly _storage: PreferencesStorage,
+        @Inject(STORAGE_TOKEN) private readonly _storage: Storage,
         @Optional() @Inject('STORAGE_KEY') private readonly _storageKey: string
     ) {
         this._getStorage();
     }
 
-    get $state() {
+    get $state(): Signal<T | undefined> {
         return this._state.asReadonly();
     }
 
@@ -33,7 +34,7 @@ export class StateStorageRepository<T> implements StorageRepository<T> {
         await this._storage.remove(this._storageKey);
     }
 
-    protected async _getStorage() {
+    protected async _getStorage(): Promise<void> {
         if (!this._storageKey) return;
 
         const value = await this._storage.get(this._storageKey);

@@ -1,14 +1,6 @@
 <app-header title="Ai Assistant" [showBackButton]="true"></app-header>
 
 <ion-content class="chat-resolve-math__content" [fullscreen]="true" #content>
-    <app-typing-loading></app-typing-loading>
-    <div class="bubble-loader">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
     <ion-list class="chat-resolve-math__message-list" [lines]="'none'">
         @for (message of messages(); track $index) {
         <!--  -->
@@ -33,6 +25,9 @@
         </ion-item>
         }
     </ion-list>
+    @if (isLoading()) {
+    <app-typing-loading></app-typing-loading>
+    }
 </ion-content>
 
 <app-footer (onSendMessage)="sendMessage($event)"></app-footer>

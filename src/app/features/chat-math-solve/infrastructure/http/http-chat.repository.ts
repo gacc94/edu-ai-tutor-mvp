@@ -2,15 +2,17 @@ import { Message } from '@features/chat-math-solve/domain/entities/message.entit
 import { ChatRepository } from '@features/chat-math-solve/domain/repositories/chat.repository';
 import { Injectable } from '@angular/core';
 import { environment } from '@envs/environment';
-import { ChatMathStateService } from '@features/chat-math-solve/application/states/chat-math.state';
 import { ChatMapper } from '../mappers/chat.mapper';
+import { IMAGES_SELECTED_AS_FILES_STATE } from '@features/chat-math-solve/application/states/chat-math.state';
+import { Inject } from '@angular/core';
+import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HttpChatRepository implements ChatRepository {
-    constructor(private readonly _chatState: ChatMathStateService) {}
+    constructor(@Inject(IMAGES_SELECTED_AS_FILES_STATE) private readonly _chatState: StateStorage<Array<File>>) {}
 
     async sendMessage(message: Message): Promise<string> {
-        const files = this._chatState.$selectedImagesAsFiles();
+        const files = this._chatState.$state() ?? [];
         const formData = ChatMapper.toFormData(message, files);
 
         console.log(formData);

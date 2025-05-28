@@ -1,7 +1,5 @@
-import { Signal } from '@angular/core';
-
-export interface StorageRepository<T> {
-    $state: Signal<T | undefined>;
-    save(value: T): Promise<void>;
-    clear(): Promise<void>;
+export interface Storage {
+    set(key: string, value: string): Promise<void>;
+    get(key: string): Promise<string | null>;
+    remove(key: string): Promise<void>;
 }

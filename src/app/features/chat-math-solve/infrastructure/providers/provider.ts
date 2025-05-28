@@ -1,15 +1,9 @@
-import { InjectionToken, Provider } from '@angular/core';
+import { InjectionToken, inject } from '@angular/core';
 import { ChatRepository } from '@features/chat-math-solve/domain/repositories/chat.repository';
 import { HttpChatRepository } from '../http/http-chat.repository';
-import { CameraService } from '@shared/services/camera.service';
-import { ChatMathStateService } from '@features/chat-math-solve/application/states/chat-math.state';
+import { IMAGES_SELECTED_AS_FILES_STATE } from '@features/chat-math-solve/application/states/chat-math.state';
 
-export const CHAT_REPOSITORY = new InjectionToken<ChatRepository>('ChatRepository');
-
-export const CHAT_MATH_PROVIDERS: Provider[] = [
-    {
-        provide: CHAT_REPOSITORY,
-        useFactory: (chatState: ChatMathStateService) => new HttpChatRepository(chatState),
-        deps: [ChatMathStateService],
-    },
-];
+export const HTTP_CHAT_REPOSITORY = new InjectionToken<ChatRepository>('ChatRepository', {
+    providedIn: 'root',
+    factory: () => new HttpChatRepository(inject(IMAGES_SELECTED_AS_FILES_STATE)),
+});

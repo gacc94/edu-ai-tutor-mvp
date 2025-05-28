@@ -49,12 +49,14 @@
         }
 
         &--user {
+            @include mixins.fadeUpChat();
             background-color: var(--color-primary);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-white);
         }
 
         &--ai {
+            @include mixins.fadeInChat();
             background: var(--gradient-bg-ai);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-text);

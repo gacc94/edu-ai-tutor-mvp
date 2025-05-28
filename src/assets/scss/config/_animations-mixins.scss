@@ -1,0 +1,80 @@
+// Mixins para animaciones
+// ==========================================
+
+// Mixin base para animaciones
+@mixin animate($name, $duration: 0.3s, $timing-function: ease, $delay: 0s, $iteration-count: 1, $fill-mode: both) {
+  animation: {
+    name: $name;
+    duration: $duration;
+    timing-function: $timing-function;
+    delay: $delay;
+    iteration-count: $iteration-count;
+    fill-mode: $fill-mode;
+  }
+}
+
+// Animación de fadeIn
+@mixin fadeIn($duration: 0.3s, $delay: 0s) {
+  @include animate(fadeIn, $duration, ease, $delay);
+}
+
+// Animación de fadeInUp
+@mixin fadeInUp($duration: 0.5s, $delay: 0s) {
+  @include animate(fadeInUp, $duration, cubic-bezier(0.2, 0.6, 0.3, 1), $delay);
+}
+
+// Animación de fadeInDown
+@mixin fadeInDown($duration: 0.5s, $delay: 0s) {
+  @include animate(fadeInDown, $duration, cubic-bezier(0.2, 0.6, 0.3, 1), $delay);
+}
+
+// Animación de bounce
+@mixin bounce($duration: 1s, $delay: 0s) {
+  @include animate(bounce, $duration, ease-in-out, $delay);
+}
+
+// Animación de pulse
+@mixin pulse($duration: 1.5s, $delay: 0s) {
+  @include animate(pulse, $duration, ease-in-out, $delay, infinite);
+}
+
+// Animación de rotación
+@mixin rotate($duration: 1s, $delay: 0s) {
+  @include animate(rotate, $duration, linear, $delay, infinite);
+}
+
+// Animación de shake
+@mixin shake($duration: 0.6s, $delay: 0s) {
+  @include animate(shake, $duration, ease-in-out, $delay);
+}
+
+// Clases de utilidad para animaciones
+.animate {
+  &--fade-in {
+    @include fadeIn();
+  }
+  
+  &--fade-in-up {
+    @include fadeInUp();
+  }
+  
+  &--fade-in-down {
+    @include fadeInDown();
+  }
+  
+  &--bounce {
+    @include bounce();
+  }
+  
+  &--pulse {
+    @include pulse();
+  }
+  
+  &--rotate {
+    @include rotate();
+  }
+  
+  &--shake {
+    @include shake();
+  }
+}

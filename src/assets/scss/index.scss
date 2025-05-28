@@ -1,6 +1,8 @@
 // SCSS global para todo el proyecto
 @use "config/variables";
+@use "config/animations";
 @use "config/mixins";
+@use "config/animations-mixins";
 @use "base/base";
 @use "layout/layout";
 @use "config/swiper";

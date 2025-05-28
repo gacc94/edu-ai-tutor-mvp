@@ -1,5 +1,4 @@
 // Mixins globales para el proyecto
-
 @mixin flex-center {
     display: flex;
     align-items: center;
@@ -86,5 +85,23 @@ $color-main: var(--color-primary);
     }
     @media (max-width: 320px) {
         font-size: $size-xs;
+    }
+}
+
+@mixin fadeInChat($duration: 0.3s, $delay: 0s) {
+    animation: {
+        name: fadeIncChat;
+        duration: $duration;
+        timing-function: ease;
+        delay: $delay;
+    }
+}
+
+@mixin fadeUpChat($duration: 0.3s, $delay: 0s) {
+    animation: {
+        name: fadeUpChat;
+        duration: $duration;
+        timing-function: ease;
+        delay: $delay;
     }
 }

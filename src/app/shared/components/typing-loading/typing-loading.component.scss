@@ -1,5 +1,7 @@
+@use "mixins";
+
 .typing-container {
-    animation: fadeIn 0.3s ease-in-out;
+    @include mixins.fadeInChat(0.3s, 0s);
 }
 
 .typing-content {
@@ -78,13 +80,13 @@
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-0.65rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+// @keyframes fadeIn {
+//     from {
+//         opacity: 0;
+//         transform: translateX(-0.65rem);
+//     }
+//     to {
+//         opacity: 1;
+//         transform: translateX(0);
+//     }
+// }

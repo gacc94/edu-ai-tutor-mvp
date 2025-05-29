@@ -18,12 +18,17 @@ export class HttpChatRepository implements ChatRepository {
         console.log(formData);
 
         // Make the API call
-        const response = await fetch(environment.apis.openai.baseUrl, {
-            method: 'POST',
-            body: formData,
-        });
+        // const response = await fetch(environment.apis.openai.baseUrl, {
+        //     method: 'POST',
+        //     body: formData,
+        // });
 
-        // Map and return the response
-        return response.json();
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(
+                    `La respuesta del ejercicio es un texto que describe como se resolvi o el ejercicio. Por ejemplo, si el ejercicio es "2 + 2" la respuesta sera "La respuesta del ejercicio es 4, que es el resultado de la suma de 2 + 2".`
+                );
+            }, 3000);
+        });
     }
 }

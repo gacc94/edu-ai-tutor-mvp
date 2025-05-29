@@ -7,6 +7,6 @@ export class ChatService {
     constructor(private readonly _sendMessageUseCase: SendMessageUseCase) {}
 
     sendMessage(message: Message) {
-        this._sendMessageUseCase.execute(message);
+        return this._sendMessageUseCase.execute(message);
     }
 }

@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
         <div class="typing-container">
             <div class="typing-content">
                 <div class="typing-bubble">
+                    <div class="typing-text">Escribiendo</div>
                     <div class="typing-dots">
                         <span class="dot"></span>
                         <span class="dot"></span>
                         <span class="dot"></span>
                     </div>
-                    <div class="typing-text">Escribiendo...</div>
                 </div>
             </div>
         </div>

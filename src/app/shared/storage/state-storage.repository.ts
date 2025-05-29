@@ -9,7 +9,7 @@ export class StateStorageRepository<T> implements StateStorage<T> {
 
     constructor(
         @Inject(STORAGE_TOKEN) private readonly _storage: Storage,
-        @Optional() @Inject('STORAGE_KEY') private readonly _storageKey: string
+        @Optional() @Inject('STORAGE_KEY') private readonly _storageKey?: string
     ) {
         this._getStorage();
     }
@@ -18,20 +18,18 @@ export class StateStorageRepository<T> implements StateStorage<T> {
         return this._state.asReadonly();
     }
 
-    async save(value: T): Promise<void> {
+    async save(value: T): Promise<T | undefined> {
         this._state.set(value);
 
-        if (!this._storageKey) return;
+        if (this._storageKey) await this._storage.set(this._storageKey, JSON.stringify(value));
 
-        await this._storage.set(this._storageKey, JSON.stringify(value));
+        return value;
     }
 
     async clear(): Promise<void> {
         this._state.set(undefined);
 
-        if (!this._storageKey) return;
-
-        await this._storage.remove(this._storageKey);
+        if (this._storageKey) await this._storage.remove(this._storageKey);
     }
 
     protected async _getStorage(): Promise<void> {

@@ -1,4 +1,4 @@
-import { ChatRequest, ChatRequestDto } from '../dtos/chat-response.dto';
+import { ChatRequest, ChatRequestDto } from '../dtos/chat-request.dto';
 import { Message } from '@features/chat-math-solve/domain/entities/message.entity';
 
 export class ChatMapper {

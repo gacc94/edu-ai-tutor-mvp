@@ -13,7 +13,7 @@ import {
 import { MessageFactory } from '@features/chat-math-solve/domain/factories/message.factory';
 import { Inject } from '@angular/core';
 import { Image } from '@features/chat-math-solve/domain/entities/image.entity';
-import { MessageState } from '@features/chat-math-solve/application/states/interfaces/math-solve.interface';
+import { MessageState } from '@features/chat-math-solve/application/states/interfaces/chat-math.state.interface';
 import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
 
 @Component({

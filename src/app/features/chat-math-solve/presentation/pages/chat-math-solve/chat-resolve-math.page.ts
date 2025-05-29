@@ -8,7 +8,7 @@ import { TypingLoadingComponent } from '@shared/components/typing-loading/typing
 import { ChatService } from '@features/chat-math-solve/application/services/chat.service';
 import { Inject } from '@angular/core';
 import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
-import { MessageState } from '@features/chat-math-solve/application/states/interfaces/math-solve.interface';
+import { MessageState } from '@features/chat-math-solve/application/states/interfaces/chat-math.state.interface';
 import { Message } from '@features/chat-math-solve/domain/entities/message.entity';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -24,7 +24,7 @@ export default class ChatResolveMathPage {
     area = viewChild<IonContent>(IonContent);
 
     messages = this._messagesState.$state;
-    isLoading = signal<boolean>(true);
+    isLoading = signal<boolean>(false);
 
     constructor(
         @Inject(MESSAGES_STATE) private _messagesState: StateStorage<Array<MessageState>>,
@@ -44,9 +44,10 @@ export default class ChatResolveMathPage {
         this.isLoading.set(true);
         await this.scrollToBottom();
 
-        this._chatService.sendMessage(message);
+        await this._chatService.sendMessage(message);
 
-        // this.isLoading.set(false);
+        this.isLoading.set(false);
+        await this.scrollToBottom();
     }
 
     private scrollToBottom() {

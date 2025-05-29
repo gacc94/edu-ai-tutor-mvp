@@ -1,8 +1,6 @@
-import { Injectable, inject, linkedSignal } from '@angular/core';
-import { signal } from '@angular/core';
-import { ChatMathState, MessageState } from './interfaces/math-solve.interface';
+import { inject } from '@angular/core';
+import { MessageState } from './interfaces/chat-math.state.interface';
 import { Image } from '@features/chat-math-solve/domain/entities/image.entity';
-import { v4 as uuidv4 } from 'uuid';
 import { InjectionToken } from '@angular/core';
 import { StateStorageRepository } from '@shared/storage/state-storage.repository';
 import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
@@ -25,6 +23,6 @@ export const IMAGES_SELECTED_AS_FILES_STATE = new InjectionToken<StateStorage<Ar
     'StorageRepository<Array<File>>',
     {
         providedIn: 'root',
-        factory: () => new StateStorageRepository<Array<File>>(inject(STORAGE_TOKEN), 'mathImagesSelectedAsFiles'),
+        factory: () => new StateStorageRepository<Array<File>>(inject(STORAGE_TOKEN)),
     }
 );

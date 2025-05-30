@@ -1,6 +1,6 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, viewChild, linkedSignal, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, viewChild, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonList, IonItem } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { MESSAGES_STATE } from '@features/chat-math-solve/application/states/chat-math.state';
@@ -11,13 +11,14 @@ import { StateStorage } from '@shared/storage/interfaces/state-storage.interface
 import { MessageState } from '@features/chat-math-solve/application/states/interfaces/chat-math.state.interface';
 import { Message } from '@features/chat-math-solve/domain/entities/message.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { ChatListComponent } from '../../components/chat-list/chat-list.component';
 
 @Component({
     selector: 'app-chat-resolve-math',
     templateUrl: './chat-resolve-math.page.html',
     styleUrls: ['./chat-resolve-math.page.scss'],
     standalone: true,
-    imports: [CommonModule, IonList, IonItem, IonContent, HeaderComponent, FooterComponent, TypingLoadingComponent],
+    imports: [CommonModule, IonContent, HeaderComponent, FooterComponent, TypingLoadingComponent, ChatListComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class ChatResolveMathPage {
@@ -40,7 +41,7 @@ export default class ChatResolveMathPage {
         ]);
     }
 
-    async sendMessage(message: Message) {
+    async sendMessage(message: Message): Promise<void> {
         this.isLoading.set(true);
         await this.scrollToBottom();
 
@@ -50,7 +51,7 @@ export default class ChatResolveMathPage {
         await this.scrollToBottom();
     }
 
-    private scrollToBottom() {
+    private scrollToBottom(): Promise<void> | undefined {
         return this.area()?.scrollToBottom(300);
     }
 }

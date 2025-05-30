@@ -1,4 +1,4 @@
-import { Component, input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, input, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } from '@ionic/angular/standalone';
 
 @Component({
@@ -21,6 +21,7 @@ import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } fr
     styleUrls: ['./header.component.scss'],
     imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonImg],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
     title = input.required<string>();

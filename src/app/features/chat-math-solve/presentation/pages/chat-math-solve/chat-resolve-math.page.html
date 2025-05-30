@@ -1,30 +1,7 @@
 <app-header title="Ai Assistant" [showBackButton]="true"></app-header>
 
-<ion-content class="chat-resolve-math__content" [fullscreen]="true" #content>
-    <ion-list class="chat-resolve-math__message-list" [lines]="'none'">
-        @for (message of messages(); track $index) {
-        <!--  -->
-        @let text = message.content; @let images = message.images;
-        <ion-item
-            class="chat-resolve-math__message-item"
-            [ngClass]="'chat-resolve-math__message-item--' + message.role"
-        >
-            <!-- <ion-avatar *ngIf="message.role === 'ia'" slot="start" class="chat-resolve-math__avatar">
-                <ion-icon class="chat-resolve-math__avatar-icon" [name]="message.avatarIcon!"></ion-icon>
-            </ion-avatar> -->
-            <div class="chat-resolve-math__bubble" [ngClass]="'chat-resolve-math__bubble--' + message.role">
-                <p class="chat-resolve-math__bubble-text">{{ text }}</p>
-                @if (images?.length) {
-                <div class="chat-resolve-math__images">
-                    @for (image of images; track $index) {
-                    <ion-img [src]="image.webPath" class="chat-resolve-math__image"></ion-img>
-                    }
-                </div>
-                }
-            </div>
-        </ion-item>
-        }
-    </ion-list>
+<ion-content class="chat-resolve-math__content" [fullscreen]="true">
+    <app-chat-list></app-chat-list>
     @if (isLoading()) {
     <app-typing-loading></app-typing-loading>
     }

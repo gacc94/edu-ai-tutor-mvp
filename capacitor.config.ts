@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-    appId: 'io.ionic.starter',
-    appName: 'eduAiTutor',
+    appId: 'com.eduaitutor.app',
+    appName: 'EduAI Tutor',
     webDir: 'www',
     plugins: {
         SafeArea: {
@@ -13,6 +13,10 @@ const config: CapacitorConfig = {
             navigationBarColor: '#000000',
             navigationBarContent: 'light',
             offset: 0,
+        },
+        StatusBar: {
+            style: 'dark',
+            backgroundColor: '#000000',
         },
     },
 };

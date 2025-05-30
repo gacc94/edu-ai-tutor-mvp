@@ -126,7 +126,7 @@ export class FooterComponent {
     }
 
     private _reset() {
-        this._imagesSelectedState.save([]);
+        this._imagesSelectedState.clear();
         this.control.reset();
     }
 }

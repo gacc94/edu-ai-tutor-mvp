@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Image } from '@features/chat-math-solve/domain/entities/image.entity';
+import { Image } from '@features/chat-math/domain/entities/image.entity';
 
 @Injectable({
     providedIn: 'root',

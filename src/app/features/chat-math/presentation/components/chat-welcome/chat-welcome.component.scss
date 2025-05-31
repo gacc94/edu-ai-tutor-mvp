@@ -1,0 +1,14 @@
+.chat__welcome {
+    --background: transparent;
+    color: var(--color-text);
+    --background: var(--gradient-bg-ai);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    width: 90%;
+    margin-inline: auto;
+    margin-bottom: var(--spacing-md);
+
+    & ion-card-content {
+        padding: 0;
+    }
+}

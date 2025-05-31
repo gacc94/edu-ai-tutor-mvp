@@ -15,22 +15,17 @@ import { Inject } from '@angular/core';
 import { Image } from '@features/chat-math-solve/domain/entities/image.entity';
 import { MessageState } from '@features/chat-math-solve/application/states/interfaces/chat-math.state.interface';
 import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { FooterPreviewComponent } from '../footer-preview/footer-preview.component';
 
 @Component({
     selector: 'app-footer',
     template: `
         <ion-footer class="footer">
             @if (selectedImages.length > 0) {
-            <div class="footer__preview">
-                @for (image of selectedImages; track $index) {
-                <div class="footer__preview-item">
-                    <ion-img [src]="image.webPath"></ion-img>
-                    <ion-button fill="clear" (click)="removeImage($index)">
-                        <ion-icon name="close-circle-outline"></ion-icon>
-                    </ion-button>
-                </div>
-                }
-            </div>
+            <app-footer-preview
+                [selectedImages]="selectedImages"
+                (removeImage)="removeImage($event)"
+            ></app-footer-preview>
             }
             <div class="footer__wrapper">
                 <ion-button (click)="openImageOptions()">
@@ -44,7 +39,7 @@ import { StateStorage } from '@shared/storage/interfaces/state-storage.interface
         </ion-footer>
     `,
     styleUrls: ['./footer.component.scss'],
-    imports: [IonFooter, IonInput, IonButton, IonIcon, ReactiveFormsModule, IonImg],
+    imports: [IonFooter, IonInput, IonButton, IonIcon, ReactiveFormsModule, FooterPreviewComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FooterComponent {

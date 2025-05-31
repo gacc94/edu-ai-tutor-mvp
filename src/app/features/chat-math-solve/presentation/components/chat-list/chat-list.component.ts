@@ -6,10 +6,12 @@ import { MessageState } from '@features/chat-math-solve/application/states/inter
 import { ChatItemComponent } from '../chat-item/chat-item.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChatWelcomeComponent } from '../chat-welcome/chat-welcome.component';
 
 @Component({
     selector: 'app-chat-list',
     template: `
+        <app-chat-welcome></app-chat-welcome>
         <ion-list class="chat__list" lines="none">
             @for (message of $messages(); track $index) {
             <app-chat-item [message]="message"></app-chat-item>
@@ -17,7 +19,7 @@ import { CommonModule } from '@angular/common';
         </ion-list>
     `,
     styleUrls: ['./chat-list.component.scss'],
-    imports: [IonList, ChatItemComponent, CommonModule],
+    imports: [IonList, ChatItemComponent, CommonModule, ChatWelcomeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatListComponent implements OnInit {

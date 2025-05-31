@@ -1,0 +1,114 @@
+<ion-header class="modal-image-preview__header">
+    <ion-toolbar color="primary">
+        <ion-title>Edit Image</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="cancel()" class="modal-image-preview__button modal-image-preview__button--cancel">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="modal-image-preview__content">
+    <div class="modal-image-preview__cropper-container">
+        <div *ngIf="loading" class="modal-image-preview__loader-container">
+            <ion-spinner name="crescent"></ion-spinner>
+            <p>Loading Image...</p>
+        </div>
+
+        <div *ngIf="!imageEvent && !loading" class="modal-image-preview__no-image">
+            <p>No image selected to preview or crop.</p>
+        </div>
+    </div>
+
+    <div class="modal-image-preview__controls" *ngIf="showCropper && imageLoadedFlag">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="6" size-sm="3">
+                    <ion-button
+                        expand="block"
+                        fill="outline"
+                        (click)="rotateLeft()"
+                        class="modal-image-preview__button modal-image-preview__button--rotate-left"
+                    >
+                        <ion-icon slot="start" name="rotate-left"></ion-icon>
+                        Rotate L
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6" size-sm="3">
+                    <ion-button
+                        expand="block"
+                        fill="outline"
+                        (click)="rotateRight()"
+                        class="modal-image-preview__button modal-image-preview__button--rotate-right"
+                    >
+                        <ion-icon slot="start" name="rotate-right"></ion-icon>
+                        Rotate R
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6" size-sm="3">
+                    <ion-button
+                        expand="block"
+                        fill="outline"
+                        (click)="zoomIn()"
+                        class="modal-image-preview__button modal-image-preview__button--zoom-in"
+                    >
+                        <ion-icon slot="start" name="add"></ion-icon>
+                        Zoom In
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6" size-sm="3">
+                    <ion-button
+                        expand="block"
+                        fill="outline"
+                        (click)="zoomOut()"
+                        class="modal-image-preview__button modal-image-preview__button--zoom-out"
+                    >
+                        <ion-icon slot="start" name="remove"></ion-icon>
+                        Zoom Out
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item class="modal-image-preview__aspect-ratio-toggle">
+                        <ion-label>Maintain Aspect Ratio ({{ aspectRatio }})</ion-label>
+                        <ion-toggle
+                            slot="end"
+                            [checked]="maintainAspectRatio"
+                            (ionChange)="toggleAspectRatio()"
+                        ></ion-toggle>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>
+
+<ion-footer class="modal-image-preview__footer" *ngIf="showCropper && imageLoadedFlag">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button
+                (click)="cancel()"
+                color="danger"
+                fill="outline"
+                class="modal-image-preview__button modal-image-preview__button--cancel-footer"
+            >
+                <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+                Cancel
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button
+                (click)="saveCroppedImage()"
+                [disabled]="!croppedImage"
+                color="success"
+                fill="solid"
+                class="modal-image-preview__button modal-image-preview__button--save"
+            >
+                <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+                Crop & Save
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

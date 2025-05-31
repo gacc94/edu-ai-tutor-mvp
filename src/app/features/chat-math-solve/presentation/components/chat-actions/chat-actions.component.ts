@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
 import { Share } from '@capacitor/share';
-import { IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonButton, IonIcon, isPlatform } from '@ionic/angular/standalone';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { Clipboard } from '@capacitor/clipboard';
 import {
@@ -37,10 +37,13 @@ export class ChatActionsComponent {
         await Clipboard.write({
             string: this.content(),
         });
-        this._utilsService.presentToast({
-            message: TEXT_COPY_TO_CLIPBOARD,
-            duration: DURATION_TOAST,
-        });
+
+        if (isPlatform('desktop')) {
+            this._utilsService.presentToast({
+                message: TEXT_COPY_TO_CLIPBOARD,
+                duration: DURATION_TOAST,
+            });
+        }
     }
 
     async handleShareMessage(): Promise<void> {

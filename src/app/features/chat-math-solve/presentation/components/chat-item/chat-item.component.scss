@@ -29,9 +29,9 @@
         font-size: var(--normal-font-size);
         line-height: 1.5;
         white-space: pre-wrap; // Preserve line breaks in messages
-        max-width: 80%; // Allow slightly wider bubbles
+        width: 80%; // Allow slightly wider bubbles
         word-wrap: break-word; // Ensure long words break
-        border-radius: var(--border-radius-lg);
+        border-radius: var(--border-radius-md);
         padding: var(--spacing-sm) var(--size-sm); // Adjusted padding
 
         &-text {

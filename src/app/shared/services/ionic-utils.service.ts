@@ -1,12 +1,16 @@
-import { ActionSheetButton, ActionSheetController, ToastController } from '@ionic/angular/standalone';
+import { ActionSheetController, ToastController, ModalController } from '@ionic/angular/standalone';
 import { Injectable } from '@angular/core';
-import { PresentActionSheetParams, PresentToastParams } from '../interfaces/ionic-utils.interface';
+import { PresentActionSheetParams, PresentModalParams, PresentToastParams } from '../interfaces/ionic-utils.interface';
 
 @Injectable({
     providedIn: 'root',
 })
 export class IonicUtilsService {
-    constructor(private _actionSheetController: ActionSheetController, private _toastController: ToastController) {}
+    constructor(
+        private _actionSheetController: ActionSheetController,
+        private _toastController: ToastController,
+        private _modalController: ModalController
+    ) {}
 
     async presentActionSheet({ buttons, header, id }: PresentActionSheetParams) {
         const actionSheet = await this._actionSheetController.create({
@@ -29,5 +33,16 @@ export class IonicUtilsService {
             animated: animated ?? true,
         });
         await toast.present();
+    }
+
+    async presentModal({ component, componentProps }: PresentModalParams) {
+        const modal = await this._modalController.create({
+            component,
+            componentProps,
+            cssClass: 'custom-preview-modal',
+        });
+
+        await modal.present();
+        return modal;
     }
 }

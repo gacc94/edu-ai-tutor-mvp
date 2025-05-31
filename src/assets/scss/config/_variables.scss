@@ -54,9 +54,12 @@
     --body-color: #0a0e1a;
 
     /*========== Borders and shadows ==========*/
+    --border-radius-circle: 50%;
     --border-radius-lg: 1.25rem;
     --border-radius: 1rem;
+    --border-radius-md: 0.75rem;
     --border-radius-sm: 0.5rem;
+    --border-radius-xs: 0.25rem;
     --border-radius-circle: 50%;
     --box-shadow-main: 0 4px 24px rgba(67, 97, 238, 0.18);
     --font-family-alt: "Roboto", sans-serif;

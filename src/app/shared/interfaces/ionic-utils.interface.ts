@@ -13,3 +13,9 @@ export interface PresentToastParams {
     position?: 'bottom' | 'top' | 'middle';
     animated?: boolean;
 }
+
+export interface PresentModalParams {
+    component: any;
+    componentProps?: any;
+    cssClass?: string;
+}

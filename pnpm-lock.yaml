@@ -83,6 +83,9 @@ importers:
       ionicons:
         specifier: ^7.0.0
         version: 7.4.0
+      ngx-image-cropper:
+        specifier: ^9.1.5
+        version: 9.1.5(@angular/common@19.2.7(@angular/core@19.2.7(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.7(rxjs@7.8.2)(zone.js@0.15.0))
       rxjs:
         specifier: ~7.8.0
         version: 7.8.2
@@ -4312,6 +4315,12 @@ packages:
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  ngx-image-cropper@9.1.5:
+    resolution: {integrity: sha512-I8MAjMREtXDALgYyeMIvcqE+WpXA4IA9Z59JsujDuqOnjFY/Mpb+8JUyVVuOa0Irp20ukDPQJZmECR4v96hTrg==}
+    peerDependencies:
+      '@angular/common': '>=17.3.0'
+      '@angular/core': '>=17.3.0'
 
   node-addon-api@6.1.0:
     resolution: {integrity: sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA==}
@@ -10375,6 +10384,12 @@ snapshots:
   negotiator@1.0.0: {}
 
   neo-async@2.6.2: {}
+
+  ngx-image-cropper@9.1.5(@angular/common@19.2.7(@angular/core@19.2.7(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.7(rxjs@7.8.2)(zone.js@0.15.0)):
+    dependencies:
+      '@angular/common': 19.2.7(@angular/core@19.2.7(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2)
+      '@angular/core': 19.2.7(rxjs@7.8.2)(zone.js@0.15.0)
+      tslib: 2.8.1
 
   node-addon-api@6.1.0:
     optional: true

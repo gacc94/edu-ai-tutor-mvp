@@ -19,7 +19,6 @@ import { StateStorage } from '@shared/storage/interfaces/state-storage.interface
 @Component({
     selector: 'app-footer',
     template: `
-        @let selectedImages = $selectedImages() ?? [];
         <ion-footer class="footer">
             @if (selectedImages.length > 0) {
             <div class="footer__preview">
@@ -66,10 +65,10 @@ export class FooterComponent {
     ) {}
 
     get isDisabled(): boolean {
-        return !this.control.valid || this.$selectedImages()?.length === 0;
+        return !this.control?.valid || this.selectedImages.length === 0;
     }
 
-    get selectedImages() {
+    get selectedImages(): Array<Image> {
         return this.$selectedImages() ?? [];
     }
 

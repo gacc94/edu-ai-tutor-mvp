@@ -12,6 +12,6 @@ export interface ChatMathState {
 export interface MessageState {
     id: string;
     role: RoleType;
-    content?: string;
+    content: string;
     images?: Array<Image>;
 }

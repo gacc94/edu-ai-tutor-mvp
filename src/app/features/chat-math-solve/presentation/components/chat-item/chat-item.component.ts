@@ -1,7 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, input, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, input, ElementRef, ViewChild } from '@angular/core';
 import { IonItem, IonImg } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { MessageState } from '@features/chat-math-solve/application/states/interfaces/chat-math.state.interface';
+import { ChatActionsComponent } from '../chat-actions/chat-actions.component';
 
 @Component({
     selector: 'app-chat-item',
@@ -15,17 +16,18 @@ import { MessageState } from '@features/chat-math-solve/application/states/inter
                     }
                 </div>
                 }
-                <p class="chat__bubble-text">{{ message().content }}</p>
+                <p class="chat__bubble-text" #messageContent>{{ message().content }}</p>
+                @if (message().role === 'ai') {
+                <app-chat-actions [content]="message().content"></app-chat-actions>
+                }
             </div>
         </ion-item>
     `,
     styleUrls: ['./chat-item.component.scss'],
-    imports: [IonItem, IonImg, CommonModule],
+    imports: [IonItem, IonImg, CommonModule, ChatActionsComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ChatItemComponent implements OnInit {
+export class ChatItemComponent {
+    @ViewChild('messageContent') messageContent!: ElementRef<HTMLParagraphElement>;
     message = input.required<MessageState>();
-    constructor() {}
-
-    ngOnInit() {}
 }

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
+
 import { addIcons } from 'ionicons';
 import { logoGoogle } from 'ionicons/icons';
 import { AuthService } from '../../../services/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
     templateUrl: 'login.page.html',
     styleUrls: ['login.page.scss'],
     standalone: true,
-    imports: [CommonModule, IonContent, IonSpinner],
+    imports: [IonContent, IonSpinner],
 })
 export class LoginPage implements OnInit {
     isLoading = false;

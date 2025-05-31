@@ -1,0 +1,44 @@
+ion-searchbar {
+    --background: var(--color-bg-card);
+    --border-radius: var(--border-radius-lg);
+    --placeholder-color: var(--color-text-muted);
+    --placeholder-opacity: 0.7;
+    --clear-button-color: var(--color-text-muted);
+    --cancel-button-color: var(--color-text-muted);
+    --icon-color: var(--color-text-muted);
+    --color: var(--color-text);
+    padding: 0.05rem;
+    font-family: var(--font-family-main);
+    margin-bottom: var(--spacing-md);
+
+    &:focus-within {
+        --box-shadow: 0 0 0 0.0875rem var(--color-primary);
+    }
+}
+
+.custom-searchbar {
+    ::ng-deep {
+        .searchbar-input-container {
+            .searchbar-input {
+                transition: all 0.3s ease;
+                font-size: var(--normal-font-size);
+                padding-block: 0.25rem;
+                padding-left: var(--size-2xl);
+                padding-right: var(--size-2xl);
+            }
+
+            .searchbar-search-icon {
+                font-size: var(--bigger-font-size);
+                top: 50%;
+                transform: translateY(-50%);
+                width: var(--size-md-lg);
+                height: var(--size-md-lg);
+            }
+
+            .searchbar-cancel-button {
+                font-size: var(--bigger-font-size);
+                padding: var(--spacing-xs);
+            }
+        }
+    }
+}

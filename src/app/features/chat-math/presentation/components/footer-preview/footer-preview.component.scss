@@ -1,0 +1,39 @@
+.footer {
+    &__preview {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+        overflow-x: auto;
+        background-color: var(--color-bg-light);
+
+        &-item {
+            position: relative;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+
+            ion-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.5;
+            }
+
+            ion-button {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                --border-radius: var(--border-radius-circle);
+
+                ion-icon {
+                    color: var(--color-text);
+                }
+            }
+        }
+    }
+}

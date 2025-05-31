@@ -5,6 +5,8 @@
 export const environment = {
     name: 'development',
     production: false,
+    useEmulators: true,
+    enableLogging: true,
     firebase: {
         projectId: 'edu-ai-tutor',
         appId: '1:207854376775:web:908bbe0cce6e4a87ab1e62',
@@ -12,6 +14,43 @@ export const environment = {
         apiKey: 'AIzaSyBqJisg-oS2YiMm9MEFjHuZvmxe9k1Yo74',
         authDomain: 'edu-ai-tutor.firebaseapp.com',
         messagingSenderId: '207854376775',
+    },
+    emulators: {
+        auth: {
+            host: 'localhost',
+            port: 9099,
+        },
+        firestore: {
+            host: 'localhost',
+            port: 9097,
+        },
+        functions: {
+            host: 'localhost',
+            port: 9098,
+        },
+        storage: {
+            host: 'localhost',
+            port: 9096,
+        },
+        ui: {
+            host: 'localhost',
+            port: 9095,
+        },
+    },
+    apis: {
+        openai: {
+            baseUrl: 'https://api.openai.com/v1/chat/completions',
+            model: 'gpt-3.5-turbo',
+            maxTokens: 1000,
+            temperature: 0.7,
+        },
+    },
+    features: {
+        enableAnalytics: false,
+        enableCrashReporting: false,
+        enablePerformanceMonitoring: false,
+        enableDebugMode: true,
+        enableMockData: true,
     },
 };
 

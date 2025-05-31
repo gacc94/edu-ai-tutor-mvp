@@ -1,16 +1,32 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, linkedSignal, signal } from '@angular/core';
-import { IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
-import { DragonBallService } from '../../shared/services/dragon-ball.service';
+import { IonContent } from '@ionic/angular/standalone';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { PlanPremiunComponent } from './components/plan-premiun/plan-premiun.component';
+import { ToolsComponent } from './components/tools/tools.component';
+import { DragonBallService } from 'src/app/shared/services/dragon-ball.service';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
-    imports: [IonIcon, IonContent, IonFooter, IonHeader, IonToolbar, IonTitle],
+    imports: [
+        IonContent,
+        HeaderComponent,
+        FooterComponent,
+        SearchbarComponent,
+        CarouselComponent,
+        PlanPremiunComponent,
+        ToolsComponent,
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage {
+export default class HomePage {
     #dbService = inject(DragonBallService);
+
+    title = 'EduAITutor';
 
     $id = signal<number>(1);
 

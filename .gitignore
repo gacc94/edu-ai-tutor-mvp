@@ -23,6 +23,7 @@ log.txt
 /platforms
 /plugins
 /android
+/ios
 
 # Compiled output
 /dist
@@ -74,3 +75,8 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+# Packages Manager
+pnpm-lock.yaml
+yarn.lock
+package-lock.json

@@ -1,0 +1,22 @@
+.chat__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    margin-right: var(--spacing-xs); // Align with bubble padding
+
+    ion-button {
+        --padding-start: 0.5em;
+        --padding-end: 0.5em;
+        height: 2em; // Smaller buttons
+        color: var(--color-text-secondary); // Subtle color
+
+        ion-icon {
+            font-size: 1.2em;
+        }
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+}

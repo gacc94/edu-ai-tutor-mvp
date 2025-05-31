@@ -1,0 +1,13 @@
+<ion-searchbar
+    type="search"
+    inputmode="text"
+    placeholder="Buscar herramientas AI"
+    class="custom-searchbar"
+    search-icon="search-outline"
+    clear-icon="close-outline"
+    show-clear-button="focus"
+    show-cancel-button="focus"
+    cancel-button-text="Cancelar"
+    #searchbar
+    (ionInput)="onInput(searchbar)"
+/>

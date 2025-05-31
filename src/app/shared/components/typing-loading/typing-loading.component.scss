@@ -1,0 +1,59 @@
+@use "mixins";
+
+.typing-container {
+    @include mixins.fadeInChat(0.3s, 0s);
+}
+
+.typing-content {
+    display: flex;
+    align-items: center;
+}
+
+.typing-bubble {
+    display: flex;
+    padding: 12px 20px;
+    border-radius: 18px;
+    background: var(--gradient-bg-ai);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform-origin: left center;
+    animation: pulseScale 2s infinite ease-in-out;
+}
+
+.typing-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    margin-right: 0.85rem;
+}
+
+.typing-text {
+    font-size: var(--normal-font-size);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    margin-right: var(--spacing-sm);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 2px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: inline-block;
+    opacity: 0.8;
+}
+
+.dot:nth-child(1) {
+    animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation: dotPulse 1.5s infinite ease-in-out 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation: dotPulse 1.5s infinite ease-in-out 0.4s;
+}

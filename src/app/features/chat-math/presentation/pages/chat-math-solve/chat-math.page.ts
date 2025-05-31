@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, viewChild, signal, linkedSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -32,7 +32,6 @@ import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome
     `,
     standalone: true,
     imports: [
-        CommonModule,
         IonContent,
         HeaderComponent,
         FooterComponent,

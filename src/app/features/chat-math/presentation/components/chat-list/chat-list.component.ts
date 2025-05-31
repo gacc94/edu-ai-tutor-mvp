@@ -5,8 +5,6 @@ import { StateStorage } from '@shared/storage/interfaces/state-storage.interface
 import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
 import { ChatItemComponent } from '../chat-item/chat-item.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ChatWelcomeComponent } from '../chat-welcome/chat-welcome.component';
 
 @Component({
     selector: 'app-chat-list',
@@ -18,7 +16,7 @@ import { ChatWelcomeComponent } from '../chat-welcome/chat-welcome.component';
         </ion-list>
     `,
     styleUrls: ['./chat-list.component.scss'],
-    imports: [IonList, ChatItemComponent, CommonModule],
+    imports: [IonList, ChatItemComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatListComponent implements OnInit {

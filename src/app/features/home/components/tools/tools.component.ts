@@ -13,7 +13,7 @@ import { IonIcon } from '@ionic/angular/standalone';
 
             <div class="tools__grid">
                 @for (item of tools; track $index) {
-                <div class="card" [routerLink]="['/chat-resolve-math']">
+                <div class="card" [routerLink]="['/chat-math']">
                     <div class="card__header">
                         <div class="card__icon-wrapper">
                             <ion-icon name="create-outline" class="card__icon"></ion-icon>

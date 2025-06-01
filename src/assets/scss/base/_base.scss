@@ -8,6 +8,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 html {
@@ -32,6 +33,10 @@ ion-content {
     --background: var(--color-bg-main);
     color: var(--color-text);
     font-family: var(--font-family-main);
+    --padding-bottom: var(--spacing-md);
+    --padding-top: var(--spacing-md);
+    --padding-start: var(--spacing-md);
+    --padding-end: var(--spacing-md);
     button {
         outline: none;
         border: none;

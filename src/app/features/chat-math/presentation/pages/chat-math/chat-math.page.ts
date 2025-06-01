@@ -1,4 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, viewChild, signal, linkedSignal } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -13,6 +14,11 @@ import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { ChatListComponent } from '../../components/chat-list/chat-list.component';
 import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome.component';
 
+interface ScrollToBottomParams {
+    duration?: number;
+    delay?: number;
+}
+
 @Component({
     selector: 'app-chat-math',
     template: `
@@ -21,15 +27,16 @@ import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome
         <ion-content [fullscreen]="true">
             @if ($messageLength() === 0) {
             <app-chat-welcome></app-chat-welcome>
-            } @else {
+            }
             <app-chat-list></app-chat-list>
-            } @if (isLoading()) {
+            @if (isLoading()) {
             <app-typing-loading></app-typing-loading>
             }
         </ion-content>
 
         <app-footer (onSendMessage)="sendMessage($event)"></app-footer>
     `,
+    styleUrl: './chat-math.page.scss',
     standalone: true,
     imports: [
         IonContent,
@@ -41,8 +48,8 @@ import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export default class ChatMathPage {
-    area = viewChild<IonContent>(IonContent);
+export default class ChatMathPage implements AfterViewInit {
+    area = viewChild<IonContent>(IonContent, { debugName: 'area' });
 
     $messages = this._messagesState.$state;
 
@@ -55,17 +62,33 @@ export default class ChatMathPage {
         private readonly _chatService: ChatService
     ) {}
 
+    /**
+     * After view init
+     */
+    async ngAfterViewInit(): Promise<void> {
+        this._scrollToBottom({ duration: 0 });
+    }
+
+    /**
+     * Sends a message to the chat
+     * @param message
+     */
     async sendMessage(message: Message): Promise<void> {
         this.isLoading.set(true);
-        await this.scrollToBottom();
+        this._scrollToBottom();
 
         await this._chatService.sendMessage(message);
 
         this.isLoading.set(false);
-        await this.scrollToBottom();
+        this._scrollToBottom();
     }
 
-    private scrollToBottom(): Promise<void> | undefined {
-        return this.area()?.scrollToBottom(300);
+    /**
+     * Scrolls to the bottom of the chat list
+     * @param scrollToBottomParams
+     */
+    private _scrollToBottom(scrollToBottomParams?: ScrollToBottomParams) {
+        const { duration = 300, delay = 100 } = scrollToBottomParams || {};
+        setTimeout(() => this.area()?.scrollToBottom(duration), delay);
     }
 }

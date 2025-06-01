@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { IonList } from '@ionic/angular/standalone';
 import { MESSAGES_STATE } from '@features/chat-math/application/states/chat-math.state';
 import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
@@ -19,10 +19,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     imports: [IonList, ChatItemComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ChatListComponent implements OnInit {
+export class ChatListComponent {
     $messages = this._messagesState.$state;
 
     constructor(@Inject(MESSAGES_STATE) private _messagesState: StateStorage<Array<MessageState>>) {}
-
-    ngOnInit() {}
 }

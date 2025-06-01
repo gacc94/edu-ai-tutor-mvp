@@ -101,9 +101,6 @@ importers:
       zod:
         specifier: ^3.24.3
         version: 3.24.3
-      zone.js:
-        specifier: ~0.15.0
-        version: 0.15.0
     devDependencies:
       '@angular-eslint/builder':
         specifier: ^19.0.0

@@ -19,6 +19,9 @@ export const environment = {
             maxTokens: 2000,
             temperature: 0.5,
         },
+        functions: {
+            baseUrl: 'http://localhost:9098/edu-ai-tutor/us-central1/getPokemons',
+        },
     },
     features: {
         enableAnalytics: true,

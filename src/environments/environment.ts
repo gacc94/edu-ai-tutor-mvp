@@ -41,6 +41,9 @@ export const environment = {
         openai: {
             baseUrl: 'https://api.openai.com/v1/chat/completions',
         },
+        functions: {
+            baseUrl: 'http://localhost:9098/edu-ai-tutor/us-central1/getPokemons',
+        },
     },
     features: {
         enableAnalytics: false,

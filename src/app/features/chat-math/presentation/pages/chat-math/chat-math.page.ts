@@ -77,7 +77,8 @@ export default class ChatMathPage implements AfterViewInit {
         this.isLoading.set(true);
         this._scrollToBottom();
 
-        await this._chatService.sendMessage(message);
+        const response = await this._chatService.sendMessage(message);
+        console.log({ response });
 
         this.isLoading.set(false);
         this._scrollToBottom();

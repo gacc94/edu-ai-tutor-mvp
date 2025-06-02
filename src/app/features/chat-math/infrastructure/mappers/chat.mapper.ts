@@ -15,7 +15,7 @@ export class ChatMapper {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('message', content);
-        files.forEach((file) => formData.append('files', file));
+        files.forEach((file, index) => formData.append(`image_${index}`, file, file.name));
         return formData;
     }
 }

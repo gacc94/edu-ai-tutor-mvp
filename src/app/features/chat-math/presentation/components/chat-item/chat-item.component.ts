@@ -3,6 +3,7 @@ import { IonItem, IonImg } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
 import { ChatActionsComponent } from '../chat-actions/chat-actions.component';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
     selector: 'app-chat-item',
@@ -16,7 +17,7 @@ import { ChatActionsComponent } from '../chat-actions/chat-actions.component';
                     }
                 </div>
                 }
-                <p class="chat__bubble-text">{{ message().content }}</p>
+                <markdown [katex]="true" [data]="message().content"></markdown>
                 @if (message().role === 'ai') {
                 <app-chat-actions [content]="message().content"></app-chat-actions>
                 }
@@ -24,7 +25,7 @@ import { ChatActionsComponent } from '../chat-actions/chat-actions.component';
         </ion-item>
     `,
     styleUrls: ['./chat-item.component.scss'],
-    imports: [IonItem, IonImg, CommonModule, ChatActionsComponent],
+    imports: [IonItem, IonImg, CommonModule, ChatActionsComponent, MarkdownComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatItemComponent {

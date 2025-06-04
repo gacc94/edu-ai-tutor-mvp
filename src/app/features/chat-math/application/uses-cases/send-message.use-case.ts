@@ -19,8 +19,8 @@ export class SendMessageUseCase {
 
         const aiMessage = MessageFactory.createAiMessage(response);
 
-        this._messagesState.save([...(this._messagesState.$state() ?? []), aiMessage]);
+        return this._messagesState.save([...(this._messagesState.$state() ?? []), aiMessage]);
 
-        return aiMessage;
+        // return aiMessage;
     }
 }

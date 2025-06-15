@@ -1,4 +1,9 @@
-export const environment = {
+import { IEnvironment } from './ienvironment';
+
+const GEMINI_BASE_URL = 'https://edu-ai-tutor-644032611464.us-central1.run.app';
+const GEMINI_API_URL = `${GEMINI_BASE_URL}/api/v1`;
+
+export const environment: IEnvironment = {
     name: 'production',
     production: true,
     useEmulators: false,
@@ -10,38 +15,11 @@ export const environment = {
         apiKey: 'AIzaSyBqJisg-oS2YiMm9MEFjHuZvmxe9k1Yo74',
         authDomain: 'edu-ai-tutor.firebaseapp.com',
         messagingSenderId: '207854376775',
-        measurementId: 'G-XXXXXXXXXX', // Add your Google Analytics measurement ID
     },
     apis: {
-        openai: {
-            baseUrl: 'https://api.openai.com/v1/chat/completions',
-            model: 'gpt-4-turbo-preview',
-            maxTokens: 2000,
-            temperature: 0.5,
+        gemini: {
+            baseUrl: GEMINI_BASE_URL,
+            mathSolve: `${GEMINI_API_URL}/math-solve/chat`,
         },
-        functions: {
-            baseUrl: 'http://localhost:9098/edu-ai-tutor/us-central1/getPokemons',
-        },
-    },
-    features: {
-        enableAnalytics: true,
-        enableCrashReporting: true,
-        enablePerformanceMonitoring: true,
-        enableDebugMode: false,
-        enableMockData: false,
-    },
-    security: {
-        enableCSP: true,
-        enableCORS: true,
-        maxRequestSize: 10485760, // 10MB
-        rateLimiting: {
-            windowMs: 900000, // 15 minutes
-            maxRequests: 100,
-        },
-    },
-    cache: {
-        enableServiceWorker: true,
-        cacheStrategy: 'cacheFirst',
-        maxAge: 86400000, // 24 hours
     },
 };

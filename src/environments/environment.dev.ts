@@ -1,8 +1,9 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { IEnvironment } from './ienvironment';
 
-export const environment = {
+const GEMINI_BASE_URL = 'http://localhost:3100';
+const GEMINI_API_URL = `${GEMINI_BASE_URL}/api/v1`;
+
+export const environment: IEnvironment = {
     name: 'development',
     production: false,
     useEmulators: true,
@@ -38,30 +39,9 @@ export const environment = {
         },
     },
     apis: {
-        openai: {
-            baseUrl: 'https://api.openai.com/v1/chat/completions',
-            model: 'gpt-3.5-turbo',
-            maxTokens: 1000,
-            temperature: 0.7,
+        gemini: {
+            baseUrl: GEMINI_BASE_URL,
+            mathSolve: `${GEMINI_API_URL}/math-solve/chat`,
         },
-        functions: {
-            baseUrl: 'http://localhost:9098/edu-ai-tutor/us-central1/getPokemons',
-        },
-    },
-    features: {
-        enableAnalytics: false,
-        enableCrashReporting: false,
-        enablePerformanceMonitoring: false,
-        enableDebugMode: true,
-        enableMockData: true,
     },
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

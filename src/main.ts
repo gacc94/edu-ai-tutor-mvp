@@ -23,7 +23,6 @@ bootstrapApplication(AppComponent, {
         provideIonicAngular(),
         provideRouter(routes, withPreloading(PreloadAllModules)),
         provideHttpClient(withFetch()),
-        //TODO: Firebase config start
         ...firebaseProviders,
         importProvidersFrom(),
         ...CHAT_PROVIDER,

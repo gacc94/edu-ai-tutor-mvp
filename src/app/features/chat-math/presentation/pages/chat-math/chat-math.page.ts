@@ -22,7 +22,7 @@ interface ScrollToBottomParams {
 @Component({
     selector: 'app-chat-math',
     template: `
-        <app-header title="Ai Assistant" [showBackButton]="true"></app-header>
+        <app-header title="Ai Assistant" [show-back-button]="true"></app-header>
 
         <ion-content [fullscreen]="true">
             @if ($messageLength() === 0) {

@@ -1,5 +1,8 @@
-import { Component, input, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } from '@ionic/angular/standalone';
+import { IStateRegister } from '@shared/storage/interfaces/state-register.interface';
+import { STATE_REGISTER_TOKEN } from '@shared/storage/providers/storage.provider';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -15,6 +18,11 @@ import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } fr
                     <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
                     <ion-title class="header__title">{{ title() }}</ion-title>
                 </div>
+                <ion-buttons slot="end">
+                    <ion-button (click)="logout()">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
     `,
@@ -25,5 +33,12 @@ import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } fr
 })
 export class HeaderComponent {
     title = input.required<string>();
-    showBackButton = input.required<boolean>();
+    showBackButton = input.required<boolean>({ alias: 'show-back-button' });
+
+    constructor(@Inject(STATE_REGISTER_TOKEN) private register: IStateRegister, private router: Router) {}
+
+    async logout() {
+        await this.register.clearAll();
+        this.router.navigate(['/auth']);
+    }
 }

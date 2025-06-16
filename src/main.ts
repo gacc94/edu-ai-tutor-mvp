@@ -8,7 +8,6 @@ import { firebaseProviders } from './app/shared/config/firebase.config';
 import { enableProdMode, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { environment } from '@envs/environment';
 import { appInitializerProviders } from './app/shared/config/app-initializer.config';
-import { CHAT_PROVIDER } from '@features/chat-math/infrastructure/providers/provider';
 import { provideMarkdown } from 'ngx-markdown';
 
 if (environment.production) {
@@ -25,7 +24,6 @@ bootstrapApplication(AppComponent, {
         provideHttpClient(withFetch()),
         ...firebaseProviders,
         importProvidersFrom(),
-        ...CHAT_PROVIDER,
         provideMarkdown({}),
     ],
 });

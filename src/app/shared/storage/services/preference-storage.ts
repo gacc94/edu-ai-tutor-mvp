@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { Storage } from './interfaces/storage.interface';
+import { Storage } from '../interfaces/storage.interface';
 
 @Injectable()
 export class PreferencesStorage implements Storage {

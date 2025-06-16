@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input, signal } from '@angular/core';
 import { IonItem, IonImg } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
+import { MessageState } from '@features/chat-math/application/states/interfaces/message.state';
 import { ChatActionsComponent } from '../chat-actions/chat-actions.component';
 import { KatexOptions, MarkdownComponent } from 'ngx-markdown';
 
@@ -18,7 +18,7 @@ import { KatexOptions, MarkdownComponent } from 'ngx-markdown';
                 </div>
                 }
                 <markdown [katex]="true" [katexOptions]="katexOptions()" [data]="message().content"></markdown>
-                @if (message().role === 'ai') {
+                @if (message().isAi) {
                 <app-chat-actions [content]="message().content"></app-chat-actions>
                 }
             </div>

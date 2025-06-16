@@ -4,12 +4,12 @@ import { AfterViewInit } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { MESSAGES_STATE } from '@features/chat-math/application/states/chat-math.state';
+import { MESSAGES_STATE } from '@features/chat-math/application/states/states';
 import { TypingLoadingComponent } from '@shared/components/typing-loading/typing-loading.component';
 import { ChatService } from '@features/chat-math/application/services/chat.service';
 import { Inject } from '@angular/core';
-import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
-import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
+import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { MessageState } from '@features/chat-math/application/states/interfaces/message.state';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { ChatListComponent } from '../../components/chat-list/chat-list.component';
 import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome.component';
@@ -58,7 +58,7 @@ export default class ChatMathPage implements AfterViewInit {
     isLoading = signal<boolean>(false);
 
     constructor(
-        @Inject(MESSAGES_STATE) private _messagesState: StateStorage<Array<MessageState>>,
+        @Inject(MESSAGES_STATE) private _messagesState: IStateStorage<MessageState[]>,
         private readonly _chatService: ChatService
     ) {}
 
@@ -77,8 +77,7 @@ export default class ChatMathPage implements AfterViewInit {
         this.isLoading.set(true);
         this._scrollToBottom();
 
-        const response = await this._chatService.sendMessage(message);
-        console.log({ response });
+        await this._chatService.sendMessage(message);
 
         this.isLoading.set(false);
         this._scrollToBottom();

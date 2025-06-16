@@ -6,7 +6,7 @@ import { Message } from '@features/chat-math/domain/entities/message.entity';
 export class ChatService {
     constructor(private readonly _sendMessageUseCase: SendMessageUseCase) {}
 
-    sendMessage(message: Message) {
+    sendMessage(message: Message): Promise<void> {
         return this._sendMessageUseCase.execute(message);
     }
 }

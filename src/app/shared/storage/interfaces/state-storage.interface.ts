@@ -1,7 +1,7 @@
 import { Signal } from '@angular/core';
 
-export interface StateStorage<T> {
+export interface IStateStorage<T> {
     $state: Signal<T | undefined>;
-    save(value: T): Promise<T | undefined>;
+    save(value: T): Promise<void>;
     clear(): Promise<void>;
 }

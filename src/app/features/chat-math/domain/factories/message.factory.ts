@@ -3,10 +3,10 @@ import { Message } from '../entities/message.entity';
 
 export class MessageFactory {
     static createUserMessage(message: string, images?: Array<Image>): Message {
-        return new Message('user', message, images);
+        return new Message({ role: 'user', content: message, images });
     }
 
     static createAiMessage(message: string): Message {
-        return new Message('ai', message);
+        return new Message({ role: 'ai', content: message });
     }
 }

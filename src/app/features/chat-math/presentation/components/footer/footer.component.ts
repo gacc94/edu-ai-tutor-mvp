@@ -9,13 +9,14 @@ import {
     MESSAGES_STATE,
     IMAGES_SELECTED_STATE,
     IMAGES_SELECTED_AS_FILES_STATE,
-} from '@features/chat-math/application/states/chat-math.state';
+} from '@features/chat-math/application/states/states';
 import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
 import { Inject } from '@angular/core';
 import { Image } from '@features/chat-math/domain/entities/image.entity';
-import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
-import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { MessageState } from '@features/chat-math/application/states/interfaces/message.state';
+import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { FooterPreviewComponent } from '../footer-preview/footer-preview.component';
+import { MessageStateAdapter } from '@features/chat-math/application/adapters/message-state.adapter';
 
 @Component({
     selector: 'app-footer',
@@ -54,9 +55,9 @@ export class FooterComponent {
         private _formBuilder: FormBuilder,
         private _cameraService: CameraService,
         private _ionicUtilsService: IonicUtilsService,
-        @Inject(MESSAGES_STATE) private _messagesState: StateStorage<Array<MessageState>>,
-        @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: StateStorage<Array<Image>>,
-        @Inject(IMAGES_SELECTED_AS_FILES_STATE) private _imagesSelectedAsFilesState: StateStorage<Array<File>>
+        @Inject(MESSAGES_STATE) private _messagesState: IStateStorage<Array<MessageState>>,
+        @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: IStateStorage<Array<Image>>,
+        @Inject(IMAGES_SELECTED_AS_FILES_STATE) private _imagesSelectedAsFilesState: IStateStorage<Array<File>>
     ) {}
 
     get isDisabled(): boolean {
@@ -72,8 +73,10 @@ export class FooterComponent {
         const message = this.control.value.trim();
 
         const userMessage = MessageFactory.createUserMessage(message, images);
+        const userMessageState = MessageStateAdapter.adapt(userMessage);
+
         const messages = this._messagesState.$state() ?? [];
-        this._messagesState.save([...messages, userMessage]);
+        this._messagesState.save([...messages, userMessageState]);
 
         const files = await this._cameraService.imagesToFiles(images);
         this._imagesSelectedAsFilesState.save(files);

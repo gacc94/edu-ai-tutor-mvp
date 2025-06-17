@@ -1,3 +1,13 @@
+interface ImageProps {
+    base64String?: string;
+    dataUrl?: string;
+    path?: string;
+    webPath?: string;
+    exif?: any;
+    format: string;
+    saved: boolean;
+}
+
 export class Image {
     base64String?: string;
     dataUrl?: string;
@@ -17,24 +27,12 @@ export class Image {
         this.saved = props.saved;
     }
 
-    static base64ToBlob(base64String: string): File {
-        const base64Data = base64String.split(',')[1];
-        const byteCharacters = atob(base64Data);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        return new File([byteArray], 'image.jpg', { type: 'image/jpeg' });
-    }
-}
+    async getFile(): Promise<File> {
+        const response = await fetch(this.webPath!);
+        const blob = await response.blob();
+        const ext = this.format ?? 'jpeg';
+        const mime = blob.type ?? `image/${ext}`;
 
-interface ImageProps {
-    base64String?: string;
-    dataUrl?: string;
-    path?: string;
-    webPath?: string;
-    exif?: any;
-    format: string;
-    saved: boolean;
+        return new File([blob], `image.${ext}`, { type: mime });
+    }
 }

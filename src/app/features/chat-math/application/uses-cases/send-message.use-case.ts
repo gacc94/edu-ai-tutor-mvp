@@ -1,12 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
 import { ChatRepository } from '@features/chat-math/domain/repositories/chat.repository';
 import { HTTP_CHAT_REPOSITORY } from '@features/chat-math/infrastructure/providers/provider';
 import { MESSAGES_STATE } from '@features/chat-math/application/states/states';
 import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
-import { MessageState } from '../states/interfaces/message.state';
-import { MessageStateAdapter } from '../adapters/message-state.adapter';
+import { Message } from '@features/chat-math/domain/entities/message.entity';
+import { MessageMapper } from '../mappers/message.mapper';
+import { MessageState } from '../states/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class SendMessageUseCase {
@@ -20,10 +20,8 @@ export class SendMessageUseCase {
 
         const aiMessage = MessageFactory.createAiMessage(response);
 
-        const messageState = MessageStateAdapter.adapt(aiMessage);
+        const aiMessageState = MessageMapper.toState(aiMessage);
 
-        const messages = this._messagesState.$state() ?? [];
-
-        await this._messagesState.save([...messages, messageState]);
+        await this._messagesState.save([...(this._messagesState.$state() ?? []), aiMessageState]);
     }
 }

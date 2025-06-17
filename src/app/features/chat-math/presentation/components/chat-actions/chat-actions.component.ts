@@ -1,14 +1,16 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, input, signal } from '@angular/core';
 import { Share } from '@capacitor/share';
-import { IonButton, IonIcon, isPlatform } from '@ionic/angular/standalone';
+import { IonButton, IonIcon, IonLoading, isPlatform } from '@ionic/angular/standalone';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { Clipboard } from '@capacitor/clipboard';
 import { DURATION_MS_TOAST, TEXT_WEB_SHARE_API_NOT_AVAILABLE, TEXT_COPY_TO_CLIPBOARD } from '@shared/utils/constants/';
+import html2canvas from 'html2canvas-pro';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 @Component({
     selector: 'app-chat-actions',
     template: `
-        <div class="chat__actions">
+        <div class="chat__actions" [id]="'chat__item__share-button-' + this.id()">
             <ion-button expand="full" fill="clear" size="small" (click)="handleCopyToClipboard()">
                 <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
             </ion-button>
@@ -19,13 +21,16 @@ import { DURATION_MS_TOAST, TEXT_WEB_SHARE_API_NOT_AVAILABLE, TEXT_COPY_TO_CLIPB
                 <ion-icon slot="icon-only" name="download-outline"></ion-icon>
             </ion-button>
         </div>
+        <ion-loading mode="ios" [isOpen]="isLoading()" [message]="'Procesando...'"></ion-loading>
     `,
     styleUrls: ['./chat-actions.component.scss'],
-    imports: [IonButton, IonIcon],
+    imports: [IonButton, IonIcon, IonLoading],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatActionsComponent {
     content = input.required<string>();
+    id = input.required<string>();
+    isLoading = signal<boolean>(false);
 
     constructor(private readonly _utilsService: IonicUtilsService) {}
 
@@ -43,18 +48,49 @@ export class ChatActionsComponent {
     }
 
     async handleShareMessage(): Promise<void> {
+        this.isLoading.set(true);
+
         const { value } = await Share.canShare();
         if (!value) {
-            this._utilsService.presentToast({
-                message: TEXT_WEB_SHARE_API_NOT_AVAILABLE,
-                duration: DURATION_MS_TOAST,
-            });
+            this._utilsService.presentToast({ message: TEXT_WEB_SHARE_API_NOT_AVAILABLE, duration: DURATION_MS_TOAST });
             return;
         }
+
+        const element = document.getElementById('chat__item__markdown-' + this.id())!;
+
+        const rect = element.getBoundingClientRect();
+        const elementWidth = rect.width;
+        const elementHeight = rect.height;
+
+        const scale = 1920 / Math.max(elementWidth, elementHeight);
+
+        const canvas = await html2canvas(element, {
+            useCORS: true,
+            scale: scale,
+            backgroundColor: '#1e2a47',
+            logging: false,
+            allowTaint: true,
+
+            height: elementHeight,
+            width: elementWidth,
+            removeContainer: true,
+        });
+
+        const base64Data = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
+        const fileName = `solucion_${new Date().getTime()}.png`;
+
+        const { uri } = await Filesystem.writeFile({
+            path: fileName,
+            data: base64Data,
+            directory: Directory.Cache,
+        });
+        this.isLoading.set(false);
+
         await Share.share({
-            title: 'AI Tutor Response',
-            text: this.content(),
-            dialogTitle: 'Compartir respuesta',
+            title: 'Solución de EduAI Tutor',
+            text: '¡Resolví este problema matemático con EduAI Tutor!',
+            url: uri,
+            dialogTitle: 'Compartir solución',
         });
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, input, output } from '@angular/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
-import { Image } from '@features/chat-math/domain/entities/image.entity';
+import { ImageState } from '@features/chat-math/application/states/interfaces/image.state';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { ModalImagePreviewComponent } from '../modal-image-preview/modal-image-preview.component';
 
@@ -24,7 +24,7 @@ import { ModalImagePreviewComponent } from '../modal-image-preview/modal-image-p
     styleUrls: ['./footer-preview.component.scss'],
 })
 export class FooterPreviewComponent implements OnInit {
-    selectedImages = input.required<Array<Image>>();
+    selectedImages = input.required<Array<ImageState>>();
     removeImage = output<number>();
 
     constructor(private readonly _ionicUtilsService: IonicUtilsService) {}

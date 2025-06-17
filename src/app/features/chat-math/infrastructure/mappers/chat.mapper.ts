@@ -1,3 +1,4 @@
+import { MessageState } from '@features/chat-math/application/states/interfaces';
 import { ChatRequest, ChatRequestDto } from '../dtos/chat-request.dto';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
 
@@ -15,9 +16,11 @@ export class ChatMapper {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('prompt', content);
-        files.forEach((file) => {
-            formData.append(`files`, file, file.name);
-        });
+        if (files.length > 0) {
+            files.forEach((file) => {
+                formData.append(`files`, file, file.name);
+            });
+        }
         return formData;
     }
 }

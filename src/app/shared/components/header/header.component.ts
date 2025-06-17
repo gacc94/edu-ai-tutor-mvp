@@ -16,13 +16,13 @@ import { Router } from '@angular/router';
                 }
                 <div class="header__wrapper">
                     <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
-                    <ion-title class="header__title">{{ title() }}</ion-title>
+                    <ion-title class="header__title">{{ 'EduAI Tutor' }}</ion-title>
                 </div>
-                <ion-buttons slot="end">
+                <!-- <ion-buttons slot="end">
                     <ion-button (click)="logout()">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </ion-button>
-                </ion-buttons>
+                </ion-buttons> -->
             </ion-toolbar>
         </ion-header>
     `,

@@ -13,13 +13,22 @@ import { KatexOptions, MarkdownComponent } from 'ngx-markdown';
                 @if (message().images?.length) {
                 <div class="chat__images">
                     @for (image of message().images; track $index) {
-                    <ion-img [src]="image.webPath" class="chat__image"></ion-img>
+                    <ion-img
+                        [src]="image.webPath"
+                        class="chat__image"
+                        (error)="(null)"
+                        (load)="(null)"
+                        [alt]="image"
+                        aria-label="image"
+                    ></ion-img>
                     }
                 </div>
                 }
-                <markdown [katex]="true" [katexOptions]="katexOptions()" [data]="message().content"></markdown>
+                <div [attr.id]="'chat__item__markdown-' + message().id">
+                    <markdown [katex]="true" [katexOptions]="katexOptions()" [data]="message().content"></markdown>
+                </div>
                 @if (message().isAi) {
-                <app-chat-actions [content]="message().content"></app-chat-actions>
+                <app-chat-actions [content]="message().content" [id]="message().id"></app-chat-actions>
                 }
             </div>
         </ion-item>

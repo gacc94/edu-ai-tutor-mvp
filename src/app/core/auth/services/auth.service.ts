@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+import { Auth, getAdditionalUserInfo, GoogleAuthProvider, signInWithPopup, UserCredential } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root',
@@ -10,9 +10,13 @@ export class AuthService {
 
     async signInWithGoogle() {
         try {
-            const result = await signInWithPopup(this.#auth, this.#googleProvider);
+            const result: UserCredential = await signInWithPopup(this.#auth, this.#googleProvider);
             const user = result.user;
-            const [token, tokenResult] = await Promise.all([user.getIdToken(), user.getIdTokenResult()]);
+            console.log({ toJson: user.toJSON() });
+            const [token, tokenResult] = await Promise.all([user.getIdToken(true), user.getIdTokenResult(true)]);
+
+            const resp = getAdditionalUserInfo(result);
+            console.log({ resp });
             return { token, tokenResult, user };
         } catch (error) {
             console.error('Google sign-in error:', error);

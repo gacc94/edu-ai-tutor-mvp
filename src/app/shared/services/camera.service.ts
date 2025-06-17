@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { Image } from '@features/chat-math/domain/entities/image.entity';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CameraService {
-    async takePicture(source: CameraSource) {
+    async takePicture(source: CameraSource): Promise<Photo> {
         const image = await Camera.getPhoto({
             quality: 90,
             // allowEditing: true,
@@ -38,6 +38,11 @@ export class CameraService {
         return await response.blob();
     }
 
+    /**
+     * Converts an array of Image entities to an array of File objects
+     * @param images
+     * @returns
+     */
     async imagesToFiles(images: Image[]): Promise<File[]> {
         return await Promise.all(images.map((image) => this.imageToFile(image)));
     }

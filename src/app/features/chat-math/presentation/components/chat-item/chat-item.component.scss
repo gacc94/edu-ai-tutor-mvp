@@ -29,7 +29,6 @@
         font-size: var(--normal-font-size);
         line-height: 1.5;
         white-space: pre-wrap; // Preserve line breaks in messages
-        max-width: 80%; // Allow slightly wider bubbles
         word-wrap: break-word; // Ensure long words break
         border-radius: var(--border-radius-md);
         padding: var(--spacing-sm) var(--size-sm); // Adjusted padding
@@ -45,6 +44,7 @@
             background-color: var(--color-primary);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-white);
+            max-width: 80%;
         }
 
         &--ai {
@@ -52,6 +52,8 @@
             background: var(--gradient-bg-ai);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-text);
+            max-width: 100%;
+            font-size: var(--small-font-size);
         }
     }
 
@@ -68,4 +70,9 @@
         overflow: hidden;
         border-radius: var(--border-radius-sm);
     }
+}
+
+.hdr-look {
+    padding: var(--spacing-xs);
+    font-display: swap;
 }

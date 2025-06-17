@@ -8,15 +8,20 @@
             <div class="login__welcome">
                 <h1 class="login__title">Bienvenido a</h1>
                 <h2 class="login__subtitle">EduAiTutor</h2>
-                <p class="login__description">comienza a aprender con tu tutor de matemáticas AI ahora</p>
+                <p class="login__description">comienza a aprender con tu tutor AI ahora</p>
             </div>
 
-            <button class="login__button login__button--google" (click)="loginWithGoogle()" [disabled]="isLoading">
+            <button
+                type="button"
+                class="login__button login__button--google"
+                (click)="loginWithGoogle()"
+                [disabled]="isLoading"
+            >
                 @if (isLoading) {
                 <ion-spinner name="dots"></ion-spinner>
                 } @if (!isLoading) {
-                <div class="login__button-content">
-                    <div class="login__google-icon-wrapper">
+                <span class="login__button-content">
+                    <span class="login__google-icon-wrapper">
                         <svg class="login__google-icon" viewBox="0 0 48 48">
                             <path
                                 fill="#EA4335"
@@ -36,9 +41,9 @@
                             ></path>
                             <path fill="none" d="M0 0h48v48H0z"></path>
                         </svg>
-                    </div>
+                    </span>
                     <span>Iniciar sesión</span>
-                </div>
+                </span>
                 }
             </button>
         </div>

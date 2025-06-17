@@ -1,6 +1,6 @@
 import { IEnvironment } from './ienvironment';
 
-const GEMINI_BASE_URL = 'http://localhost:3500';
+const GEMINI_BASE_URL = 'https://edu-ai-tutor-644032611464.us-central1.run.app';
 const GEMINI_API_URL = `${GEMINI_BASE_URL}/api/v1`;
 
 export const environment: IEnvironment = {

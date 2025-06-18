@@ -1,28 +1,158 @@
 @use "mixins";
 
 .header {
-    &__toolbar {
-        text-align: center;
-        font-weight: var(--font-medium);
-        padding: 0;
-        color: var(--color-text);
+    --background: var(--color-bg-dark);
+    --color: var(--color-white);
+    --border-color: var(--color-border);
+
+    &::after {
+        background: var(--gradient-primary);
     }
 
-    &__wrapper {
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
-        gap: 0.5rem;
-        align-items: center;
+    &__toolbar {
+        --background: transparent;
+        --color: var(--color-white);
+        --border-color: transparent;
+        --padding-start: var(--spacing-sm);
+        --padding-end: var(--spacing-sm);
+
+        min-height: 3.5rem;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--color-border) 20%,
+                var(--color-border) 80%,
+                transparent 100%
+            );
+        }
+    }
+
+    &__buttons {
+        @include mixins.flex(row, center, center, nowrap, var(--spacing-xs));
+    }
+
+    &__back-button {
+        --color: var(--color-text);
+        --padding-start: 0;
+        --padding-end: var(--spacing-xs);
+
+        ion-icon {
+            font-size: var(--size-md);
+        }
+
+        &:hover {
+            --color: var(--color-primary);
+        }
     }
 
     &__title {
-        font-size: var(--h3-font-size);
-        font-weight: var(--font-bold);
+        @include mixins.flex(column, center, center);
+
+        &-content {
+            @include mixins.flex(column, center, center);
+            text-align: center;
+        }
+
+        &-text {
+            font-size: var(--h3-font-size);
+            font-weight: var(--font-semi-bold);
+            color: var(--color-white);
+            line-height: 1.2;
+
+            @media (max-width: 480px) {
+                font-size: var(--normal-font-size);
+            }
+        }
     }
 
-    & ion-img {
-        width: 2rem;
-        height: 2rem;
+    &__subtitle {
+        font-size: var(--small-font-size);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-regular);
+        margin-top: 2px;
+        line-height: 1;
+
+        @media (max-width: 480px) {
+            font-size: var(--smaller-font-size);
+        }
+    }
+
+    &__credits {
+        margin-right: var(--spacing-xs);
+
+        @media (max-width: 480px) {
+            margin-right: var(--spacing-xxs);
+        }
+    }
+
+    &__menu-button {
+        --color: var(--color-text);
+        --padding-start: var(--spacing-xs);
+        --padding-end: 0;
+
+        ion-icon {
+            font-size: var(--size-md);
+        }
+
+        &:hover {
+            --color: var(--color-primary);
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .header {
+        &__toolbar {
+            --padding-start: var(--spacing-xs);
+            --padding-end: var(--spacing-xs);
+            min-height: 3rem;
+        }
+
+        &__buttons {
+            gap: var(--spacing-xxs);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        &__toolbar {
+            min-height: 2.8rem;
+        }
+
+        &__title-text {
+            font-size: var(--normal-font-size);
+        }
+
+        &__subtitle {
+            font-size: var(--smallest-font-size);
+        }
+    }
+}
+
+// Animaciones y efectos
+.header__toolbar {
+    transition: var(--transition-main);
+
+    &:hover {
+        &::before {
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--color-primary) 20%,
+                var(--color-primary) 80%,
+                transparent 100%
+            );
+        }
     }
 }

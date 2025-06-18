@@ -1,0 +1,162 @@
+@use "mixins";
+
+.credits-counter {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__button {
+        --padding-start: var(--spacing-xs);
+        --padding-end: var(--spacing-xs);
+        --padding-top: var(--spacing-xs);
+        --padding-bottom: var(--spacing-xs);
+        --border-radius: var(--border-radius-lg);
+        --background: var(--color-bg-card);
+        --color: var(--color-text);
+        --box-shadow: var(--box-shadow-light);
+
+        height: auto;
+        min-height: 2.5rem;
+        transition: var(--transition-main);
+
+        &:hover {
+            --background: var(--color-bg-light);
+            transform: translateY(-1px);
+        }
+    }
+
+    &__content {
+        @include mixins.flex(row, center, center, nowrap, var(--spacing-xs));
+        flex-direction: column;
+        min-width: 2.5rem;
+    }
+
+    &__icon {
+        font-size: var(--size-md);
+        color: var(--color-primary);
+        transition: var(--transition-main);
+
+        &--pulse {
+            // @include mixins.pulse();
+            color: var(--color-accent);
+        }
+    }
+
+    &__text {
+        font-size: var(--small-font-size);
+        font-weight: var(--font-semi-bold);
+        color: var(--color-text);
+        line-height: 1;
+        margin-top: 2px;
+    }
+
+    &__progress {
+        position: absolute;
+        bottom: 2px;
+        left: 4px;
+        right: 4px;
+        height: 2px;
+        background-color: var(--color-bg-light);
+        border-radius: var(--border-radius-xs);
+        overflow: hidden;
+
+        &-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-xs);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    }
+
+    &__badge {
+        position: absolute;
+        top: -4px;
+        right: -8px;
+        font-size: var(--smallest-font-size);
+        padding: 2px 6px;
+        border-radius: var(--border-radius-sm);
+        z-index: 1;
+
+        &[color="warning"] {
+            --background: var(--color-accent);
+            --color: var(--color-white);
+            animation: pulse 2s infinite;
+        }
+
+        &[color="danger"] {
+            --background: #ff4757;
+            --color: var(--color-white);
+            animation: shake 0.5s ease-in-out infinite alternate;
+        }
+    }
+
+    // Estados del contador
+    &--low {
+        .credits-counter__button {
+            --background: rgba(72, 149, 239, 0.1);
+            --box-shadow: 0 0 0 1px rgba(72, 149, 239, 0.3);
+        }
+
+        .credits-counter__progress-fill {
+            background: var(--gradient-accent);
+        }
+    }
+
+    &--empty {
+        .credits-counter__button {
+            --background: rgba(255, 71, 87, 0.1);
+            --box-shadow: 0 0 0 1px rgba(255, 71, 87, 0.3);
+        }
+
+        .credits-counter__icon {
+            color: #ff4757;
+        }
+
+        .credits-counter__text {
+            color: #ff4757;
+        }
+
+        .credits-counter__progress-fill {
+            background: #ff4757;
+        }
+    }
+}
+
+// Animaciones adicionales
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(2px);
+    }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+    .credits-counter {
+        &__content {
+            min-width: 2rem;
+        }
+
+        &__icon {
+            font-size: var(--size-sm);
+        }
+
+        &__text {
+            font-size: var(--smallest-font-size);
+        }
+    }
+}

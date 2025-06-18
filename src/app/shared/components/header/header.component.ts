@@ -1,44 +1,63 @@
-import { Component, input, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } from '@ionic/angular/standalone';
-import { IStateRegister } from '@shared/storage/interfaces/state-register.interface';
-import { STATE_REGISTER_TOKEN } from '@shared/storage/providers/storage.provider';
-import { Router } from '@angular/router';
+import { Component, input } from '@angular/core';
+import {
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonBackButton,
+} from '@ionic/angular/standalone';
+import { CreditsCounterComponent } from '../credits-counter/credits-counter.component';
 
 @Component({
     selector: 'app-header',
     template: `
-        <ion-header class="header">
+        <ion-header [translucent]="true" class="header">
             <ion-toolbar class="header__toolbar">
-                @if (showBackButton()) {
-                <ion-buttons slot="start">
-                    <ion-back-button class="header__back-button" defaultHref="/home"></ion-back-button>
+                <ion-buttons slot="start" class="header__buttons">
+                    @if (showBackButton()) {
+                    <ion-back-button class="header__back-button" defaultHref="/" [text]="''">
+                        <ion-icon name="chevron-back-outline"></ion-icon>
+                    </ion-back-button>
+                    }
                 </ion-buttons>
-                }
-                <div class="header__wrapper">
-                    <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
-                    <ion-title class="header__title">{{ 'EduAI Tutor' }}</ion-title>
-                </div>
-                <!-- <ion-buttons slot="end">
-                    <ion-button (click)="logout()">
-                        <ion-icon name="log-out-outline"></ion-icon>
+
+                <ion-title class="header__title">
+                    <div class="header__title-content">
+                        <span class="header__title-text">{{ title() }}</span>
+                        @if (showSubtitle()) {
+                        <span class="header__subtitle">{{ subtitle() }}</span>
+                        }
+                    </div>
+                </ion-title>
+
+                <ion-buttons slot="end" class="header__buttons">
+                    @if (showCredits()) {
+                    <app-credits-counter class="header__credits"></app-credits-counter>
+                    } @if (showMenuButton()) {
+                    <ion-button fill="clear" class="header__menu-button" (click)="onMenuClick()">
+                        <ion-icon name="menu-outline"></ion-icon>
                     </ion-button>
-                </ion-buttons> -->
+                    }
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
     `,
     styleUrls: ['./header.component.scss'],
-    imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonImg],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonBackButton, CreditsCounterComponent],
+    standalone: true,
 })
 export class HeaderComponent {
-    title = input.required<string>();
-    showBackButton = input.required<boolean>({ alias: 'show-back-button' });
+    title = input<string>('EduAI Tutor');
+    subtitle = input<string>('');
+    showBackButton = input<boolean>(false);
+    showMenuButton = input<boolean>(true);
+    showCredits = input<boolean>(true);
+    showSubtitle = input<boolean>(false);
 
-    constructor(@Inject(STATE_REGISTER_TOKEN) private register: IStateRegister, private router: Router) {}
-
-    async logout() {
-        await this.register.clearAll();
-        this.router.navigate(['/auth']);
+    onMenuClick(): void {
+        // Implementar lógica del menú si es necesario
+        console.log('Menu clicked');
     }
 }

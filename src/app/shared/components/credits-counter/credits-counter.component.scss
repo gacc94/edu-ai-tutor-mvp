@@ -1,0 +1,158 @@
+@use "../../../assets/scss/config/variables";
+@use "../../../assets/scss/config/mixins";
+@use "../../../assets/scss/config/animations-mixins";
+
+.credits-counter {
+    @include mixins.flex(row, space-between, center, nowrap, var(--spacing-xs));
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-lg);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    transition: var(--transition-main);
+    cursor: pointer;
+    min-width: 120px;
+
+    &:hover {
+        background: var(--color-bg-light);
+        border-color: var(--color-primary);
+        transform: translateY(-1px);
+        box-shadow: var(--box-shadow-light);
+    }
+
+    &--low {
+        border-color: var(--color-warning);
+        background: rgba(255, 193, 7, 0.1);
+
+        .credits-counter__icon {
+            color: var(--color-warning);
+        }
+    }
+
+    &--empty {
+        border-color: var(--color-danger);
+        background: rgba(220, 53, 69, 0.1);
+
+        .credits-counter__icon {
+            color: var(--color-danger);
+        }
+    }
+
+    &__wrapper {
+        @include mixins.flex(row, flex-start, center, nowrap, var(--spacing-xs));
+        flex: 1;
+    }
+
+    &__icon-container {
+        position: relative;
+        @include mixins.flex-center;
+    }
+
+    &__icon {
+        font-size: var(--size-lg);
+        color: var(--color-primary);
+        transition: var(--transition-main);
+
+        &--pulse {
+            @include animations-mixins.pulse(1.5s);
+        }
+    }
+
+    &__badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        font-size: var(--smallest-font-size);
+        min-width: 18px;
+        height: 18px;
+        border-radius: var(--border-radius-circle);
+        @include mixins.flex-center;
+        font-weight: var(--font-semi-bold);
+    }
+
+    &__info {
+        @include mixins.flex(column, flex-start, flex-start, nowrap, 2px);
+        flex: 1;
+    }
+
+    &__text {
+        font-size: var(--smallest-font-size);
+        color: var(--color-text-muted);
+        font-weight: var(--font-medium);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    &__progress-container {
+        @include mixins.flex(column, flex-start, flex-start, nowrap, 2px);
+        width: 100%;
+    }
+
+    &__progress {
+        width: 100%;
+        height: 4px;
+        border-radius: var(--border-radius-xs);
+
+        &::part(track) {
+            background: var(--color-bg-light);
+        }
+    }
+
+    &__count {
+        font-size: var(--smallest-font-size);
+        color: var(--color-text-secondary);
+        font-weight: var(--font-semi-bold);
+        align-self: flex-end;
+    }
+
+    &__reset {
+        --color: var(--color-primary);
+        --padding-start: var(--spacing-xs);
+        --padding-end: var(--spacing-xs);
+        margin: 0;
+
+        &:hover {
+            --color: var(--color-primary-dark);
+        }
+    }
+
+    // Responsive adjustments
+    @media (max-width: 480px) {
+        min-width: 100px;
+        padding: var(--spacing-xs);
+
+        &__text {
+            font-size: var(--smallest-font-size-2);
+        }
+
+        &__count {
+            font-size: var(--smallest-font-size-2);
+        }
+
+        &__icon {
+            font-size: var(--size-md-lg);
+        }
+    }
+
+    // Animation for state changes
+    &.credits-counter--low,
+    &.credits-counter--empty {
+        @include animations-mixins.fadeIn(0.3s);
+    }
+}
+
+// Additional animations for low credits warning
+@keyframes creditsPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.credits-counter--low .credits-counter__icon--pulse {
+    animation: creditsPulse 2s ease-in-out infinite;
+}

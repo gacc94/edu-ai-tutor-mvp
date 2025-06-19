@@ -35,6 +35,12 @@
     --button-text: #fff;
     --button-radius: 1.5rem;
 
+    /*========== ESTADOS Y ALERTAS ==========*/
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-info: #17a2b8;
+
     /*========== GRADIENTES ==========*/
     --gradient-primary: linear-gradient(90deg, #4361ee 0%, #3a56d4 100%);
     --gradient-accent: linear-gradient(90deg, #4361ee 0%, #4895ef 100%);
@@ -64,7 +70,35 @@
     --box-shadow-main: 0 4px 24px rgba(67, 97, 238, 0.18);
     --font-family-alt: "Roboto", sans-serif;
     --box-shadow-light: 0 2px 10px rgba(67, 97, 238, 0.12);
-    --box-shadow-card: 0 8px 20px rgba(10, 14, 26, 0.5);
+
+    /*========== Colores de tarjetas ==========*/
+    --card-bg-dark: #1e2235;
+    --card-bg-darker: #171b2c;
+    --card-border: #2a2e45;
+    --card-highlight: rgba(67, 97, 238, 0.1);
+
+    /*========== Colores de navegación ==========*/
+    --nav-bg: #0a0e1a;
+    --nav-item-bg: #1e2235;
+    --nav-item-active: #4361ee;
+    --nav-item-text: #6c7293;
+    --nav-item-text-active: #ffffff;
+
+    /*========== Colores específicos de la aplicación ==========*/
+    --feature-card-purple: #8a3ffc;
+    --feature-card-blue: #4361ee;
+    --tab-bg: #1e2235;
+    --tab-active-bg: #4361ee;
+    --tab-text: #6c7293;
+    --tab-active-text: #ffffff;
+    --header-bg: #0a0e1a;
+    --logo-bg: #4361ee;
+
+    /*========== Android Safe Area ==========*/
+    --android-status-bar-height: env(safe-area-inset-top);
+    --android-navigation-bar-height: env(safe-area-inset-bottom);
+    --safe-area-top: max(var(--android-status-bar-height), 24px);
+    --safe-area-bottom: max(var(--android-navigation-bar-height), 48px);
 
     /*========== Typography ==========*/
     --font-family-main: "Poppins", sans-serif;
@@ -77,6 +111,7 @@
     --font-regular: 400;
     --font-medium: 500;
     --font-semi-bold: 600;
+    --font-bold: 700;
 
     /*========== Spacing ==========*/
     --spacing-xs: 4px;
@@ -128,33 +163,4 @@
     --icon-purple: #8a3ffc;
     --icon-bg-blue: rgba(67, 97, 238, 0.15);
     --icon-bg-purple: rgba(114, 9, 183, 0.15);
-
-    /*========== Colores de tarjetas ==========*/
-    --card-bg-dark: #1e2235;
-    --card-bg-darker: #171b2c;
-    --card-border: #2a2e45;
-    --card-highlight: rgba(67, 97, 238, 0.1);
-
-    /*========== Colores de navegación ==========*/
-    --nav-bg: #0a0e1a;
-    --nav-item-bg: #1e2235;
-    --nav-item-active: #4361ee;
-    --nav-item-text: #6c7293;
-    --nav-item-text-active: #ffffff;
-
-    /*========== Colores específicos de la aplicación ==========*/
-    --feature-card-purple: #8a3ffc;
-    --feature-card-blue: #4361ee;
-    --tab-bg: #1e2235;
-    --tab-active-bg: #4361ee;
-    --tab-text: #6c7293;
-    --tab-active-text: #ffffff;
-    --header-bg: #0a0e1a;
-    --logo-bg: #4361ee;
-
-    /*========== Android Safe Area ==========*/
-    --android-status-bar-height: env(safe-area-inset-top);
-    --android-navigation-bar-height: env(safe-area-inset-bottom);
-    --safe-area-top: max(var(--android-status-bar-height), 24px);
-    --safe-area-bottom: max(var(--android-navigation-bar-height), 48px);
 }

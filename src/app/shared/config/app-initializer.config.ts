@@ -1,94 +1,29 @@
-import { EnvironmentProviders, provideAppInitializer } from '@angular/core';
-import { addIcons } from 'ionicons';
-import {
-    logoIonic,
-    home,
-    flashOutline,
-    searchOutline,
-    bulbOutline,
-    personOutline,
-    helpCircleOutline,
-    notificationsOutline,
-    pulseOutline,
-    desktopOutline,
-    analyticsOutline,
-    starOutline,
-    warningOutline,
-    chatbubbleEllipses,
-    gridOutline,
-    createOutline,
-    chatboxEllipsesOutline,
-    timeOutline,
-    chatbubbleOutline,
-    imageOutline,
-    chatbubblesOutline,
-    chatboxEllipses,
-    grid,
-    time,
-    person,
-    closeOutline,
-    arrowBackOutline,
-    cameraOutline,
-    paperPlaneOutline,
-    cogOutline,
-    happyOutline,
-    imagesOutline,
-    closeCircleOutline,
-    closeCircle,
-    attachOutline,
-    shareSocialOutline,
-    downloadOutline,
-    copyOutline,
-    logOutOutline,
-} from 'ionicons/icons';
-import { register } from 'swiper/element/bundle';
+import { APP_INITIALIZER, inject } from '@angular/core';
+import { AuthService } from '@core/auth/application/services/auth.service';
 
-/**
- * Initialize app initializers
- */
-export const appInitializerProviders: EnvironmentProviders[] = [
-    provideAppInitializer(() => {
-        register();
-        addIcons({
-            logoIonic,
-            home,
-            flashOutline,
-            searchOutline,
-            bulbOutline,
-            personOutline,
-            helpCircleOutline,
-            notificationsOutline,
-            pulseOutline,
-            desktopOutline,
-            analyticsOutline,
-            starOutline,
-            warningOutline,
-            chatbubbleEllipses,
-            gridOutline,
-            createOutline,
-            chatboxEllipsesOutline,
-            timeOutline,
-            chatbubbleOutline,
-            imageOutline,
-            chatbubblesOutline,
-            chatboxEllipses,
-            grid,
-            time,
-            person,
-            closeOutline,
-            arrowBackOutline,
-            cameraOutline,
-            paperPlaneOutline,
-            cogOutline,
-            happyOutline,
-            imagesOutline,
-            closeCircleOutline,
-            closeCircle,
-            attachOutline,
-            shareSocialOutline,
-            downloadOutline,
-            copyOutline,
-            logOutOutline,
+export function initializeApp() {
+    const authService = inject(AuthService);
+
+    return () => {
+        return new Promise<void>((resolve) => {
+            // Check current user on app startup
+            authService
+                .getCurrentUser()
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    console.error('App initialization error:', error);
+                    resolve(); // Continue app startup even if auth check fails
+                });
         });
-    }),
+    };
+}
+
+export const appInitializerProviders = [
+    {
+        provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        multi: true,
+    },
 ];

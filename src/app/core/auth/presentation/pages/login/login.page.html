@@ -15,11 +15,12 @@
                 type="button"
                 class="login__button login__button--google"
                 (click)="loginWithGoogle()"
-                [disabled]="isLoading"
+                [disabled]="isLoading()"
+                [class.login__button--loading]="isLoading()"
             >
-                @if (isLoading) {
-                <ion-spinner name="dots"></ion-spinner>
-                } @if (!isLoading) {
+                @if (isLoading()) {
+                <ion-spinner name="dots" class="login__spinner"></ion-spinner>
+                } @else {
                 <span class="login__button-content">
                     <span class="login__google-icon-wrapper">
                         <svg class="login__google-icon" viewBox="0 0 48 48">
@@ -46,6 +47,21 @@
                 </span>
                 }
             </button>
+
+            @if (errorMessage()) {
+            <div class="login__error">
+                <p>{{ errorMessage() }}</p>
+            </div>
+            }
         </div>
     </div>
+
+    <ion-toast
+        [isOpen]="showToast()"
+        [message]="errorMessage() || ''"
+        duration="4000"
+        position="top"
+        color="danger"
+        (didDismiss)="onToastDismiss()"
+    ></ion-toast>
 </ion-content>

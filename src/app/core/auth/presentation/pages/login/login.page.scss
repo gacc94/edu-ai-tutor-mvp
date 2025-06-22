@@ -1,49 +1,54 @@
-/* login.page.scss - BEM y variables CSS */
+@use "../../../../../assets/scss/config/variables";
+@use "../../../../../assets/scss/config/mixins";
+@use "../../../../../assets/scss/config/animations-mixins";
 
 .login {
     &__container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex(column, center, center);
         min-height: 100vh;
         background-color: var(--color-bg-main);
         padding: var(--spacing-lg);
     }
 
     &__content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include mixins.flex(column, center, center, nowrap, var(--spacing-lg));
         width: 100%;
         max-width: 320px;
+        @include animations-mixins.fadeInUp(0.6s);
     }
 
     &__logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include mixins.flex-center;
         width: 14rem;
         height: 14rem;
-        background-color: var(--color-primary-dark); /* Color azul oscuro que coincide con la imagen del robot */
-        border-radius: 50%;
-        margin-bottom: var(--spacing-xl);
+        background: var(--gradient-primary);
+        border-radius: var(--border-radius-circle);
         box-shadow: var(--box-shadow-main);
         overflow: hidden;
         position: relative;
-        z-index: 3;
+        transition: var(--transition-main);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(67, 97, 238, 0.25);
+        }
     }
 
     &__logo {
         height: 85%;
         width: 85%;
         object-fit: contain;
-        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        transition: var(--transition-main);
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 
     &__welcome {
         text-align: center;
-        margin-bottom: var(--spacing-xl);
+        @include mixins.flex(column, center, center, nowrap, var(--spacing-xs));
     }
 
     &__title {
@@ -51,7 +56,7 @@
         font-family: var(--font-family-main);
         font-size: var(--h2-font-size);
         font-weight: var(--font-medium);
-        margin: 0 0 var(--spacing-xs);
+        margin: 0;
     }
 
     &__subtitle {

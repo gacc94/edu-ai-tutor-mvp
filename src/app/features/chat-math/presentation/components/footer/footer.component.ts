@@ -1,26 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonFooter, IonInput, IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
-import { CameraService } from '@shared/services/camera.service';
+import { IonFooter, IonInput, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { CameraSource } from '@capacitor/camera';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
-import {
-    MESSAGES_STATE,
-    IMAGES_SELECTED_STATE,
-    IMAGES_SELECTED_AS_FILES_STATE,
-} from '@features/chat-math/application/states/chat-math.state';
-import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
+import { IMAGES_SELECTED_STATE } from '@features/chat-math/application/states/states';
 import { Inject } from '@angular/core';
-import { Image } from '@features/chat-math/domain/entities/image.entity';
-import { MessageState } from '@features/chat-math/application/states/interfaces/chat-math.state.interface';
-import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { FooterPreviewComponent } from '../footer-preview/footer-preview.component';
+import { ChatService } from '@features/chat-math/application/services/chat.service';
+import { ImageState } from '@features/chat-math/application/states/interfaces';
 
 @Component({
     selector: 'app-footer',
     template: `
         <ion-footer class="footer">
+            @let selectedImages = $selectedImages() ?? [];
+            <!--  -->
             @if (selectedImages.length > 0) {
             <app-footer-preview
                 [selectedImages]="selectedImages"
@@ -31,7 +27,11 @@ import { FooterPreviewComponent } from '../footer-preview/footer-preview.compone
                 <ion-button (click)="openImageOptions()">
                     <ion-icon slot="icon-only" name="attach-outline"></ion-icon>
                 </ion-button>
-                <ion-input class="footer__input" placeholder="Escribe mensaje" [formControl]="control"></ion-input>
+                <ion-input
+                    class="footer__input"
+                    placeholder="Escribe tu problema o adjunta imágenes"
+                    [formControl]="control"
+                ></ion-input>
                 <ion-button type="button" (click)="sendMessage()" [disabled]="isDisabled">
                     <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
                 </ion-button>
@@ -46,48 +46,35 @@ export class FooterComponent {
     control = this._formBuilder.control('', { nonNullable: true, validators: [Validators.required] });
 
     $selectedImages = this._imagesSelectedState.$state;
-    $selectedImagesAsFiles = this._imagesSelectedAsFilesState.$state;
 
     onSendMessage = output<Message>();
 
     constructor(
         private _formBuilder: FormBuilder,
-        private _cameraService: CameraService,
         private _ionicUtilsService: IonicUtilsService,
-        @Inject(MESSAGES_STATE) private _messagesState: StateStorage<Array<MessageState>>,
-        @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: StateStorage<Array<Image>>,
-        @Inject(IMAGES_SELECTED_AS_FILES_STATE) private _imagesSelectedAsFilesState: StateStorage<Array<File>>
+        private _chatService: ChatService,
+        @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: IStateStorage<ImageState[]>
     ) {}
 
     get isDisabled(): boolean {
-        return !this.control?.valid || this.selectedImages.length === 0;
-    }
-
-    get selectedImages(): Array<Image> {
-        return this.$selectedImages() ?? [];
+        return !this.control?.valid || this.$selectedImages()?.length === 0;
     }
 
     async sendMessage() {
-        const images = this.selectedImages;
         const message = this.control.value.trim();
 
-        const userMessage = MessageFactory.createUserMessage(message, images);
-        const messages = this._messagesState.$state() ?? [];
-        this._messagesState.save([...messages, userMessage]);
-
-        const files = await this._cameraService.imagesToFiles(images);
-        this._imagesSelectedAsFilesState.save(files);
+        const userMessage = await this._chatService.prepareSendingMessage(message);
 
         this.onSendMessage.emit(userMessage);
         this._reset();
     }
 
     removeImage(index: number) {
-        const newImages = this.selectedImages.filter((_, i) => i !== index);
-        this._imagesSelectedState.save(newImages);
+        const newImages = this.$selectedImages()?.filter((_, i) => i !== index);
+        this._imagesSelectedState.save(newImages ?? []);
     }
 
-    async openImageOptions() {
+    async openImageOptions(): Promise<void> {
         await this._ionicUtilsService.presentActionSheet({
             id: 'action-sheet-picture',
             buttons: [
@@ -113,10 +100,8 @@ export class FooterComponent {
         });
     }
 
-    private async _takePicture(source: CameraSource) {
-        const image = await this._cameraService.takePicture(source);
-        const images = [...this.selectedImages, image];
-        this._imagesSelectedState.save(images);
+    private async _takePicture(source: CameraSource): Promise<void> {
+        await this._chatService.takePicture(source);
     }
 
     private _reset() {

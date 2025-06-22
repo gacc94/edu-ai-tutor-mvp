@@ -1,26 +1,28 @@
-import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { ChatRepository } from '@features/chat-math/domain/repositories/chat.repository';
-import { Injectable } from '@angular/core';
-import { environment } from '@envs/environment';
+import { Injectable, Inject } from '@angular/core';
 import { ChatMapper } from '../mappers/chat.mapper';
-import { IMAGES_SELECTED_AS_FILES_STATE } from '@features/chat-math/application/states/chat-math.state';
-import { Inject } from '@angular/core';
-import { StateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { IMAGES_SELECTED_AS_FILES_STATE } from '@features/chat-math/application/states/states';
+import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
+import { AppResponse } from '@shared/infrastructure/dtos/app-response.dto';
+import { ChatResponseDto } from '../dtos/chat-response.dto';
+import { environment } from '@envs/environment';
+import { Message } from '@features/chat-math/domain/entities/message.entity';
 
 @Injectable({ providedIn: 'root' })
 export class HttpChatRepository implements ChatRepository {
-    constructor(@Inject(IMAGES_SELECTED_AS_FILES_STATE) private readonly _chatState: StateStorage<Array<File>>) {}
+    private readonly _baseUrl: string = environment.apis.gemini.mathSolve;
+
+    constructor(@Inject(IMAGES_SELECTED_AS_FILES_STATE) private readonly _filesState: IStateStorage<File[]>) {}
 
     async sendMessage(message: Message): Promise<string> {
-        const files = this._chatState.$state() ?? [];
+        const files = this._filesState.$state() ?? [];
         const formData = ChatMapper.toFormData(message, files);
 
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(
-                    `La respuesta del ejercicio es un texto que describe como se resolvi o el ejercicio. Por ejemplo, si el ejercicio es "2 + 2" la respuesta sera "La respuesta del ejercicio es 4, que es el resultado de la suma de 2 + 2".`
-                );
-            }, 3000);
+        const response = await fetch(this._baseUrl, {
+            method: 'POST',
+            body: formData,
         });
+        const data = (await response.json()) as AppResponse<ChatResponseDto>;
+        return data.data.content;
     }
 }

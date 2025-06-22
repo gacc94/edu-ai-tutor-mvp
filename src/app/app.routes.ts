@@ -10,8 +10,8 @@ export const routes: Routes = [
         loadComponent: () => import('./features/home/home.page'),
     },
     {
-        path: 'chat-resolve-math',
-        loadComponent: () => import('./features/chat-math/presentation/pages/chat-math-solve/chat-math.page'),
+        path: 'chat-math',
+        loadComponent: () => import('./features/chat-math/presentation/pages/chat-math/chat-math.page'),
     },
     {
         path: '',

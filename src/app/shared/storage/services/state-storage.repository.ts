@@ -1,16 +1,17 @@
-import { Inject, Injectable, Optional, signal, Signal } from '@angular/core';
-import { StateStorage } from './interfaces/state-storage.interface';
-import { Storage } from './interfaces/storage.interface';
-import { STORAGE_TOKEN } from './providers/storage.provider';
+import { inject, Inject, Injectable, Optional, signal, Signal } from '@angular/core';
+import { IStateStorage } from '../interfaces/state-storage.interface';
+import { Storage } from '../interfaces/storage.interface';
+import { STATE_REGISTER_TOKEN, STORAGE_TOKEN, STORAGE_KEY } from '../providers/storage.provider';
+import { StateRegister } from '../services/state-register';
 
 @Injectable()
-export class StateStorageRepository<T> implements StateStorage<T> {
+export class StateStorageRepository<T> implements IStateStorage<T> {
     private readonly _state = signal<T | undefined>(undefined);
+    private readonly _register: StateRegister = inject(STATE_REGISTER_TOKEN);
+    private readonly _storage: Storage = inject(STORAGE_TOKEN);
 
-    constructor(
-        @Inject(STORAGE_TOKEN) private readonly _storage: Storage,
-        @Optional() @Inject('STORAGE_KEY') private readonly _storageKey?: string
-    ) {
+    constructor(@Optional() @Inject(STORAGE_KEY) private readonly _storageKey?: string) {
+        this._register.register(this);
         this._getStorage();
     }
 
@@ -18,12 +19,10 @@ export class StateStorageRepository<T> implements StateStorage<T> {
         return this._state.asReadonly();
     }
 
-    async save(value: T): Promise<T | undefined> {
+    async save(value: T): Promise<void> {
         this._state.set(value);
 
         if (this._storageKey) await this._storage.set(this._storageKey, JSON.stringify(value));
-
-        return value;
     }
 
     async clear(): Promise<void> {

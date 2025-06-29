@@ -15,11 +15,11 @@
                 type="button"
                 class="login__button login__button--google"
                 (click)="loginWithGoogle()"
-                [disabled]="isLoading"
+                [disabled]="isLoading()"
             >
-                @if (isLoading) {
+                @if (isLoading()) {
                 <ion-spinner name="dots"></ion-spinner>
-                } @if (!isLoading) {
+                } @if (!isLoading()) {
                 <span class="login__button-content">
                     <span class="login__google-icon-wrapper">
                         <svg class="login__google-icon" viewBox="0 0 48 48">

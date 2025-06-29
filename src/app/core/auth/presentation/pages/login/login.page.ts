@@ -1,10 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/auth/application/services/auth.service';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
-
-import { addIcons } from 'ionicons';
-import { logoGoogle } from 'ionicons/icons';
-import { AuthService } from '../../../services/auth.service';
+import { LoginService } from './login.service';
 
 @Component({
     selector: 'app-login',
@@ -13,38 +11,21 @@ import { AuthService } from '../../../services/auth.service';
     standalone: true,
     imports: [IonContent, IonSpinner],
 })
-export class LoginPage implements OnInit {
-    isLoading = false;
-    #authService = inject(AuthService);
+export class LoginPage {
+    isLoading = signal(false);
 
-    constructor(private router: Router) {
-        addIcons({
-            logoGoogle,
-        });
-    }
-
-    ngOnInit() {
-        // Inicialización si es necesaria
+    constructor(private _router: Router, private _authService: AuthService, private loginService: LoginService) {
+        const sum = this.loginService.suma(5, 10);
+        console.log('Resultado de la suma:', sum);
     }
 
     async loginWithGoogle() {
-        try {
-            this.isLoading = true;
-            // const result = await this.#authService.signInWithGoogle();
-            // console.log({ result });
-            setTimeout(() => {
-                this.isLoading = false;
-                this.router.navigate(['/home']);
-            }, 1500);
-        } catch (error) {
-            this.isLoading = false;
-            console.error('Google sign-in error:', error);
-        }
-    }
+        this.isLoading.set(true);
 
-    goToSignUp() {
-        // Navegar a la página de registro
-        console.log('Navegando a registro');
-        // this.router.navigate(['/register']);
+        const response = await this._authService.signInWithGoogle();
+        console.log({ response });
+
+        await this._router.navigate(['/home']);
+        this.isLoading.set(false);
     }
 }

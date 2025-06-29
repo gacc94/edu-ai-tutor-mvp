@@ -11,7 +11,7 @@
             "port": 9099
         },
         "firestore": {
-            "port": 9097
+            "port": 9092
         },
         "storage": {
             "port": 9096
@@ -24,13 +24,5 @@
             "port": 9098
         },
         "singleProjectMode": true
-    },
-    "functions": [
-        {
-            "source": "functions",
-            "codebase": "default",
-            "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log", "*.local"],
-            "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
-        }
-    ]
+    }
 }

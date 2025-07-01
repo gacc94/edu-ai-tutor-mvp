@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth/application/services/auth.service';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
-import { LoginService } from './login.service';
 
 @Component({
     selector: 'app-login',
@@ -14,10 +13,7 @@ import { LoginService } from './login.service';
 export class LoginPage {
     isLoading = signal(false);
 
-    constructor(private _router: Router, private _authService: AuthService, private loginService: LoginService) {
-        const sum = this.loginService.suma(5, 10);
-        console.log('Resultado de la suma:', sum);
-    }
+    constructor(private _router: Router, private _authService: AuthService) {}
 
     async loginWithGoogle() {
         this.isLoading.set(true);

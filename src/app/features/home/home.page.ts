@@ -1,11 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, linkedSignal, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { PlanPremiunComponent } from './components/plan-premiun/plan-premiun.component';
 import { ToolsComponent } from './components/tools/tools.component';
-import { DragonBallService } from 'src/app/shared/services/dragon-ball.service';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 
 @Component({
@@ -24,22 +23,5 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class HomePage {
-    #dbService = inject(DragonBallService);
-
-    title = 'EduAITutor';
-
-    $id = signal<number>(1);
-
-    charactersRes = this.#dbService.getOne(this.$id);
-
-    character = linkedSignal(() => this.charactersRes);
-
-    nextCharacter() {
-        this.$id.update((num) => num + 1);
-    }
-
-    previusCharacter() {
-        if (this.$id() === 0) return;
-        this.$id.update((num) => num - 1);
-    }
+    title = 'EduAiTutor';
 }

@@ -27,10 +27,10 @@ const authApp = () => {
         popupRedirectResolver: browserPopupRedirectResolver,
     });
 
-    if (isDevMode()) {
-        // TODO: Configure the emulator for authentication
-        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
-    }
+    // if (isDevMode()) {
+    //     // TODO: Configure the emulator for authentication
+    //     connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+    // }
 
     return auth;
 };

@@ -1,10 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { ISignInWithProviderUseCase, IUserAuthUseCase } from '@core/auth/application/interfaces';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
-
-import { addIcons } from 'ionicons';
-import { logoGoogle } from 'ionicons/icons';
-import { AuthService } from '../../../services/auth.service';
+import { AuthProvider } from '@core/auth/domain/enums';
+import { SIGN_IN_WITH_PROVIDER_USE_CASE, USER_AUTH_USE_CASE } from '@core/auth/infrastructure/providers/providers';
 
 @Component({
     selector: 'app-login',
@@ -13,38 +12,31 @@ import { AuthService } from '../../../services/auth.service';
     standalone: true,
     imports: [IonContent, IonSpinner],
 })
-export class LoginPage implements OnInit {
-    isLoading = false;
-    #authService = inject(AuthService);
+export class LoginPage {
+    $isLoading = signal(false);
 
-    constructor(private router: Router) {
-        addIcons({
-            logoGoogle,
-        });
-    }
-
-    ngOnInit() {
-        // Inicialización si es necesaria
-    }
+    constructor(
+        @Inject(SIGN_IN_WITH_PROVIDER_USE_CASE) private readonly _signInWithProviderUseCase: ISignInWithProviderUseCase,
+        @Inject(USER_AUTH_USE_CASE) private readonly _userAuthUseCase: IUserAuthUseCase,
+        private readonly _router: Router
+    ) {}
 
     async loginWithGoogle() {
+        this.$isLoading.set(true);
+
         try {
-            this.isLoading = true;
-            // const result = await this.#authService.signInWithGoogle();
-            // console.log({ result });
-            setTimeout(() => {
-                this.isLoading = false;
-                this.router.navigate(['/home']);
-            }, 1500);
+            await this._signInWithProviderUseCase.execute(AuthProvider.GOOGLE);
+            await this._userAuthUseCase.execute();
+
+            this._navigateToHome();
         } catch (error) {
-            this.isLoading = false;
-            console.error('Google sign-in error:', error);
+            console.error(error);
+        } finally {
+            this.$isLoading.set(false);
         }
     }
 
-    goToSignUp() {
-        // Navegar a la página de registro
-        console.log('Navegando a registro');
-        // this.router.navigate(['/register']);
+    private _navigateToHome() {
+        this._router.navigate(['/home']);
     }
 }

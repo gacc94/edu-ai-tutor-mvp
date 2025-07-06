@@ -21,5 +21,9 @@ export const environment: IEnvironment = {
             baseUrl: GEMINI_BASE_URL,
             mathSolve: `${GEMINI_API_URL}/math-solve/chat`,
         },
+        user: {
+            baseUrl: 'http://localhost:3100',
+            auth: `${GEMINI_API_URL}/user/auth`,
+        },
     },
 };

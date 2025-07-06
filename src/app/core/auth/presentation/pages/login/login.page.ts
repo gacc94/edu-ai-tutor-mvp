@@ -1,7 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@core/auth/application/services/auth.service';
+import { ISignInWithProviderUseCase, IUserAuthUseCase } from '@core/auth/application/interfaces';
 import { IonContent, IonSpinner } from '@ionic/angular/standalone';
+import { AuthProvider } from '@core/auth/domain/enums';
+import { SIGN_IN_WITH_PROVIDER_USE_CASE, USER_AUTH_USE_CASE } from '@core/auth/infrastructure/providers/providers';
 
 @Component({
     selector: 'app-login',
@@ -11,17 +13,30 @@ import { IonContent, IonSpinner } from '@ionic/angular/standalone';
     imports: [IonContent, IonSpinner],
 })
 export class LoginPage {
-    isLoading = signal(false);
+    $isLoading = signal(false);
 
-    constructor(private _router: Router, private _authService: AuthService) {}
+    constructor(
+        @Inject(SIGN_IN_WITH_PROVIDER_USE_CASE) private readonly _signInWithProviderUseCase: ISignInWithProviderUseCase,
+        @Inject(USER_AUTH_USE_CASE) private readonly _userAuthUseCase: IUserAuthUseCase,
+        private readonly _router: Router
+    ) {}
 
     async loginWithGoogle() {
-        this.isLoading.set(true);
+        this.$isLoading.set(true);
 
-        const response = await this._authService.signInWithGoogle();
-        console.log({ response });
+        try {
+            await this._signInWithProviderUseCase.execute(AuthProvider.GOOGLE);
+            await this._userAuthUseCase.execute();
 
-        await this._router.navigate(['/home']);
-        this.isLoading.set(false);
+            this._navigateToHome();
+        } catch (error) {
+            console.error(error);
+        } finally {
+            this.$isLoading.set(false);
+        }
+    }
+
+    private _navigateToHome() {
+        this._router.navigate(['/home']);
     }
 }

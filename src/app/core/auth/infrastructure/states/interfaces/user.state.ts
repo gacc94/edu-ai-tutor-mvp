@@ -1,12 +1,14 @@
-import { CreditProps } from '../interfaces/credit.props';
 import { Timestamp } from 'firebase/firestore';
 
-export interface UserProps {
+export interface IUserState {
     id: string;
     email: string;
     displayName: string;
     authProvider: string;
-    credits: CreditProps;
+    credits: {
+        current: number;
+        max: number;
+    };
     emailVerified: boolean;
     isActive: boolean;
     photoURL: string | null;
@@ -15,5 +17,3 @@ export interface UserProps {
     updatedAt: Timestamp;
     lastLoginAt: Timestamp;
 }
-
-export interface UserPropsFromProviders extends UserProps {}

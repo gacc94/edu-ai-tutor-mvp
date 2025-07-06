@@ -1,14 +1,20 @@
 import { CreditProps } from '../interfaces/credit.props';
 
 export class Credit {
-    constructor(private readonly props: CreditProps) {}
+    private readonly _current: number;
+    private readonly _max: number;
+
+    constructor(props: CreditProps) {
+        this._current = props.current;
+        this._max = props.max;
+    }
 
     get current(): number {
-        return this.props.current;
+        return this._current;
     }
 
     get max(): number {
-        return this.props.max;
+        return this._max;
     }
 
     get percentage(): number {

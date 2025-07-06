@@ -1,7 +1,7 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
-import { TOKEN_STATE } from '@core/auth/application/states/states';
 import { inject } from '@angular/core';
 import { WITH_AUTH_TOKEN } from './http-context.tokens';
+import { TOKEN_STATE } from '@core/auth/infrastructure/providers/providers';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     const tokenState = inject(TOKEN_STATE).$state();

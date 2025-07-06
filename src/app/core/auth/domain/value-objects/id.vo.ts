@@ -1,23 +1,26 @@
 export class IdVO {
-    private constructor(private readonly _value: string) {}
+    private readonly _value: string;
 
-    static create(value: string): IdVO {
-        if (!value || value.trim().length === 0) {
+    constructor(value: string) {
+        const sanitized = value.trim();
+
+        if (!sanitized) {
             throw new Error('UserId cannot be empty');
         }
-        if (value.length < 3) {
+
+        if (sanitized.length < 3) {
             throw new Error('UserId must be at least 3 characters long');
         }
 
-        return new IdVO(value);
+        this._value = sanitized;
+    }
+
+    equals(other: IdVO): boolean {
+        return this._value === other.value;
     }
 
     toString(): string {
         return this._value;
-    }
-
-    equals(other: IdVO): boolean {
-        return this._value === other._value;
     }
 
     /*
@@ -29,4 +32,22 @@ export class IdVO {
     get value(): string {
         return this._value;
     }
+}
+
+export interface User {
+    uuid: string;
+    email: string;
+    displayName: string;
+    photoURL: string;
+    credits: {
+        current: number;
+        max: number;
+    };
+    provider: string;
+    phoneNumber: string;
+    emailVerified: boolean;
+    createdAt: string;
+    updatedAt: string;
+    lastLoginAt: string;
+    isActive: boolean;
 }

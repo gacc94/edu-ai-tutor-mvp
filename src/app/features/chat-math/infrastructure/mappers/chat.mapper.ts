@@ -1,4 +1,3 @@
-import { MessageState } from '@features/chat-math/application/states/interfaces';
 import { ChatRequest, ChatRequestDto } from '../dtos/chat-request.dto';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
 

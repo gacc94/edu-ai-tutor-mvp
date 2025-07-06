@@ -1,26 +1,24 @@
 export class DisplayNameVO {
-    private constructor(private readonly _value: string) {}
+    private readonly _value: string;
 
-    static create(value: string): DisplayNameVO {
-        if (!value || value.trim().length === 0) {
+    constructor(value: string) {
+        const sanitized = value.trim();
+
+        if (!sanitized) {
             throw new Error('DisplayName cannot be empty');
         }
-        if (value.length < 2) {
+        if (sanitized.length < 2) {
             throw new Error('DisplayName must be at least 2 characters long');
         }
-        if (value.length > 100) {
+        if (sanitized.length > 100) {
             throw new Error('DisplayName cannot exceed 100 characters');
         }
 
-        return new DisplayNameVO(value);
-    }
-
-    static createEmpty(): DisplayNameVO {
-        return new DisplayNameVO('');
+        this._value = sanitized;
     }
 
     get initials(): string {
-        return this._value
+        return this.value
             .split(' ')
             .map((name) => name.charAt(0).toUpperCase())
             .join('')

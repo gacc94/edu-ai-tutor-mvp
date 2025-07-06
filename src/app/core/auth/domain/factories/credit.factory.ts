@@ -8,11 +8,4 @@ export class CreditFactory {
             max: props.max,
         });
     }
-
-    static createDefault(): Credit {
-        return new Credit({
-            current: 10,
-            max: 10,
-        });
-    }
 }

@@ -1,7 +1,7 @@
 export class EmailVO {
-    private constructor(private readonly _value: string) {}
+    private readonly _value: string;
 
-    static create(value: string): EmailVO {
+    constructor(value: string) {
         const email = value?.trim().toLowerCase();
 
         if (!email) {
@@ -12,15 +12,7 @@ export class EmailVO {
             throw new Error('Invalid email format');
         }
 
-        return new EmailVO(email);
-    }
-
-    static createEmpty(): EmailVO {
-        return new EmailVO('');
-    }
-
-    toString(): string {
-        return this._value;
+        this._value = email;
     }
 
     equals(other: EmailVO): boolean {

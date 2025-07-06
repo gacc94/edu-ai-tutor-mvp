@@ -1,15 +1,15 @@
-export class PhotoUrlVO {
+export class PhoneNumberVO {
     private _value: string;
 
     constructor(value: string) {
         const sanitizer = value.trim();
 
         if (!sanitizer) {
-            throw new Error('Photo URL cannot be empty');
+            throw new Error('Phone number cannot be empty');
         }
 
-        if (!(sanitizer !== '' && (sanitizer.startsWith('http://') || sanitizer.startsWith('https://')))) {
-            throw new Error('Invalid photo URL format');
+        if (!(sanitizer !== '' && (sanitizer.startsWith('+') || sanitizer.startsWith('00')))) {
+            throw new Error('Invalid phone number format');
         }
 
         this._value = sanitizer;

@@ -1,13 +1,24 @@
 import { IdTokenResult } from 'firebase/auth';
-import { ITokenState } from '../../application/states/interfaces/token.state';
+import { ITokenState } from '../states/interfaces/token.state';
+import { Token } from '@core/auth/domain/entities/token.entity';
 
 export class TokenMapper {
-    static toState(firebaseTokenResult: IdTokenResult): ITokenState {
+    static toPersistence(domain: Token): ITokenState {
         return {
-            token: firebaseTokenResult.token,
-            expirationTime: new Date(firebaseTokenResult.expirationTime),
-            issuedAtTime: new Date(firebaseTokenResult.issuedAtTime),
-            claims: firebaseTokenResult.claims,
+            token: domain.token,
+            expirationTime: domain.expirationTime,
+            issuedAtTime: domain.issuedAtTime,
+            claims: domain.claims,
         };
+    }
+
+    static toDomain(tokenResult: IdTokenResult): Token {
+        return new Token(
+            tokenResult.token,
+            new Date(tokenResult.expirationTime),
+            new Date(tokenResult.issuedAtTime),
+            tokenResult.signInProvider,
+            tokenResult.claims
+        );
     }
 }

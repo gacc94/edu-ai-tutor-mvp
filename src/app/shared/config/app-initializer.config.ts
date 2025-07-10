@@ -1,94 +1,25 @@
-import { EnvironmentProviders, provideAppInitializer } from '@angular/core';
+import { ChatPort } from '@features/chat-math/domain/ports/chat.repository';
+import { EnvironmentProviders, inject, provideAppInitializer } from '@angular/core';
+import { TOKEN_STATE } from '@core/auth/infrastructure/providers/providers';
+import { LIST_ICONS } from '@shared/utils/constants/list-icons.constants';
 import { addIcons } from 'ionicons';
-import {
-    logoIonic,
-    home,
-    flashOutline,
-    searchOutline,
-    bulbOutline,
-    personOutline,
-    helpCircleOutline,
-    notificationsOutline,
-    pulseOutline,
-    desktopOutline,
-    analyticsOutline,
-    starOutline,
-    warningOutline,
-    chatbubbleEllipses,
-    gridOutline,
-    createOutline,
-    chatboxEllipsesOutline,
-    timeOutline,
-    chatbubbleOutline,
-    imageOutline,
-    chatbubblesOutline,
-    chatboxEllipses,
-    grid,
-    time,
-    person,
-    closeOutline,
-    arrowBackOutline,
-    cameraOutline,
-    paperPlaneOutline,
-    cogOutline,
-    happyOutline,
-    imagesOutline,
-    closeCircleOutline,
-    closeCircle,
-    attachOutline,
-    shareSocialOutline,
-    downloadOutline,
-    copyOutline,
-    logOutOutline,
-} from 'ionicons/icons';
+import * as Ionicons from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
 
+export const getSelectedIcons = (iconNames: Array<keyof typeof Ionicons>): Record<string, string> => {
+    const selectedIcons: Record<string, string> = {};
+    for (const iconName of iconNames) {
+        selectedIcons[iconName] = Ionicons[iconName];
+    }
+    return selectedIcons;
+};
+
 /**
- * Initialize app initializers
+ * Inicializa los providers de la app
  */
 export const appInitializerProviders: EnvironmentProviders[] = [
     provideAppInitializer(() => {
         register();
-        addIcons({
-            logoIonic,
-            home,
-            flashOutline,
-            searchOutline,
-            bulbOutline,
-            personOutline,
-            helpCircleOutline,
-            notificationsOutline,
-            pulseOutline,
-            desktopOutline,
-            analyticsOutline,
-            starOutline,
-            warningOutline,
-            chatbubbleEllipses,
-            gridOutline,
-            createOutline,
-            chatboxEllipsesOutline,
-            timeOutline,
-            chatbubbleOutline,
-            imageOutline,
-            chatbubblesOutline,
-            chatboxEllipses,
-            grid,
-            time,
-            person,
-            closeOutline,
-            arrowBackOutline,
-            cameraOutline,
-            paperPlaneOutline,
-            cogOutline,
-            happyOutline,
-            imagesOutline,
-            closeCircleOutline,
-            closeCircle,
-            attachOutline,
-            shareSocialOutline,
-            downloadOutline,
-            copyOutline,
-            logOutOutline,
-        });
+        addIcons(getSelectedIcons(LIST_ICONS));
     }),
 ];

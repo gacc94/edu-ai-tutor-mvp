@@ -4,12 +4,12 @@ import { IonFooter, IonInput, IonButton, IonIcon } from '@ionic/angular/standalo
 import { CameraSource } from '@capacitor/camera';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
-import { IMAGES_SELECTED_STATE } from '@features/chat-math/application/states/states';
 import { Inject } from '@angular/core';
 import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { FooterPreviewComponent } from '../footer-preview/footer-preview.component';
-import { ChatService } from '@features/chat-math/application/services/chat.service';
 import { ImageState } from '@features/chat-math/application/states/interfaces';
+import { ChatFacade } from '../../facades/chat.facade';
+import { IMAGES_SELECTED_STATE } from '@features/chat-math/infrastructure/providers/provider';
 
 @Component({
     selector: 'app-footer',
@@ -18,20 +18,13 @@ import { ImageState } from '@features/chat-math/application/states/interfaces';
             @let selectedImages = $selectedImages() ?? [];
             <!--  -->
             @if (selectedImages.length > 0) {
-            <app-footer-preview
-                [selectedImages]="selectedImages"
-                (removeImage)="removeImage($event)"
-            ></app-footer-preview>
+            <app-footer-preview [selectedImages]="selectedImages" (removeImage)="removeImage($event)"></app-footer-preview>
             }
             <div class="footer__wrapper">
                 <ion-button (click)="openImageOptions()">
                     <ion-icon slot="icon-only" name="attach-outline"></ion-icon>
                 </ion-button>
-                <ion-input
-                    class="footer__input"
-                    placeholder="Escribe tu problema o adjunta imágenes"
-                    [formControl]="control"
-                ></ion-input>
+                <ion-input class="footer__input" placeholder="Escribe tu problema o adjunta imágenes" [formControl]="control"></ion-input>
                 <ion-button type="button" (click)="sendMessage()" [disabled]="isDisabled">
                     <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
                 </ion-button>
@@ -52,7 +45,7 @@ export class FooterComponent {
     constructor(
         private _formBuilder: FormBuilder,
         private _ionicUtilsService: IonicUtilsService,
-        private _chatService: ChatService,
+        private _facade: ChatFacade,
         @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: IStateStorage<ImageState[]>
     ) {}
 
@@ -63,7 +56,7 @@ export class FooterComponent {
     async sendMessage() {
         const message = this.control.value.trim();
 
-        const userMessage = await this._chatService.prepareSendingMessage(message);
+        const userMessage = await this._facade.preparingSendingMessage(message);
 
         this.onSendMessage.emit(userMessage);
         this._reset();
@@ -72,6 +65,7 @@ export class FooterComponent {
     removeImage(index: number) {
         const newImages = this.$selectedImages()?.filter((_, i) => i !== index);
         this._imagesSelectedState.save(newImages ?? []);
+        90;
     }
 
     async openImageOptions(): Promise<void> {
@@ -101,7 +95,7 @@ export class FooterComponent {
     }
 
     private async _takePicture(source: CameraSource): Promise<void> {
-        await this._chatService.takePicture(source);
+        await this._facade.takePicture(source);
     }
 
     private _reset() {

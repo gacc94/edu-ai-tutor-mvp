@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-export const createResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
+export const createHttpResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
     z.object({
         statusCode: z.number().int(),
-        message: z.string(),
+        message: z.string().optional(),
         metadata: z.record(z.unknown()).optional(),
         data: dataSchema,
     });

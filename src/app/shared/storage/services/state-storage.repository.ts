@@ -1,18 +1,16 @@
 import { inject, Inject, Injectable, Optional, signal, Signal } from '@angular/core';
 import { IStateStorage } from '../interfaces/state-storage.interface';
-import { Storage } from '../interfaces/storage.interface';
 import { STATE_REGISTER_TOKEN, STORAGE_TOKEN, STORAGE_KEY } from '../providers/storage.provider';
-import { StateRegister } from '../services/state-register';
 
 @Injectable()
 export class StateStorageRepository<T> implements IStateStorage<T> {
     private readonly _state = signal<T | undefined>(undefined);
-    private readonly _register: StateRegister = inject(STATE_REGISTER_TOKEN);
-    private readonly _storage: Storage = inject(STORAGE_TOKEN);
+    private readonly _register = inject(STATE_REGISTER_TOKEN);
+    private readonly _storage = inject(STORAGE_TOKEN);
 
     constructor(@Optional() @Inject(STORAGE_KEY) private readonly _storageKey?: string) {
         this._register.register(this);
-        this._getStorage();
+        this.getStorage();
     }
 
     get $state(): Signal<T | undefined> {
@@ -31,10 +29,10 @@ export class StateStorageRepository<T> implements IStateStorage<T> {
         if (this._storageKey) await this._storage.remove(this._storageKey);
     }
 
-    protected async _getStorage(): Promise<void> {
+    async getStorage(): Promise<void> {
         if (!this._storageKey) return;
 
-        const value = await this._storage.get(this._storageKey);
+        const { value } = await this._storage.get(this._storageKey);
         if (!value) {
             this.clear();
             return;

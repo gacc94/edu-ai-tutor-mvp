@@ -10,6 +10,7 @@ import { SignInWithProviderUseCase } from '@core/auth/application/use-cases/sign
 import { UserAuthUseCase } from '@core/auth/application/use-cases/user-auth.use-case';
 import { IUserAuthUseCase, ISignInWithProviderUseCase } from '@core/auth/application/interfaces';
 import { IUserState } from '../states/interfaces/user.state';
+import { STORAGE_KEYS } from '@shared/utils/constants/storage-keys.constants';
 
 /*
  * ========================================================================================
@@ -50,10 +51,10 @@ export const USER_AUTH_USE_CASE = new InjectionToken<IUserAuthUseCase>('UserAuth
 
 export const TOKEN_STATE = new InjectionToken<IStateStorage<ITokenState>>('TOKEN_STATE', {
     providedIn: 'root',
-    factory: () => new StateStorageRepository<ITokenState>('tokenState'),
+    factory: () => new StateStorageRepository<ITokenState>(STORAGE_KEYS.token),
 });
 
 export const USER_STATE = new InjectionToken<IStateStorage<IUserState>>('USER_STATE', {
     providedIn: 'root',
-    factory: () => new StateStorageRepository<IUserState>('userState'),
+    factory: () => new StateStorageRepository<IUserState>(STORAGE_KEYS.user),
 });

@@ -7,9 +7,9 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { firebaseProviders } from './app/shared/config/firebase.config';
 import { enableProdMode, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { environment } from '@envs/environment';
-import { appInitializerProviders } from './app/shared/config/app-initializer.config';
 import { provideMarkdown } from 'ngx-markdown';
 import { tokenInterceptor } from '@core/interceptors/token.interceptor';
+import { appInitializerProviders } from '@shared/config/app-initializer.config';
 
 if (environment.production) {
     enableProdMode();

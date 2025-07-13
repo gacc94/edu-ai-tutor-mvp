@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
+import { authGuard } from '@core/guards/auth.guard';
 
 export const routes: Routes = [
     {
-        path: 'auth',
-        loadChildren: () => import('./core/auth/presentation/auth.routes'),
+        path: '',
+        redirectTo: '/auth',
+        pathMatch: 'full',
     },
     {
         path: 'home',
@@ -17,8 +18,16 @@ export const routes: Routes = [
         canActivate: [authGuard],
     },
     {
-        path: '',
-        redirectTo: 'auth',
-        pathMatch: 'full',
+        path: 'premium',
+        loadComponent: () => import('./features/subscription/presentation/pages/premium/premium.page'),
+        canActivate: [authGuard],
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./core/auth/presentation/auth.routes'),
+    },
+    {
+        path: '**',
+        redirectTo: '/home',
     },
 ];

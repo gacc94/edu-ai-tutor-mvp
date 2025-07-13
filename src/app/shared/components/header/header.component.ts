@@ -1,15 +1,5 @@
 import { Component, input, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectionStrategy, Inject } from '@angular/core';
-import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonBackButton,
-    IonImg,
-    IonButton,
-    IonIcon,
-    IonLabel,
-} from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonImg } from '@ionic/angular/standalone';
 import { IStateRegister } from '@shared/storage/interfaces/state-register.interface';
 import { STATE_REGISTER_TOKEN } from '@shared/storage/providers/storage.provider';
 import { Router } from '@angular/router';
@@ -26,8 +16,16 @@ import { CreditsCounterComponent } from '../credits-counter/credits-counter.comp
                 </ion-buttons>
                 }
                 <div class="header__wrapper">
-                    <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
-                    <ion-title class="header__title">{{ title() }}</ion-title>
+                    <div class="header__brand">
+                        <ion-img src="assets/eduaitutor-bot.png" alt="eduai-tutor-bot"></ion-img>
+                        <ion-title class="header__title">{{ title() }}</ion-title>
+                    </div>
+
+                    @if (showCredits()) {
+                    <div class="header__credits">
+                        <app-credits-counter></app-credits-counter>
+                    </div>
+                    }
                 </div>
 
                 <!-- <ion-buttons slot="end">
@@ -37,25 +35,26 @@ import { CreditsCounterComponent } from '../credits-counter/credits-counter.comp
                     </ion-button>
                 </ion-buttons> -->
 
-                <ion-buttons slot="end">
+                <!-- <ion-buttons slot="end">
                     <ion-button (click)="credits()">
                         <ion-icon name="logoIonic"></ion-icon>
                         <ion-label>
                             <app-credits-counter></app-credits-counter>
                         </ion-label>
                     </ion-button>
-                </ion-buttons>
+                </ion-buttons> -->
             </ion-toolbar>
         </ion-header>
     `,
     styleUrls: ['./header.component.scss'],
-    imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonImg, IonButton, IonIcon, IonLabel, CreditsCounterComponent],
+    imports: [IonBackButton, IonButtons, IonHeader, IonTitle, IonToolbar, IonImg, CreditsCounterComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
     title = input.required<string>();
     showBackButton = input.required<boolean>({ alias: 'show-back-button' });
+    showCredits = input<boolean>(false, { alias: 'show-credits' });
 
     constructor(@Inject(STATE_REGISTER_TOKEN) private register: IStateRegister, private router: Router) {}
 

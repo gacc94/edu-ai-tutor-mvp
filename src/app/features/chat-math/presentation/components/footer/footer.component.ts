@@ -1,28 +1,26 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, output } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonFooter, IonInput, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { CameraSource } from '@capacitor/camera';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
-import { Inject } from '@angular/core';
-import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { FooterPreviewComponent } from '../footer-preview/footer-preview.component';
-import { ImageState } from '@features/chat-math/application/states/interfaces';
 import { ChatFacade } from '../../facades/chat.facade';
 import { IMAGES_SELECTED_STATE } from '@features/chat-math/infrastructure/providers/provider';
+import { USER_STATE } from '@core/auth/infrastructure/providers/providers';
 
 @Component({
     selector: 'app-footer',
     template: `
         <ion-footer class="footer">
             @let selectedImages = $selectedImages() ?? [];
-            <!--  -->
+            <!-- Show preview if there are images -->
             @if (selectedImages.length > 0) {
             <app-footer-preview [selectedImages]="selectedImages" (removeImage)="removeImage($event)"></app-footer-preview>
             }
             <div class="footer__wrapper">
                 <ion-button (click)="openImageOptions()">
-                    <ion-icon slot="icon-only" name="attach-outline"></ion-icon>
+                    <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
                 </ion-button>
                 <ion-input class="footer__input" placeholder="Escribe tu problema o adjunta imágenes" [formControl]="control"></ion-input>
                 <ion-button type="button" (click)="sendMessage()" [disabled]="isDisabled">
@@ -36,21 +34,21 @@ import { IMAGES_SELECTED_STATE } from '@features/chat-math/infrastructure/provid
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FooterComponent {
+    private readonly _formBuilder = inject(FormBuilder);
+    private readonly _imagesSelectedState = inject(IMAGES_SELECTED_STATE);
+    private readonly _ionicUtilsService = inject(IonicUtilsService);
+    private readonly _facade = inject(ChatFacade);
+    private readonly _userState = inject(USER_STATE);
+
     control = this._formBuilder.control('', { nonNullable: true, validators: [Validators.required] });
 
     $selectedImages = this._imagesSelectedState.$state;
 
     onSendMessage = output<Message>();
 
-    constructor(
-        private _formBuilder: FormBuilder,
-        private _ionicUtilsService: IonicUtilsService,
-        private _facade: ChatFacade,
-        @Inject(IMAGES_SELECTED_STATE) private _imagesSelectedState: IStateStorage<ImageState[]>
-    ) {}
-
     get isDisabled(): boolean {
-        return !this.control?.valid || this.$selectedImages()?.length === 0;
+        const currentCredits = this._userState.$state()?.credits.current ?? 0;
+        return !this.control?.valid || this.$selectedImages()?.length === 0 || currentCredits <= 0;
     }
 
     async sendMessage() {
@@ -65,7 +63,6 @@ export class FooterComponent {
     removeImage(index: number) {
         const newImages = this.$selectedImages()?.filter((_, i) => i !== index);
         this._imagesSelectedState.save(newImages ?? []);
-        90;
     }
 
     async openImageOptions(): Promise<void> {

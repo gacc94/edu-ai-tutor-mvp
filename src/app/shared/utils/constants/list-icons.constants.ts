@@ -51,4 +51,7 @@ export const LIST_ICONS: Array<keyof typeof Icons> = [
     'chevronUpCircleOutline',
     'chevronForwardCircleOutline',
     'chevronBackCircleOutline',
+    'diamond',
+    'diamondOutline',
+    'cameraOutline',
 ];

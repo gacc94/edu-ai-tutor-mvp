@@ -1,18 +1,7 @@
 import { EnvironmentProviders, isDevMode } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-    browserPopupRedirectResolver,
-    browserSessionPersistence,
-    connectAuthEmulator,
-    initializeAuth,
-    provideAuth,
-} from '@angular/fire/auth';
-import {
-    connectFirestoreEmulator,
-    initializeFirestore,
-    persistentLocalCache,
-    provideFirestore,
-} from '@angular/fire/firestore';
+import { browserPopupRedirectResolver, browserSessionPersistence, initializeAuth, provideAuth } from '@angular/fire/auth';
+import { connectFirestoreEmulator, initializeFirestore, persistentLocalCache, provideFirestore } from '@angular/fire/firestore';
 import { connectFunctionsEmulator, getFunctions, provideFunctions } from '@angular/fire/functions';
 import { connectStorageEmulator, getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from '@envs/environment';

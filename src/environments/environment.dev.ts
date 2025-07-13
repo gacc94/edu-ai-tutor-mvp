@@ -1,8 +1,7 @@
 import { IEnvironment } from './ienvironment';
 
 const BASE_URL = 'http://localhost:3100';
-const GEMINI_BASE_URL = 'https://edu-ai-tutor-644032611464.us-central1.run.app';
-const GEMINI_API_URL = `${GEMINI_BASE_URL}/api/v1`;
+const GEMINI_API_URL = `${BASE_URL}/api/v1`;
 
 export const environment: IEnvironment = {
     name: 'development',
@@ -41,7 +40,7 @@ export const environment: IEnvironment = {
     },
     apis: {
         gemini: {
-            baseUrl: GEMINI_BASE_URL,
+            baseUrl: BASE_URL,
             mathSolve: `${GEMINI_API_URL}/math-solve/chat`,
         },
         user: {

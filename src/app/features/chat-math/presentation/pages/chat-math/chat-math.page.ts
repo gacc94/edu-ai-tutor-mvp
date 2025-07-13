@@ -4,15 +4,15 @@ import { AfterViewInit } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { MESSAGES_STATE } from '@features/chat-math/application/states/states';
+import { MESSAGES_STATE } from '@features/chat-math/infrastructure/providers/provider';
 import { TypingLoadingComponent } from '@shared/components/typing-loading/typing-loading.component';
-import { ChatService } from '@features/chat-math/application/services/chat.service';
 import { Inject } from '@angular/core';
 import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { MessageState } from '@features/chat-math/application/states/interfaces/message.state';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { ChatListComponent } from '../../components/chat-list/chat-list.component';
 import { ChatWelcomeComponent } from '../../components/chat-welcome/chat-welcome.component';
+import { ChatFacade } from '../../facades/chat.facade';
 
 interface ScrollToBottomParams {
     duration?: number;
@@ -22,14 +22,14 @@ interface ScrollToBottomParams {
 @Component({
     selector: 'app-chat-math',
     template: `
-        <app-header title="Ai Assistant" [show-back-button]="true"></app-header>
+        <app-header title="Ai Assistant" [show-back-button]="true" [show-credits]="true"></app-header>
 
         <ion-content [fullscreen]="true">
             @if ($messageLength() === 0) {
             <app-chat-welcome></app-chat-welcome>
             }
             <app-chat-list></app-chat-list>
-            @if (isLoading()) {
+            @if ($isLoading()) {
             <app-typing-loading></app-typing-loading>
             }
         </ion-content>
@@ -38,14 +38,7 @@ interface ScrollToBottomParams {
     `,
     styleUrl: './chat-math.page.scss',
     standalone: true,
-    imports: [
-        IonContent,
-        HeaderComponent,
-        FooterComponent,
-        TypingLoadingComponent,
-        ChatListComponent,
-        ChatWelcomeComponent,
-    ],
+    imports: [IonContent, HeaderComponent, FooterComponent, TypingLoadingComponent, ChatListComponent, ChatWelcomeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class ChatMathPage implements AfterViewInit {
@@ -55,12 +48,9 @@ export default class ChatMathPage implements AfterViewInit {
 
     $messageLength = linkedSignal(() => this.$messages()?.length ?? 0);
 
-    isLoading = signal<boolean>(false);
+    $isLoading = signal<boolean>(false);
 
-    constructor(
-        @Inject(MESSAGES_STATE) private _messagesState: IStateStorage<MessageState[]>,
-        private readonly _chatService: ChatService
-    ) {}
+    constructor(@Inject(MESSAGES_STATE) private _messagesState: IStateStorage<MessageState[]>, private readonly _facade: ChatFacade) {}
 
     /**
      * After view init
@@ -74,13 +64,17 @@ export default class ChatMathPage implements AfterViewInit {
      * @param message
      */
     async sendMessage(message: Message): Promise<void> {
-        this.isLoading.set(true);
-        this._scrollToBottom();
+        try {
+            this.$isLoading.set(true);
+            this._scrollToBottom();
 
-        await this._chatService.sendMessage(message);
+            await this._facade.sendMessage(message);
 
-        this.isLoading.set(false);
-        this._scrollToBottom();
+            this.$isLoading.set(false);
+            this._scrollToBottom();
+        } catch (error) {
+            this.$isLoading.set(false);
+        }
     }
 
     /**

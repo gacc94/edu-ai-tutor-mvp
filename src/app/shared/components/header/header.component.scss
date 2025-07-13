@@ -2,7 +2,6 @@
 
 .header {
     &__toolbar {
-        text-align: center;
         font-weight: var(--font-medium);
         padding: 0;
         color: var(--color-text);
@@ -10,10 +9,17 @@
 
     &__wrapper {
         display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
-        gap: 0.5rem;
-        align-items: center;
+        grid-template-columns: 1fr auto;
+        justify-items: center;
+        gap: 5rem;
+    }
+
+    &__brand {
+        @include mixins.flex(row, center, center, nowrap, 0.5rem);
+    }
+
+    &__credits {
+        @include mixins.flex(row, center, center, nowrap);
     }
 
     &__title {

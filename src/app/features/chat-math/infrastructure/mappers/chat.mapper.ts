@@ -1,15 +1,9 @@
-import { ChatRequest, ChatRequestDto } from '../dtos/chat-request.dto';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
+import { ChatResult } from '@features/chat-math/domain/interfaces/chat-result';
+import { ChatResponseDto } from '../dtos/chat.dto';
+import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
 
 export class ChatMapper {
-    static toRequestDto(message: Message, files: File[]): ChatRequestDto {
-        return new ChatRequest(message.id, message.content, files);
-    }
-
-    static toResponseDto(response: any): any {
-        return response;
-    }
-
     static toFormData(message: Message, files: File[]): FormData {
         const { id, content } = message;
         const formData = new FormData();
@@ -21,5 +15,21 @@ export class ChatMapper {
             });
         }
         return formData;
+    }
+
+    static toDomainResult(chatResponse: ChatResponseDto): ChatResult {
+        return {
+            type: chatResponse.type,
+            solutionText: chatResponse.solutionText,
+            solutionImage: chatResponse.solutionImage,
+            userContext: {
+                creditsRemaining: chatResponse.userContext.creditsRemaining,
+                plan: chatResponse.userContext.plan,
+            },
+        };
+    }
+
+    static toDomain(chatResult: ChatResult): Message {
+        return MessageFactory.createAiMessage(chatResult.solutionText);
     }
 }

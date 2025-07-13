@@ -35,6 +35,12 @@
     --button-text: #fff;
     --button-radius: 1.5rem;
 
+    /*========== ESTADOS Y ALERTAS ==========*/
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-info: #17a2b8;
+
     /*========== GRADIENTES ==========*/
     --gradient-primary: linear-gradient(90deg, #4361ee 0%, #3a56d4 100%);
     --gradient-accent: linear-gradient(90deg, #4361ee 0%, #4895ef 100%);
@@ -77,6 +83,7 @@
     --font-regular: 400;
     --font-medium: 500;
     --font-semi-bold: 600;
+    --font-bold: 700;
 
     /*========== Spacing ==========*/
     --spacing-xs: 4px;

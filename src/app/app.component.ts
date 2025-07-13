@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
 import { environment } from '@envs/environment';
 import { SafeArea } from '@capacitor-community/safe-area';
 import { Camera } from '@capacitor/camera';

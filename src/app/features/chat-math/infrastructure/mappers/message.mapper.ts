@@ -1,6 +1,7 @@
 import { Message } from '@features/chat-math/domain/entities/message.entity';
 import { MessageState } from '@features/chat-math/application/states/interfaces/message.state';
 import { ImageMapper } from './image.mapper';
+import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
 
 export class MessageMapper {
     /**
@@ -17,5 +18,9 @@ export class MessageMapper {
             isAi: message.isAi(),
             isUser: message.isUser(),
         };
+    }
+
+    static toDomain(messageState: MessageState): Message {
+        return MessageFactory.createAiMessage(messageState.content);
     }
 }

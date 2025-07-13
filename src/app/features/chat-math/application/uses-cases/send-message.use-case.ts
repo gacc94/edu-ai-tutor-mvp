@@ -1,29 +1,13 @@
-import { Injectable, Inject } from '@angular/core';
-import { MessageFactory } from '@features/chat-math/domain/factories/message.factory';
-import { ChatRepository } from '@features/chat-math/domain/repositories/chat.repository';
 import { HTTP_CHAT_REPOSITORY } from '@features/chat-math/infrastructure/providers/provider';
-import { MESSAGES_STATE } from '@features/chat-math/application/states/states';
-import { IStateStorage } from '@shared/storage/interfaces/state-storage.interface';
 import { Message } from '@features/chat-math/domain/entities/message.entity';
-import { MessageMapper } from '../mappers/message.mapper';
-import { MessageState } from '../states/interfaces';
+import { inject } from '@angular/core';
+import { ChatResult } from '@features/chat-math/domain/interfaces/chat-result';
+import { ISendMessageUseCase } from '@features/chat-math/application/interfaces/send-message-use-case';
 
-@Injectable({ providedIn: 'root' })
-export class SendMessageUseCase {
-    constructor(
-        @Inject(HTTP_CHAT_REPOSITORY) private _repository: ChatRepository,
-        @Inject(MESSAGES_STATE) private _messagesState: IStateStorage<MessageState[]>
-    ) {}
+export class SendMessageUseCase implements ISendMessageUseCase {
+    private readonly _repository = inject(HTTP_CHAT_REPOSITORY);
 
-    async execute(message: Message): Promise<void> {
-        const response = await this._repository.sendMessage(message);
-
-        const messagesState = this._messagesState.$state() ?? [];
-
-        const aiMessage = MessageFactory.createAiMessage(response);
-
-        const aiMessageState = MessageMapper.toState(aiMessage);
-
-        await this._messagesState.save([...messagesState, aiMessageState]);
+    execute(message: Message, files: File[]): Promise<ChatResult> {
+        return this._repository.sendMessage(message, files);
     }
 }

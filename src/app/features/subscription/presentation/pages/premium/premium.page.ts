@@ -1,7 +1,23 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { IonContent, IonButton, IonIcon, IonToggle, IonSpinner } from '@ionic/angular/standalone';
+import {
+    IonContent,
+    IonButton,
+    IonIcon,
+    IonToggle,
+    IonSpinner,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonFooter,
+    IonToolbar,
+    IonItem,
+    IonLabel,
+    IonBadge,
+    IonList,
+} from '@ionic/angular/standalone';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { SubscriptionService } from '@features/subscription/application/services/subscription.service';
 
@@ -14,55 +30,57 @@ import { SubscriptionService } from '@features/subscription/application/services
                 <ion-icon name="close"></ion-icon>
             </button>
 
-            <div class="premium__container">
-                <!-- Hero Section -->
-                <div class="premium__hero">
-                    <div class="premium__logo">
-                        <img src="assets/eduaitutor-bot.png" alt="EduAI Tutor" />
-                    </div>
-                    <h1 class="premium__title">Tutor AI Pro</h1>
-                    <p class="premium__subtitle">Desbloquea todo tu potencial académico</p>
+            <!-- Hero Section -->
+            <div class="premium__hero">
+                <div class="premium__logo">
+                    <img src="assets/eduaitutor-bot.png" alt="EduAI Tutor" />
                 </div>
+                <h1 class="premium__title">Tutor AI Pro</h1>
+                <p class="premium__subtitle">Desbloquea todo tu potencial académico</p>
+            </div>
 
-                <!-- Benefits -->
-                <div class="premium__benefits">
-                    @for (benefit of benefits(); track $index) {
-                    <div class="premium__benefit">
-                        <ion-icon name="checkmark-circle" class="premium__benefit-icon"></ion-icon>
-                        <span class="premium__benefit-text">{{ benefit }}</span>
-                    </div>
+            <!-- Benefits List -->
+            <ion-list class="premium__benefits" lines="none">
+                @for (benefit of benefits(); track $index) {
+                <ion-item class="premium__benefit">
+                    <ion-icon name="checkmark-circle" slot="start" class="premium__benefit-icon"></ion-icon>
+                    <ion-label class="premium__benefit-text">{{ benefit }}</ion-label>
+                </ion-item>
+                }
+            </ion-list>
+
+            <!-- Plans Cards -->
+            <div class="premium__plans">
+                @for (plan of subscriptionService.plans(); track plan.id) {
+                <ion-card
+                    class="premium__plan-card"
+                    [class.premium__plan-card--selected]="selectedPlan()?.id === plan.id"
+                    [class.premium__plan-card--popular]="plan.isPopular"
+                    (click)="selectPlan(plan.id)"
+                    button="true"
+                >
+                    @if (plan.isPopular) {
+                    <ion-badge class="premium__plan-badge" color="primary">Más Popular</ion-badge>
                     }
-                </div>
 
-                <!-- Plans -->
-                <div class="premium__plans">
-                    @for (plan of subscriptionService.plans(); track plan.id) {
-                    <div
-                        class="premium__plan"
-                        [class.premium__plan--selected]="selectedPlan()?.id === plan.id"
-                        [class.premium__plan--popular]="plan.isPopular"
-                        (click)="selectPlan(plan.id)"
-                        [attr.aria-label]="'Plan ' + (plan.isYearly ? 'anual' : 'mensual')"
-                    >
-                        @if (plan.isPopular) {
-                        <div class="premium__plan-badge">Más Popular</div>
-                        }
-
-                        <div class="premium__plan-header">
-                            <div class="premium__plan-info">
-                                <span class="premium__plan-period">{{ plan.isYearly ? 'Anual' : 'Mensual' }}</span>
-                                @if (plan.hasDiscount) {
-                                <span class="premium__plan-savings">Ahorra {{ plan.discountPercentage }}%</span>
-                                }
-                            </div>
-                            <div class="premium__plan-check">
-                                <ion-icon
-                                    [name]="selectedPlan()?.id === plan.id ? 'checkmark-circle' : 'ellipse-outline'"
-                                    [class.premium__plan-check--selected]="selectedPlan()?.id === plan.id"
-                                ></ion-icon>
-                            </div>
+                    <ion-card-header class="premium__plan-header">
+                        <div class="premium__plan-info">
+                            <ion-card-title class="premium__plan-period">
+                                {{ plan.isYearly ? 'Plan Anual' : 'Plan Mensual' }}
+                            </ion-card-title>
+                            @if (plan.hasDiscount) {
+                            <ion-badge class="premium__plan-savings" color="success"> Ahorra {{ plan.discountPercentage }}% </ion-badge>
+                            }
                         </div>
+                        <div class="premium__plan-check">
+                            <ion-icon
+                                [name]="selectedPlan()?.id === plan.id ? 'checkmark-circle' : 'ellipse-outline'"
+                                [class.premium__plan-check--selected]="selectedPlan()?.id === plan.id"
+                            ></ion-icon>
+                        </div>
+                    </ion-card-header>
 
+                    <ion-card-content class="premium__plan-content">
                         <div class="premium__plan-pricing">
                             <div class="premium__plan-price-main">
                                 <span class="premium__plan-price">{{ plan.formattedPrice }}</span>
@@ -72,41 +90,48 @@ import { SubscriptionService } from '@features/subscription/application/services
                             <span class="premium__plan-original">{{ plan.formattedOriginalPrice }}</span>
                             }
                         </div>
-
                         @if (plan.isYearly) {
-                        <div class="premium__plan-note">Facturado anualmente</div>
+                        <p class="premium__plan-note">Facturado anualmente</p>
                         }
-                    </div>
-                    }
-                </div>
+                    </ion-card-content>
+                </ion-card>
+                }
+            </div>
 
-                <!-- Trial Toggle -->
-                @if (selectedPlan()?.trialDays) {
-                <div class="premium__trial">
-                    <div class="premium__trial-main">
-                        <div class="premium__trial-info">
-                            <span class="premium__trial-title">Prueba {{ selectedPlan()?.trialDays }} días gratis</span>
-                            <span class="premium__trial-subtitle">Sin cargo inicial</span>
+            <!-- Trial Toggle Card -->
+            @if (selectedPlan()?.trialDays) {
+            <ion-card class="premium__trial-card">
+                <ion-card-content>
+                    <ion-item lines="none" class="premium__trial-item">
+                        <div slot="start" class="premium__trial-info">
+                            <h3 class="premium__trial-title">Prueba {{ selectedPlan()?.trialDays }} días gratis</h3>
+                            <p class="premium__trial-subtitle">Sin cargo inicial</p>
                         </div>
                         <ion-toggle
+                            slot="end"
                             [checked]="subscriptionService.isTrialEnabled()"
                             (ionChange)="toggleTrial()"
                             color="success"
                             aria-label="Activar prueba gratuita"
                         ></ion-toggle>
-                    </div>
+                    </ion-item>
                     @if (subscriptionService.isTrialEnabled()) {
                     <p class="premium__trial-terms">
                         Luego {{ selectedPlan()?.formattedPrice }}{{ selectedPlan()?.duration }}, renovación automática
                     </p>
                     }
-                </div>
-                }
-            </div>
+                </ion-card-content>
+            </ion-card>
+            }
 
-            <!-- Fixed Bottom CTA -->
-            <div class="premium__bottom">
-                <div class="premium__cta">
+            <!-- Spacer for footer -->
+            <div class="premium__spacer"></div>
+        </ion-content>
+
+        <!-- Fixed Footer with CTA -->
+        <ion-footer class="premium__footer">
+            <ion-toolbar class="premium__footer-toolbar">
+                <div class="premium__cta-container">
                     <ion-button
                         expand="block"
                         class="premium__cta-button"
@@ -130,23 +155,40 @@ import { SubscriptionService } from '@features/subscription/application/services
                         </div>
                         }
                     </ion-button>
-                </div>
 
-                <div class="premium__trust">
-                    <button class="premium__trust-item" (click)="showCancelInfo()">
-                        <ion-icon name="shield-checkmark-outline"></ion-icon>
-                        <span>Cancela cuando quieras</span>
-                    </button>
-                    <button class="premium__trust-item" (click)="restorePurchase()">
-                        <ion-icon name="refresh-outline"></ion-icon>
-                        <span>Restaurar compra</span>
-                    </button>
+                    <div class="premium__trust-links">
+                        <ion-button fill="clear" size="small" class="premium__trust-button" (click)="showCancelInfo()">
+                            <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+                            Cancela cuando quieras
+                        </ion-button>
+                        <ion-button fill="clear" size="small" class="premium__trust-button" (click)="restorePurchase()">
+                            <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                            Restaurar compra
+                        </ion-button>
+                    </div>
                 </div>
-            </div>
-        </ion-content>
+            </ion-toolbar>
+        </ion-footer>
     `,
     styleUrls: ['./premium.page.scss'],
-    imports: [CommonModule, IonContent, IonButton, IonIcon, IonToggle, IonSpinner],
+    imports: [
+        CommonModule,
+        IonContent,
+        IonButton,
+        IonIcon,
+        IonToggle,
+        IonSpinner,
+        IonCard,
+        IonCardContent,
+        IonCardHeader,
+        IonCardTitle,
+        IonFooter,
+        IonToolbar,
+        IonItem,
+        IonLabel,
+        IonBadge,
+        IonList,
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     standalone: true,
 })

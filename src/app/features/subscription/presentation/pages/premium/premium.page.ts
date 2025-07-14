@@ -20,6 +20,7 @@ import {
 } from '@ionic/angular/standalone';
 import { IonicUtilsService } from '@shared/services/ionic-utils.service';
 import { SubscriptionService } from '@features/subscription/application/services/subscription.service';
+import { SubscriptionPlan } from '@features/subscription/domain/entities/subscription-plan.entity';
 
 @Component({
     selector: 'app-premium',
@@ -35,19 +36,21 @@ import { SubscriptionService } from '@features/subscription/application/services
                 <div class="premium__logo">
                     <img src="assets/eduaitutor-bot.png" alt="EduAI Tutor" />
                 </div>
-                <h1 class="premium__title">Tutor AI Pro</h1>
+                <h1 class="premium__title">EduAiTutor Pro</h1>
                 <p class="premium__subtitle">Desbloquea todo tu potencial académico</p>
             </div>
 
             <!-- Benefits List -->
-            <ion-list class="premium__benefits" lines="none">
-                @for (benefit of benefits(); track $index) {
-                <ion-item class="premium__benefit">
-                    <ion-icon name="checkmark-circle" slot="start" class="premium__benefit-icon"></ion-icon>
-                    <ion-label class="premium__benefit-text">{{ benefit }}</ion-label>
-                </ion-item>
-                }
-            </ion-list>
+            <div class="premium__benefits">
+                <div class="premium__benefits-grid">
+                    @for (benefit of benefits(); track $index) {
+                    <div class="premium__benefit">
+                        <ion-icon name="checkmark-circle" class="premium__benefit-icon"></ion-icon>
+                        <span class="premium__benefit-text">{{ benefit }}</span>
+                    </div>
+                    }
+                </div>
+            </div>
 
             <!-- Plans Cards -->
             <div class="premium__plans">
@@ -60,13 +63,15 @@ import { SubscriptionService } from '@features/subscription/application/services
                     button="true"
                 >
                     @if (plan.isPopular) {
-                    <ion-badge class="premium__plan-badge" color="primary">Más Popular</ion-badge>
+                    <div class="premium__plan-badge-container">
+                        <ion-badge class="premium__plan-badge" color="primary">Más Popular</ion-badge>
+                    </div>
                     }
 
                     <ion-card-header class="premium__plan-header">
                         <div class="premium__plan-info">
                             <ion-card-title class="premium__plan-period">
-                                {{ plan.isYearly ? 'Plan Anual' : 'Plan Mensual' }}
+                                {{ getPlanTitle(plan) }}
                             </ion-card-title>
                             @if (plan.hasDiscount) {
                             <ion-badge class="premium__plan-savings" color="success"> Ahorra {{ plan.discountPercentage }}% </ion-badge>
@@ -90,35 +95,44 @@ import { SubscriptionService } from '@features/subscription/application/services
                             <span class="premium__plan-original">{{ plan.formattedOriginalPrice }}</span>
                             }
                         </div>
-                        @if (plan.isYearly) {
-                        <p class="premium__plan-note">Facturado anualmente</p>
-                        }
+                        <p class="premium__plan-note">{{ getPlanDescription(plan) }}</p>
                     </ion-card-content>
                 </ion-card>
                 }
             </div>
 
-            <!-- Trial Toggle Card -->
+            <!-- Enhanced Trial Toggle Card -->
             @if (selectedPlan()?.trialDays) {
-            <ion-card class="premium__trial-card">
-                <ion-card-content>
-                    <ion-item lines="none" class="premium__trial-item">
-                        <div slot="start" class="premium__trial-info">
-                            <h3 class="premium__trial-title">Prueba {{ selectedPlan()?.trialDays }} días gratis</h3>
-                            <p class="premium__trial-subtitle">Sin cargo inicial</p>
+            <ion-card class="premium__trial-card" [class.premium__trial-card--enabled]="subscriptionService.isTrialEnabled()">
+                <ion-card-content class="premium__trial-content">
+                    <div class="premium__trial-main">
+                        <div class="premium__trial-info">
+                            <div class="premium__trial-icon">
+                                <ion-icon [name]="subscriptionService.isTrialEnabled() ? 'gift' : 'gift-outline'"></ion-icon>
+                            </div>
+                            <div class="premium__trial-text">
+                                <h3 class="premium__trial-title">
+                                    @if (subscriptionService.isTrialEnabled()) { Prueba gratuita habilitada } @else { Prueba
+                                    {{ selectedPlan()?.trialDays }} días gratis }
+                                </h3>
+                                <p class="premium__trial-subtitle">
+                                    @if (subscriptionService.isTrialEnabled()) {
+                                    {{ selectedPlan()?.trialDays }} días sin costo } @else { Sin cargo inicial }
+                                </p>
+                            </div>
                         </div>
                         <ion-toggle
-                            slot="end"
                             [checked]="subscriptionService.isTrialEnabled()"
                             (ionChange)="toggleTrial()"
                             color="success"
                             aria-label="Activar prueba gratuita"
                         ></ion-toggle>
-                    </ion-item>
+                    </div>
                     @if (subscriptionService.isTrialEnabled()) {
-                    <p class="premium__trial-terms">
-                        Luego {{ selectedPlan()?.formattedPrice }}{{ selectedPlan()?.duration }}, renovación automática
-                    </p>
+                    <div class="premium__trial-terms">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                        <span>Luego {{ selectedPlan()?.formattedPrice }}{{ selectedPlan()?.duration }}, renovación automática</span>
+                    </div>
                     }
                 </ion-card-content>
             </ion-card>
@@ -209,6 +223,14 @@ export default class PremiumPage {
         'Acceso a todas las funciones premium',
         'Soporte prioritario 24/7',
     ]);
+
+    getPlanTitle(plan: SubscriptionPlan): string {
+        return plan.isYearly ? 'Plan Anual' : 'Plan Mensual';
+    }
+
+    getPlanDescription(plan: SubscriptionPlan): string {
+        return plan.isYearly ? 'Facturado anualmente' : 'Facturado mensualmente';
+    }
 
     async selectPlan(planId: string): Promise<void> {
         await this.subscriptionService.selectPlan(planId);

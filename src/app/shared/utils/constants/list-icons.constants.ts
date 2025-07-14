@@ -59,4 +59,9 @@ export const LIST_ICONS: Array<keyof typeof Icons> = [
     'close',
     'star',
     'refreshOutline',
+    'shieldCheckmarkOutline',
+    'informationCircleOutline',
+    'ellipseOutline',
+    'gift',
+    'giftOutline',
 ];
